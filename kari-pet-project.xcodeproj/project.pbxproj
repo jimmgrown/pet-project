@@ -1,0 +1,745 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8456EE4A248F6CFB009DB9F5 /* CollectionViewCellSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456EE49248F6CFB009DB9F5 /* CollectionViewCellSlider.swift */; };
+		8456EE4D248F753B009DB9F5 /* ModelJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456EE4C248F753B009DB9F5 /* ModelJSON.swift */; };
+		8456EE4F248F8309009DB9F5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456EE4E248F8309009DB9F5 /* API.swift */; };
+		8457A51A248E4FB400E2943F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457A519248E4FB400E2943F /* AppDelegate.swift */; };
+		8457A51C248E4FB400E2943F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457A51B248E4FB400E2943F /* ViewController.swift */; };
+		8457A51F248E4FB400E2943F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8457A51D248E4FB400E2943F /* Main.storyboard */; };
+		8457A521248E4FB700E2943F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8457A520248E4FB700E2943F /* Assets.xcassets */; };
+		8457A524248E4FB700E2943F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8457A522248E4FB700E2943F /* LaunchScreen.storyboard */; };
+		8457A52F248E4FB700E2943F /* kari_pet_projectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457A52E248E4FB700E2943F /* kari_pet_projectTests.swift */; };
+		8457A53A248E4FB700E2943F /* kari_pet_projectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457A539248E4FB700E2943F /* kari_pet_projectUITests.swift */; };
+		846E2C0124973AEB006336A6 /* CollectionViewCellCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846E2C0024973AEB006336A6 /* CollectionViewCellCategory.swift */; };
+		846E2C03249773DB006336A6 /* CollectionViewCellInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846E2C02249773DB006336A6 /* CollectionViewCellInfo.swift */; };
+		846E2C0724979D7B006336A6 /* CollectionViewCellHot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846E2C0624979D7B006336A6 /* CollectionViewCellHot.swift */; };
+		84B97F96249891C6000AB86B /* CollectionViewCellBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B97F95249891C6000AB86B /* CollectionViewCellBrand.swift */; };
+		84B97FA02498B563000AB86B /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B97F9E2498B563000AB86B /* SliderTableViewCell.swift */; };
+		84B97FA12498B563000AB86B /* SliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B97F9F2498B563000AB86B /* SliderTableViewCell.xib */; };
+		84B97FA42498B5FB000AB86B /* SliderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B97FA22498B5FB000AB86B /* SliderCollectionViewCell.swift */; };
+		84B97FA52498B5FB000AB86B /* SliderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B97FA32498B5FB000AB86B /* SliderCollectionViewCell.xib */; };
+		84B97FA72498B9E6000AB86B /* mainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B97FA62498B9E6000AB86B /* mainScreenViewController.swift */; };
+		8D8787D396771EE2DAC9B025 /* Pods_kari_pet_project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 354DE11A5CABB6548C5CCE2B /* Pods_kari_pet_project.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8457A52B248E4FB700E2943F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8457A50E248E4FB400E2943F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8457A515248E4FB400E2943F;
+			remoteInfo = "kari-pet-project";
+		};
+		8457A536248E4FB700E2943F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8457A50E248E4FB400E2943F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8457A515248E4FB400E2943F;
+			remoteInfo = "kari-pet-project";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1236C8C2CDB51A66DDD8D7D1 /* Pods-kari-pet-project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kari-pet-project.release.xcconfig"; path = "Target Support Files/Pods-kari-pet-project/Pods-kari-pet-project.release.xcconfig"; sourceTree = "<group>"; };
+		354DE11A5CABB6548C5CCE2B /* Pods_kari_pet_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kari_pet_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8456EE49248F6CFB009DB9F5 /* CollectionViewCellSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellSlider.swift; sourceTree = "<group>"; };
+		8456EE4C248F753B009DB9F5 /* ModelJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelJSON.swift; sourceTree = "<group>"; };
+		8456EE4E248F8309009DB9F5 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		8457A516248E4FB400E2943F /* kari-pet-project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "kari-pet-project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8457A519248E4FB400E2943F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8457A51B248E4FB400E2943F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8457A51E248E4FB400E2943F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8457A520248E4FB700E2943F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8457A523248E4FB700E2943F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8457A525248E4FB700E2943F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8457A52A248E4FB700E2943F /* kari-pet-projectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "kari-pet-projectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8457A52E248E4FB700E2943F /* kari_pet_projectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kari_pet_projectTests.swift; sourceTree = "<group>"; };
+		8457A530248E4FB700E2943F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8457A535248E4FB700E2943F /* kari-pet-projectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "kari-pet-projectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8457A539248E4FB700E2943F /* kari_pet_projectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kari_pet_projectUITests.swift; sourceTree = "<group>"; };
+		8457A53B248E4FB700E2943F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		846E2C0024973AEB006336A6 /* CollectionViewCellCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellCategory.swift; sourceTree = "<group>"; };
+		846E2C02249773DB006336A6 /* CollectionViewCellInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellInfo.swift; sourceTree = "<group>"; };
+		846E2C0624979D7B006336A6 /* CollectionViewCellHot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellHot.swift; sourceTree = "<group>"; };
+		84B97F95249891C6000AB86B /* CollectionViewCellBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellBrand.swift; sourceTree = "<group>"; };
+		84B97F9E2498B563000AB86B /* SliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
+		84B97F9F2498B563000AB86B /* SliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableViewCell.xib; sourceTree = "<group>"; };
+		84B97FA22498B5FB000AB86B /* SliderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCollectionViewCell.swift; sourceTree = "<group>"; };
+		84B97FA32498B5FB000AB86B /* SliderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderCollectionViewCell.xib; sourceTree = "<group>"; };
+		84B97FA62498B9E6000AB86B /* mainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainScreenViewController.swift; sourceTree = "<group>"; };
+		8AC518AF65941D999DAFD566 /* Pods-kari-pet-project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kari-pet-project.debug.xcconfig"; path = "Target Support Files/Pods-kari-pet-project/Pods-kari-pet-project.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8457A513248E4FB400E2943F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D8787D396771EE2DAC9B025 /* Pods_kari_pet_project.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8457A527248E4FB700E2943F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8457A532248E4FB700E2943F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8456EE43248F6A7E009DB9F5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8456EE49248F6CFB009DB9F5 /* CollectionViewCellSlider.swift */,
+				846E2C0024973AEB006336A6 /* CollectionViewCellCategory.swift */,
+				846E2C02249773DB006336A6 /* CollectionViewCellInfo.swift */,
+				846E2C0624979D7B006336A6 /* CollectionViewCellHot.swift */,
+				84B97F95249891C6000AB86B /* CollectionViewCellBrand.swift */,
+				84B97FA22498B5FB000AB86B /* SliderCollectionViewCell.swift */,
+				84B97FA32498B5FB000AB86B /* SliderCollectionViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		8456EE48248F6B18009DB9F5 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				8456EE4C248F753B009DB9F5 /* ModelJSON.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		8456EE4B248F700A009DB9F5 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8456EE4E248F8309009DB9F5 /* API.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		8457A50D248E4FB400E2943F = {
+			isa = PBXGroup;
+			children = (
+				8457A518248E4FB400E2943F /* kari-pet-project */,
+				8457A52D248E4FB700E2943F /* kari-pet-projectTests */,
+				8457A538248E4FB700E2943F /* kari-pet-projectUITests */,
+				8457A517248E4FB400E2943F /* Products */,
+				D9B08F8CAF72FCDF9F2998CF /* Pods */,
+				FD3B2983F2806D25CB9B74A1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8457A517248E4FB400E2943F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8457A516248E4FB400E2943F /* kari-pet-project.app */,
+				8457A52A248E4FB700E2943F /* kari-pet-projectTests.xctest */,
+				8457A535248E4FB700E2943F /* kari-pet-projectUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8457A518248E4FB400E2943F /* kari-pet-project */ = {
+			isa = PBXGroup;
+			children = (
+				84B97FA82498C975000AB86B /* Collections */,
+				84B97F972498AFF5000AB86B /* tableCells */,
+				8456EE4B248F700A009DB9F5 /* API */,
+				8456EE48248F6B18009DB9F5 /* models */,
+				8456EE43248F6A7E009DB9F5 /* Cells */,
+				8457A519248E4FB400E2943F /* AppDelegate.swift */,
+				8457A51B248E4FB400E2943F /* ViewController.swift */,
+				84B97FA62498B9E6000AB86B /* mainScreenViewController.swift */,
+				8457A51D248E4FB400E2943F /* Main.storyboard */,
+				8457A520248E4FB700E2943F /* Assets.xcassets */,
+				8457A522248E4FB700E2943F /* LaunchScreen.storyboard */,
+				8457A525248E4FB700E2943F /* Info.plist */,
+			);
+			path = "kari-pet-project";
+			sourceTree = "<group>";
+		};
+		8457A52D248E4FB700E2943F /* kari-pet-projectTests */ = {
+			isa = PBXGroup;
+			children = (
+				8457A52E248E4FB700E2943F /* kari_pet_projectTests.swift */,
+				8457A530248E4FB700E2943F /* Info.plist */,
+			);
+			path = "kari-pet-projectTests";
+			sourceTree = "<group>";
+		};
+		8457A538248E4FB700E2943F /* kari-pet-projectUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8457A539248E4FB700E2943F /* kari_pet_projectUITests.swift */,
+				8457A53B248E4FB700E2943F /* Info.plist */,
+			);
+			path = "kari-pet-projectUITests";
+			sourceTree = "<group>";
+		};
+		84B97F972498AFF5000AB86B /* tableCells */ = {
+			isa = PBXGroup;
+			children = (
+				84B97F9E2498B563000AB86B /* SliderTableViewCell.swift */,
+				84B97F9F2498B563000AB86B /* SliderTableViewCell.xib */,
+			);
+			path = tableCells;
+			sourceTree = "<group>";
+		};
+		84B97FA82498C975000AB86B /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Collections;
+			sourceTree = "<group>";
+		};
+		D9B08F8CAF72FCDF9F2998CF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8AC518AF65941D999DAFD566 /* Pods-kari-pet-project.debug.xcconfig */,
+				1236C8C2CDB51A66DDD8D7D1 /* Pods-kari-pet-project.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FD3B2983F2806D25CB9B74A1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				354DE11A5CABB6548C5CCE2B /* Pods_kari_pet_project.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8457A515248E4FB400E2943F /* kari-pet-project */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8457A53E248E4FB700E2943F /* Build configuration list for PBXNativeTarget "kari-pet-project" */;
+			buildPhases = (
+				AF09183C9865F058F22AD469 /* [CP] Check Pods Manifest.lock */,
+				8457A512248E4FB400E2943F /* Sources */,
+				8457A513248E4FB400E2943F /* Frameworks */,
+				8457A514248E4FB400E2943F /* Resources */,
+				BAA8980D1658DE9BD384EC5A /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "kari-pet-project";
+			productName = "kari-pet-project";
+			productReference = 8457A516248E4FB400E2943F /* kari-pet-project.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8457A529248E4FB700E2943F /* kari-pet-projectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8457A541248E4FB700E2943F /* Build configuration list for PBXNativeTarget "kari-pet-projectTests" */;
+			buildPhases = (
+				8457A526248E4FB700E2943F /* Sources */,
+				8457A527248E4FB700E2943F /* Frameworks */,
+				8457A528248E4FB700E2943F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8457A52C248E4FB700E2943F /* PBXTargetDependency */,
+			);
+			name = "kari-pet-projectTests";
+			productName = "kari-pet-projectTests";
+			productReference = 8457A52A248E4FB700E2943F /* kari-pet-projectTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8457A534248E4FB700E2943F /* kari-pet-projectUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8457A544248E4FB700E2943F /* Build configuration list for PBXNativeTarget "kari-pet-projectUITests" */;
+			buildPhases = (
+				8457A531248E4FB700E2943F /* Sources */,
+				8457A532248E4FB700E2943F /* Frameworks */,
+				8457A533248E4FB700E2943F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8457A537248E4FB700E2943F /* PBXTargetDependency */,
+			);
+			name = "kari-pet-projectUITests";
+			productName = "kari-pet-projectUITests";
+			productReference = 8457A535248E4FB700E2943F /* kari-pet-projectUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8457A50E248E4FB400E2943F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Admin;
+				TargetAttributes = {
+					8457A515248E4FB400E2943F = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					8457A529248E4FB700E2943F = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 8457A515248E4FB400E2943F;
+					};
+					8457A534248E4FB700E2943F = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 8457A515248E4FB400E2943F;
+					};
+				};
+			};
+			buildConfigurationList = 8457A511248E4FB400E2943F /* Build configuration list for PBXProject "kari-pet-project" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8457A50D248E4FB400E2943F;
+			productRefGroup = 8457A517248E4FB400E2943F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8457A515248E4FB400E2943F /* kari-pet-project */,
+				8457A529248E4FB700E2943F /* kari-pet-projectTests */,
+				8457A534248E4FB700E2943F /* kari-pet-projectUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8457A514248E4FB400E2943F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8457A524248E4FB700E2943F /* LaunchScreen.storyboard in Resources */,
+				84B97FA52498B5FB000AB86B /* SliderCollectionViewCell.xib in Resources */,
+				8457A521248E4FB700E2943F /* Assets.xcassets in Resources */,
+				84B97FA12498B563000AB86B /* SliderTableViewCell.xib in Resources */,
+				8457A51F248E4FB400E2943F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8457A528248E4FB700E2943F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8457A533248E4FB700E2943F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AF09183C9865F058F22AD469 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-kari-pet-project-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BAA8980D1658DE9BD384EC5A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kari-pet-project/Pods-kari-pet-project-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kari-pet-project/Pods-kari-pet-project-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kari-pet-project/Pods-kari-pet-project-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8457A512248E4FB400E2943F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				846E2C0724979D7B006336A6 /* CollectionViewCellHot.swift in Sources */,
+				84B97FA72498B9E6000AB86B /* mainScreenViewController.swift in Sources */,
+				84B97FA42498B5FB000AB86B /* SliderCollectionViewCell.swift in Sources */,
+				84B97F96249891C6000AB86B /* CollectionViewCellBrand.swift in Sources */,
+				8457A51C248E4FB400E2943F /* ViewController.swift in Sources */,
+				8457A51A248E4FB400E2943F /* AppDelegate.swift in Sources */,
+				84B97FA02498B563000AB86B /* SliderTableViewCell.swift in Sources */,
+				846E2C0124973AEB006336A6 /* CollectionViewCellCategory.swift in Sources */,
+				846E2C03249773DB006336A6 /* CollectionViewCellInfo.swift in Sources */,
+				8456EE4A248F6CFB009DB9F5 /* CollectionViewCellSlider.swift in Sources */,
+				8456EE4D248F753B009DB9F5 /* ModelJSON.swift in Sources */,
+				8456EE4F248F8309009DB9F5 /* API.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8457A526248E4FB700E2943F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8457A52F248E4FB700E2943F /* kari_pet_projectTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8457A531248E4FB700E2943F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8457A53A248E4FB700E2943F /* kari_pet_projectUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8457A52C248E4FB700E2943F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8457A515248E4FB400E2943F /* kari-pet-project */;
+			targetProxy = 8457A52B248E4FB700E2943F /* PBXContainerItemProxy */;
+		};
+		8457A537248E4FB700E2943F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8457A515248E4FB400E2943F /* kari-pet-project */;
+			targetProxy = 8457A536248E4FB700E2943F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8457A51D248E4FB400E2943F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8457A51E248E4FB400E2943F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8457A522248E4FB700E2943F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8457A523248E4FB700E2943F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8457A53C248E4FB700E2943F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8457A53D248E4FB700E2943F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8457A53F248E4FB700E2943F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AC518AF65941D999DAFD566 /* Pods-kari-pet-project.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "kari-pet-project/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "-.kari-pet-project";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8457A540248E4FB700E2943F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1236C8C2CDB51A66DDD8D7D1 /* Pods-kari-pet-project.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "kari-pet-project/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "-.kari-pet-project";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8457A542248E4FB700E2943F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "kari-pet-projectTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "-.kari-pet-projectTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/kari-pet-project.app/kari-pet-project";
+			};
+			name = Debug;
+		};
+		8457A543248E4FB700E2943F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "kari-pet-projectTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "-.kari-pet-projectTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/kari-pet-project.app/kari-pet-project";
+			};
+			name = Release;
+		};
+		8457A545248E4FB700E2943F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "kari-pet-projectUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "-.kari-pet-projectUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "kari-pet-project";
+			};
+			name = Debug;
+		};
+		8457A546248E4FB700E2943F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "kari-pet-projectUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "-.kari-pet-projectUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "kari-pet-project";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8457A511248E4FB400E2943F /* Build configuration list for PBXProject "kari-pet-project" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8457A53C248E4FB700E2943F /* Debug */,
+				8457A53D248E4FB700E2943F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8457A53E248E4FB700E2943F /* Build configuration list for PBXNativeTarget "kari-pet-project" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8457A53F248E4FB700E2943F /* Debug */,
+				8457A540248E4FB700E2943F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8457A541248E4FB700E2943F /* Build configuration list for PBXNativeTarget "kari-pet-projectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8457A542248E4FB700E2943F /* Debug */,
+				8457A543248E4FB700E2943F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8457A544248E4FB700E2943F /* Build configuration list for PBXNativeTarget "kari-pet-projectUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8457A545248E4FB700E2943F /* Debug */,
+				8457A546248E4FB700E2943F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8457A50E248E4FB400E2943F /* Project object */;
+}
