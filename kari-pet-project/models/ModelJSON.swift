@@ -1,5 +1,8 @@
 import Foundation
 
+#warning("Каждая модель должна быть в отдельном файле (пока что это так, потом я расскажу про другой способ организации)")
+#warning("Вертикальные отступы")
+
 struct Response: Decodable {
     let blocks: [Block]
     enum CodingKeys: String, CodingKey {
@@ -111,6 +114,7 @@ struct ModelBlockIdFour: Decodable {
     //let withDiscount: Bool  
 }
 
+#warning("На нейминге я сейчас не буду останавливаться, но подобные названия абсолютно недопустимы")
 struct ModelBlockIdFive: Decodable {
     let id: String
     let importName: String
@@ -179,6 +183,7 @@ struct Block: Decodable {
     }
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        #warning("Во-первых, что за вложенность? else if - это один оператор, не надо пирамиду строить. + тут нужен вспомогательные enum который ты обработаешь через switch")
         if let items = try? container.decode([ModelBlockIdTwo].self, forKey: .items) {
             self.items = items
         } else
@@ -193,6 +198,8 @@ struct Block: Decodable {
                     } else {
                         items = ["1","2","kapec"]
         }
+        
+        #warning("Зачем для пропертей ниже стоит опциональный try?")
         if let blockId = try? container.decode(Int.self, forKey: .blockId) {
             self.blockId = blockId
         } else {

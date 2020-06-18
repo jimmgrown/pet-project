@@ -1,6 +1,8 @@
+#warning("Очисти проект от лишнего мусора")
+
 //import UIKit
 //
-//class ViewController: UIViewController {
+//class ViewCыontroller: UIViewController {
 //
 //    
 //    @IBOutlet weak var brandCollectionView: UICollectionView!
