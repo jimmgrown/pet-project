@@ -6,14 +6,12 @@ class SliderCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
-    static let identifier = "sliderCell"
+    static let reuseID: String = .init(describing: SliderCollectionViewCell.self)
     
-    func setup(response:ModelBlockIdTwo){
-        if let url = URL(string: response.image){
-            print("Yes i'm here")
+    func setup(image:String){
+        if let url = URL(string: image){
             imageView.sd_setImage(with: url)
         }
     }

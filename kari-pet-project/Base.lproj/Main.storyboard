@@ -402,7 +402,7 @@
         <!--Item-->
         <scene sceneID="0VQ-Xk-Dhz">
             <objects>
-                <viewController id="anv-9b-30x" customClass="mainScreenViewController" customModule="kari_pet_project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="anv-9b-30x" customClass="MainScreenVC" customModule="kari_pet_project" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sB3-3m-gZg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -423,7 +423,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="4oM-SW-lNe"/>
                     <connections>
-                        <outlet property="tableView" destination="O9E-mv-xAZ" id="1jh-Cp-X27"/>
+                        <outlet property="tableView" destination="O9E-mv-xAZ" id="XHP-84-4bS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0eb-d7-lwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
