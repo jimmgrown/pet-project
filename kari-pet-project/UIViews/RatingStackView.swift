@@ -1,21 +1,45 @@
-//
-//  RatingStackView.swift
-//  kari-pet-project
-//
-//  Created by Admin on 23.06.2020.
-//  Copyright © 2020 Admin. All rights reserved.
-//
-
 import UIKit
 
 class RatingStackView: UIStackView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
+    var starRating: Int = 0
+    
     override func draw(_ rect: CGRect) {
-        // Drawing code
+        
+        let views = self.subviews.filter { $0 is UIButton }
+        var starTag = 1
+        
+        for theView in views {
+            
+            if let theButton = theView as? UIButton {
+                
+                theButton.setImage(UIImage(named: "stars"), for: .normal)
+                theButton.addTarget(self, action: #selector(self.pressed(sender:)), for: .touchUpInside)
+                theButton.tag = starTag
+                starTag += 1
+                
+            }
+            
+        }
     }
-    */
+    
+    @objc func pressed(sender: UIButton) {
+        starRating = sender.tag
+        
+        let views = self.subviews.filter { $0 is UIButton }
+        
+        for theView in views {
+            if let theButton = theView as? UIButton {
+                
+                if theButton.tag > sender.tag {
+                    theButton.setImage(UIImage(named: "stars"), for: .normal)
+                }
+                else {
+                    theButton.setImage(UIImage(named: "starsFilled"), for: .normal)
+                }
+                
+            }
+        }
+    }
 
 }

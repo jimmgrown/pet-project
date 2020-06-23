@@ -1,18 +1,19 @@
-//
-//  BrandsCollectionViewCell.swift
-//  kari-pet-project
-//
-//  Created by Admin on 22.06.2020.
-//  Copyright © 2020 Admin. All rights reserved.
-//
-
 import UIKit
 
-class BrandsCollectionViewCell: UICollectionViewCell {
+final class BrandsCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var imageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
+    static let reuseID: String = .init(describing: BrandsCollectionViewCell.self)
+    
+    func setup(image:String){
+        if let url = URL(string: image){
+            imageView.sd_setImage(with: url)
+        }
+    }
+    
 }

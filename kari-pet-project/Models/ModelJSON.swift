@@ -1,10 +1,10 @@
 import Foundation
 
 #warning("Каждая модель должна быть в отдельном файле (пока что это так, потом я расскажу про другой способ организации)")
-#warning("Вертикальные отступы")
 
 struct Response: Decodable {
     let blocks: [Block]
+    
     enum CodingKeys: String, CodingKey {
         case blocks = "data"
     }
@@ -81,7 +81,7 @@ struct Rate: Decodable {
     let votes: Int
 }
 
-struct ModelBlockIdTwo: Decodable {
+struct StockBannerModel: Decodable {
     let bannerId: String
     let name: String
     let priority: Int
@@ -97,7 +97,7 @@ struct ModelBlockIdOne: Decodable {
     let priority: Int
 }
 
-struct ModelBlockIdFour: Decodable {
+struct ProductsModel: Decodable {
     //let breadCrumbs: [BreadCrumbs]
     //let tags: [String]
     //let articul: String
@@ -115,12 +115,13 @@ struct ModelBlockIdFour: Decodable {
 }
 
 #warning("На нейминге я сейчас не буду останавливаться, но подобные названия абсолютно недопустимы")
-struct ModelBlockIdFive: Decodable {
+struct BrandModel: Decodable {
     let id: String
     let importName: String
     let updated: String
     let image: String
     let name: String
+    
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case importName
@@ -171,6 +172,7 @@ struct Block: Decodable {
     let fontColor: FontColor?
     let items: [Any]
     let additionalData: AdditionalData?
+    
     enum CodingKeys: String, CodingKey {
         case blockId
         case blockType = "type"
@@ -181,22 +183,24 @@ struct Block: Decodable {
         case items
         case additionalData
     }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         #warning("Во-первых, что за вложенность? else if - это один оператор, не надо пирамиду строить. + тут нужен вспомогательные enum который ты обработаешь через switch")
-        if let items = try? container.decode([ModelBlockIdTwo].self, forKey: .items) {
+        
+        if let items = try? container.decode([StockBannerModel].self, forKey: .items) {
             self.items = items
         } else
-            if let items = try? container.decode([ModelBlockIdFour].self, forKey: .items) {
+            if let items = try? container.decode([ProductsModel].self, forKey: .items) {
                 self.items = items
             } else
-                if let items = try? container.decode([ModelBlockIdFive].self, forKey: .items) {
+                if let items = try? container.decode([BrandModel].self, forKey: .items) {
                     self.items = items
                 } else
                     if let items = try? container.decode([ModelBlockIdNine].self, forKey: .items) {
                         self.items = items
                     } else {
-                        items = ["1","2","kapec"]
+                        items = []
         }
         
         #warning("Зачем для пропертей ниже стоит опциональный try?")

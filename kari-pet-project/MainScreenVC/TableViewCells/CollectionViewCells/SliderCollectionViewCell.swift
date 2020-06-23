@@ -1,6 +1,6 @@
 import UIKit
 
-class SliderCollectionViewCell: UICollectionViewCell {
+final class SliderCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
     

@@ -1,18 +1,20 @@
-//
-//  CategoryCollectionViewCell.swift
-//  kari-pet-project
-//
-//  Created by Admin on 19.06.2020.
-//  Copyright © 2020 Admin. All rights reserved.
-//
-
 import UIKit
 
 class CategoryCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var labelName: UILabel!
+    
+    static let reuseID: String = .init(describing: CategoryCollectionViewCell.self)
+    
+    func setup(image: String,label: String){
+        if let url = URL(string: image){
+            imageView.sd_setImage(with: url)
+        }
+        labelName.text = label
+    }
 }
