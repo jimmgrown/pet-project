@@ -1,8 +1,12 @@
 import UIKit
 import SDWebImage
 
+#warning("MARK забыл везде расставить")
+
+#warning("final")
 class MainScreenVC: UIViewController {
     
+    #warning("private. Укажу только здесь, исправить нужно во ВСЕМ проекте")
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
@@ -18,6 +22,7 @@ class MainScreenVC: UIViewController {
         }
     }
     
+    #warning("Ты таким образом засунул в оперативную память кучу нибов, которые лежат в месте, не относящимся к ним. Ниб относится к ячейке, которую он представляет, никак не к контроллеру, в котором он используется. + не стоит делать такие вещи stored пропертями, так как это лишнее забивание памяти. Надо нибы использовать так же, как и reuseID, т.е сделать их static computed пропертями в соответствующих ячейках")
     let uiNibStockSlider: UINib = UINib(nibName: String(describing: SliderTableViewCell.self), bundle: nil)
     let uiNibCategories: UINib = UINib(nibName: String(describing: CategoryTableViewCell.self), bundle: nil)
     let uiNibAddInfo: UINib = UINib(nibName: String(describing: AddInfoTableViewCell.self), bundle: nil)
@@ -25,8 +30,11 @@ class MainScreenVC: UIViewController {
     let uiNibBrands: UINib = UINib(nibName: String(describing: BrandsTableViewCell.self), bundle: nil)
     let uiNibFinds: UINib = UINib(nibName: String(describing: FindsTableViewCell.self), bundle: nil)
     
+    #warning("Тут мне неясно разделение по всем этим блокам. У тебя есть result, его и нужно просто сохранить. И уже из него передавать необходимые куски данных в ячейки. Здесь-то зачем разбивать все это?")
+
     var blocks: [Block] = []
     
+    #warning("Литералы в контроллере. Надо избавиться, сделать в отдельном файле константы цветов, каждую назвать понятным именем")
     let colorsProducts: [UIColor] = [
         UIColor(red: 255/255, green: 61/255, blue: 0/255, alpha: 1),
         UIColor(red: 233/255, green: 27/255, blue: 76/255, alpha: 1),
@@ -37,6 +45,7 @@ class MainScreenVC: UIViewController {
 //        UIColor(hex: "#8b21b2")
     ]
     
+    #warning("Подобные комментарии излишни, имена переменных должны быть самодокументирующими. Но разделение блока пропертей по логическим группам - хорошая идея (но опять же, в данной ситуации не должно быть так много пропертей, см. предыдущий warning)")
     //Local variables stockBanner
     var imagesStockBanner: [StockBannerModel] = []
     var imagesUrlStockBanner : [String] = []
@@ -67,9 +76,11 @@ class MainScreenVC: UIViewController {
     var findsBlock: [StockBannerModel] = []
     var imagesFinds: [String] = []
     
+    #warning("Лишние вертикальные отступы (не только здесь)")
     var result = Response(blocks: [Block]()) {
         didSet {
             
+            #warning("Не надо использовать self, там, где его можно опустить, - нарушаешь читабельность")
             self.blocks = result.blocks
             self.blocks = self.blocks.sorted { $0.priority < $1.priority }
             
@@ -96,6 +107,7 @@ class MainScreenVC: UIViewController {
             self.findsBlock = blocks[6].items as! [StockBannerModel]
             self.imagesFinds = findsBlock.map { $0.image }
             
+            #warning("Ты невовремя переходишь на main queue, посмотри ворнинги в файле API")
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -103,10 +115,12 @@ class MainScreenVC: UIViewController {
         }
     }
     
+    #warning("Код, который ничего не делает")
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    #warning("Отступы")
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         API.loadJSON { result in
@@ -121,6 +135,7 @@ extension MainScreenVC: UITableViewDataSource, UITableViewDelegate {
         return self.blocks.count
     }
     
+    #warning("Здесь хардкод, которого быть не должно. Каким образом ты определяешь индекс для той или иной ячейки? У тебя ведь priority каждого блока приходит с сервера, ты не можешь заранее знать, какой блок в каком порядке идет")
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
             
