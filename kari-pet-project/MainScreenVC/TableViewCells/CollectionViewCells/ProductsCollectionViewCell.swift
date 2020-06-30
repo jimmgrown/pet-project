@@ -66,6 +66,8 @@ final class ProductsCollectionViewCell: UICollectionViewCell {
     }
 }
 
+//MARK: Extensions
+
 extension ProductsCollectionViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colors?.count ?? 0
@@ -82,12 +84,13 @@ extension ProductsCollectionViewCell: UICollectionViewDataSource, UICollectionVi
         return CGSize(width: side, height: side)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let url = URL(string: colors?[indexPath.row].preview ?? self.image){
-            imageView.sd_setImage(with: url)
-            colorsCollectionView.reloadData()
-        }
-    }
+    //MARK: Change preview by colors
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        if let url = URL(string: colors?[indexPath.row].preview ?? self.image){
+//            imageView.sd_setImage(with: url)
+//            colorsCollectionView.reloadData()
+//        }
+//    }
 }
 //extension ProductsCollectionViewCell: UICollectionViewDelegateFlowLayout {
 //    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
