@@ -15,7 +15,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryTableViewCell" rowHeight="200" id="KGk-i7-Jjw" customClass="CategoryTableViewCell" customModule="kari_pet_project" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -34,6 +34,7 @@
                     </collectionView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="9Gk-6o-OFd" secondAttribute="bottom" id="2BX-gH-xdN"/>
                     <constraint firstItem="9Gk-6o-OFd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Oz1-cg-LvP"/>
                     <constraint firstItem="9Gk-6o-OFd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Rie-BQ-fYh"/>
                     <constraint firstAttribute="trailing" secondItem="9Gk-6o-OFd" secondAttribute="trailing" id="a5K-Zg-e91"/>

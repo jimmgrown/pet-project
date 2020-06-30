@@ -2,13 +2,21 @@ import UIKit
 
 final class FindsCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var imageView: UIImageView!
+    //MARK: Outlets
+    
+    @IBOutlet private weak var imageView: UIImageView!
+    
+    //MARK: Initialization
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
+    //MARK: Constants
+    
     static let reuseID: String = .init(describing: FindsCollectionViewCell.self)
+    
+    //MARK: Methods
     
     func setup(image:String){
         if let url = URL(string: image){

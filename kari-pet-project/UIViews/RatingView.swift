@@ -2,8 +2,12 @@ import UIKit
 
 class RatingView: UIView {
 
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var stackView: RatingStackView!
+    //MARK: Outlets
+    
+    @IBOutlet private var contentView: UIView!
+    @IBOutlet private weak var stackView: UIStackView!
+    
+    //MARK: Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,7 +24,53 @@ class RatingView: UIView {
         addSubview(contentView)
         contentView.bounds = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        stackView.changeImages(stkView: self.stackView)
+    }
+
+    //MARK: Methods
+    
+    func firstInit(rate: Int, stkView: RatingView) {
+        let views = stkView.stackView.subviews.filter { $0 is UIButton }
+        
+        for case let starButton as UIButton in views {
+            if starButton.tag <= rate {
+                starButton.setImage(UIImage(named: "starsFilled"), for: .normal)
+            }
+        }
+    }
+
+}
+
+//MARK: Extensions
+
+extension UIStackView {
+    
+    func changeImages(stkView: UIStackView) {
+        let views = stkView.subviews.filter { $0 is UIButton }
+        var starTag = 1
+        
+        for case let starButton as UIButton in views {
+                starButton.addTarget(self, action: #selector(self.pressed(sender:)), for: .touchUpInside)
+                starButton.tag = starTag
+                starTag += 1
+
+        }
     }
     
+    @objc func pressed(sender: UIButton) {
 
+        let views = self.subviews.filter { $0 is UIButton }
+
+        for view in views {
+            if let theButton = view as? UIButton {
+                if theButton.tag > sender.tag {
+                    theButton.setImage(UIImage(named: "stars"), for: .normal)
+                } else {
+                    theButton.setImage(UIImage(named: "starsFilled"), for: .normal)
+                }
+
+            }
+        }
+    }
+    
 }

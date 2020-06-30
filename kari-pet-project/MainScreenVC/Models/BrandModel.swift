@@ -15,7 +15,7 @@ struct BrandModel: Decodable {
     let image: String
     let name: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id = "_id"
         case importName
         case updated

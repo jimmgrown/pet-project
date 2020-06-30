@@ -1,8 +1,5 @@
 import UIKit
 
-#warning("Все, что скроллится горизонтально можно назвать слайдером. Поэтому твой нейминг не является исчерпывающим. Перед продолжением работы для каждого блока баннеров придумай четкое название, которое будет выделять его среди других и согласуй со мной")
-
-
 #warning("""
 Также, привыкай использовать четкую структуру файла:
 
@@ -98,10 +95,15 @@ extension SomeClass {
 
 final class SliderTableViewCell: UITableViewCell {
     
+    //MARK: Constants
+    
+    static let uiNib: UINib = UINib(nibName: String(describing: SliderTableViewCell.self), bundle: nil)
     static let reuseID: String = .init(describing: SliderTableViewCell.self)
     
-    @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var collectionView: UICollectionView! {
+    //MARK: Outlets
+    
+    @IBOutlet private weak var pageControl: UIPageControl!
+    @IBOutlet private weak var collectionView: UICollectionView! {
         
         didSet{
             collectionView.dataSource = self
@@ -111,12 +113,16 @@ final class SliderTableViewCell: UITableViewCell {
         
     }
     
+    //MARK: Propities
+    
     let uiNib: UINib = UINib(nibName: String(describing: SliderCollectionViewCell.self), bundle: nil)
     var images: [String] = [] {
         didSet {
             self.collectionView.reloadData()
         }
     }
+    
+    //MARK: Methods
     
     func setup(images: [String]) {
         self.images = images
@@ -145,6 +151,8 @@ final class SliderTableViewCell: UITableViewCell {
 //        }
 //    }
 }
+
+//MARK: Extensions
 
 extension SliderTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     

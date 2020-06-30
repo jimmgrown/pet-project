@@ -2,9 +2,16 @@ import UIKit
 
 final class CategoryTableViewCell: UITableViewCell {
 
+    //MARK: Constants
+    
+    static let uiNib: UINib = UINib(nibName: String(describing: CategoryTableViewCell.self), bundle: nil)
     static let reuseID: String = .init(describing: CategoryTableViewCell.self)
     
-    @IBOutlet weak var collectionView: UICollectionView! {
+    let uiNib: UINib = UINib(nibName: String(describing: CategoryCollectionViewCell.self), bundle: nil)
+    
+    //MARK: Outlets
+    
+    @IBOutlet private weak var collectionView: UICollectionView! {
         didSet{
             collectionView.dataSource = self
             collectionView.delegate = self
@@ -12,13 +19,15 @@ final class CategoryTableViewCell: UITableViewCell {
         }
     }
     
-     let uiNib: UINib = UINib(nibName: String(describing: CategoryCollectionViewCell.self), bundle: nil)
+    //MARK: Propities
     
     var data: [[String]] = [[]] {
         didSet {
             self.collectionView.reloadData()
         }
     }
+    
+    //MARK: Methods
     
     func setup(data: [[String]]) {
         self.data = data
@@ -33,6 +42,8 @@ final class CategoryTableViewCell: UITableViewCell {
     }
     
 }
+
+//MARK: Extensions
 
 extension CategoryTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     

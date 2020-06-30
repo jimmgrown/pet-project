@@ -2,10 +2,15 @@ import UIKit
 
 final class FindsTableViewCell: UITableViewCell {
 
+    //MARK: Constants
+    
+    static let uiNib: UINib = UINib(nibName: String(describing: FindsTableViewCell.self), bundle: nil)
     static let reuseID: String = .init(describing: FindsTableViewCell.self)
     let uiNib: UINib = UINib(nibName: String(describing: FindsCollectionViewCell.self), bundle: nil)
     
-    @IBOutlet weak var collectionView: UICollectionView! {
+    //MARK: Outlets
+    
+    @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
             collectionView.dataSource = self
             collectionView.delegate = self
@@ -13,11 +18,15 @@ final class FindsTableViewCell: UITableViewCell {
         }
     }
     
+    //MARK: Propities
+    
     var images: [String] = [] {
         didSet {
             self.collectionView.reloadData()
         }
     }
+    
+    //MARK: Methods
     
     func setup(images: [String]) {
         self.images = images
@@ -32,6 +41,8 @@ final class FindsTableViewCell: UITableViewCell {
     }
     
 }
+
+//MARK: Extensions
 
 extension FindsTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     

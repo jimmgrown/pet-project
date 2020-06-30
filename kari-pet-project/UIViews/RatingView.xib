@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="109" height="21"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="t7j-81-3aR" customClass="RatingStackView" customModule="kari_pet_project" customModuleProvider="target">
+                <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="t7j-81-3aR">
                     <rect key="frame" x="0.0" y="0.0" width="109" height="21"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DET-66-kC5">

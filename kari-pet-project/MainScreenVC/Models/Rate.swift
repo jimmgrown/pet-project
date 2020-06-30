@@ -10,5 +10,5 @@ import Foundation
 
 struct Rate: Decodable {
     let numberOfVotes: Int
-    let votes: Int
+    let votes: Double
 }

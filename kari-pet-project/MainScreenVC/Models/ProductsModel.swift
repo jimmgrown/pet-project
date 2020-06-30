@@ -6,8 +6,6 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-import Foundation
-
 struct ProductsModel: Decodable {
     //let breadCrumbs: [BreadCrumbs]
     //let tags: [String]
@@ -19,8 +17,8 @@ struct ProductsModel: Decodable {
     let price: Price
     let saleCount: Int
     let brand: Brand
-    //let colors: Colors?
+    let colors: [Colors]?
     //let isNew: Bool
-    //let rate: Rate?
+    let rate: Rate?
     //let withDiscount: Bool
 }

@@ -2,15 +2,20 @@ import UIKit
 
 final class AddInfoTableViewCell: UITableViewCell {
 
+    static let uiNib: UINib = UINib(nibName: String(describing: AddInfoTableViewCell.self), bundle: nil)
     static let reuseID: String = .init(describing: AddInfoTableViewCell.self)
     
-    @IBOutlet weak var collectionView: UICollectionView! {
+    //MARK: Outlets
+    
+    @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
             collectionView.dataSource = self
             collectionView.delegate = self
             collectionView.register(uiNib, forCellWithReuseIdentifier: AddInfoCollectionViewCell.reuseID)
         }
     }
+    
+    //MARK: Propities
     
     let uiNib: UINib = UINib(nibName: String(describing: AddInfoCollectionViewCell.self), bundle: nil)
     
@@ -19,6 +24,8 @@ final class AddInfoTableViewCell: UITableViewCell {
             self.collectionView.reloadData()
         }
     }
+    
+    //MARK: Methods
     
     func setup(data: [String]) {
         self.data = data
@@ -32,6 +39,8 @@ final class AddInfoTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 }
+
+//MARK: Exstensions
 
 extension AddInfoTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     

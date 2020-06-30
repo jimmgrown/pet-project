@@ -11,7 +11,7 @@ import Foundation
 struct Response: Decodable {
     let blocks: [Block]
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case blocks = "data"
     }
 }

@@ -2,10 +2,13 @@ import UIKit
 
 final class ProductsTableViewCell: UITableViewCell {
 
+    static let uiNib: UINib = UINib(nibName: String(describing: ProductsTableViewCell.self), bundle: nil)
     static let reuseID: String = .init(describing: ProductsTableViewCell.self)
     
-    @IBOutlet weak var bgView: UIView!
-    @IBOutlet weak var collectionView: UICollectionView! {
+    //MARK: Outlets
+    
+    @IBOutlet private weak var bgView: UIView!
+    @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
             collectionView.dataSource = self
             collectionView.delegate = self
@@ -15,23 +18,35 @@ final class ProductsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelName: UILabel!
     
+    //MARK: Propities
+    
     let uiNib: UINib = UINib(nibName: String(describing: ProductsCollectionViewCell.self), bundle: nil)
     
+    var ratingCount: [Int] = []
     var title: [String] = []
     var price: [Price] = []
     var brands: [String] = []
+    var rating: [Double] = []
+    var colors: [[Colors]?] = [[]]
     var images: [String] = [] {
         didSet {
             self.collectionView.reloadData()
         }
     }
     
-    func setup(images: [String], price: [Price], name: String, color: UIColor, title: [String], brands: [String]) {
+    //MARK: Methods
+    
+    func setup(images: [String], price: [Price], name: String, color: UIColor, title: [String], brands: [String], fontColor: UIColor, ratingCount: [Int], rating: [Double], colors: [[Colors]?]) {
+        self.colors = colors
         self.images = images
         self.price = price
         self.title = title
         self.brands = brands
+        self.ratingCount = ratingCount
+        self.rating = rating
+        
         labelName.text = name
+        labelName.textColor = fontColor
         collectionView.backgroundColor = color
         bgView.backgroundColor = color
     }
@@ -46,6 +61,8 @@ final class ProductsTableViewCell: UITableViewCell {
     
 }
 
+//MARK: Exstensions
+
 extension ProductsTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -56,7 +73,7 @@ extension ProductsTableViewCell: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell: ProductsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductsCollectionViewCell.reuseID,for: indexPath) as! ProductsCollectionViewCell
-        cell.setup(image: images[indexPath.row], price: price[indexPath.row], title: title[indexPath.row], brand: brands[indexPath.row])
+        cell.setup(image: images[indexPath.row], price: price[indexPath.row], title: title[indexPath.row], brand: brands[indexPath.row], votes: ratingCount[indexPath.row], rating: rating[indexPath.row], colors: colors[indexPath.row])
         return cell
         
     }

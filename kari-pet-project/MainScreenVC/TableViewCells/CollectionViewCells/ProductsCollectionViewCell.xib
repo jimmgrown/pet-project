@@ -89,13 +89,36 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="tpz-zm-peJ" customClass="RatingView" customModule="kari_pet_project" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="335" width="75" height="15"/>
+                                <rect key="frame" x="0.0" y="335" width="80" height="15"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="Bhn-dr-jWV"/>
-                                    <constraint firstAttribute="width" constant="75" id="saS-uS-Oud"/>
+                                    <constraint firstAttribute="width" constant="80" id="saS-uS-Oud"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmZ-ld-cXc">
+                                <rect key="frame" x="110" y="340" width="36" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="5Za-yT-Oa5"/>
+                                    <constraint firstAttribute="width" constant="36" id="sWO-nx-oZE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Voo-KI-aM1">
+                                <rect key="frame" x="0.0" y="372" width="124" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="oHK-p2-KKb"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7dn-Z4-vG7">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -108,12 +131,17 @@
                             <constraint firstItem="0V2-xF-mYH" firstAttribute="leading" secondItem="BlN-KX-WMW" secondAttribute="leading" constant="18" id="ADW-Ci-etK"/>
                             <constraint firstItem="0a7-46-URx" firstAttribute="top" secondItem="fRt-z4-ENh" secondAttribute="bottom" id="ARI-Wr-Vi7"/>
                             <constraint firstItem="7Ik-LR-yfv" firstAttribute="leading" secondItem="BlN-KX-WMW" secondAttribute="leading" constant="8" id="CPi-dn-K2m"/>
+                            <constraint firstAttribute="trailing" secondItem="Voo-KI-aM1" secondAttribute="trailing" constant="89" id="DQa-Gn-CAt"/>
                             <constraint firstItem="fRt-z4-ENh" firstAttribute="leading" secondItem="BlN-KX-WMW" secondAttribute="leading" constant="18" id="JIf-yc-KvG"/>
+                            <constraint firstItem="UmZ-ld-cXc" firstAttribute="leading" secondItem="tpz-zm-peJ" secondAttribute="trailing" constant="30" id="aIP-eo-JUU"/>
+                            <constraint firstItem="Voo-KI-aM1" firstAttribute="top" secondItem="UmZ-ld-cXc" secondAttribute="bottom" constant="20" id="ac7-tL-T64"/>
                             <constraint firstAttribute="trailing" secondItem="p7y-nE-YOT" secondAttribute="trailing" constant="18" id="c3J-Ib-Akq"/>
                             <constraint firstItem="fRt-z4-ENh" firstAttribute="top" secondItem="p7y-nE-YOT" secondAttribute="bottom" constant="30" id="dmc-6p-8MG"/>
+                            <constraint firstItem="Voo-KI-aM1" firstAttribute="leading" secondItem="BlN-KX-WMW" secondAttribute="leading" id="fb2-ly-Taf"/>
                             <constraint firstItem="lo0-UH-WFz" firstAttribute="leading" secondItem="fRt-z4-ENh" secondAttribute="trailing" constant="5" id="fqy-rG-829"/>
                             <constraint firstItem="p7y-nE-YOT" firstAttribute="top" secondItem="7Ik-LR-yfv" secondAttribute="bottom" constant="20" id="g1p-tE-QPG"/>
                             <constraint firstItem="tpz-zm-peJ" firstAttribute="leading" secondItem="BlN-KX-WMW" secondAttribute="leading" id="gfT-Xf-iPK"/>
+                            <constraint firstItem="UmZ-ld-cXc" firstAttribute="top" secondItem="0V2-xF-mYH" secondAttribute="bottom" constant="25" id="v3o-9l-aNL"/>
                             <constraint firstAttribute="trailing" secondItem="0a7-46-URx" secondAttribute="trailing" id="wmE-yN-hR6"/>
                             <constraint firstItem="7Ik-LR-yfv" firstAttribute="top" secondItem="BlN-KX-WMW" secondAttribute="top" constant="8" id="yG8-hW-h7m"/>
                         </constraints>
@@ -130,12 +158,14 @@
             <size key="customSize" width="213" height="400"/>
             <connections>
                 <outlet property="brandIcon" destination="7Ik-LR-yfv" id="m5y-iE-hHe"/>
+                <outlet property="colorsCollectionView" destination="Voo-KI-aM1" id="2bE-e6-SmH"/>
                 <outlet property="currentPriceLabel" destination="0a7-46-URx" id="f9Q-7J-xR9"/>
                 <outlet property="discountLabel" destination="lo0-UH-WFz" id="A52-rQ-F0r"/>
                 <outlet property="firstPriceLabel" destination="fRt-z4-ENh" id="Qaw-gw-5kQ"/>
                 <outlet property="imageView" destination="p7y-nE-YOT" id="QYU-uZ-88Y"/>
                 <outlet property="labelTitle" destination="0V2-xF-mYH" id="P4K-cg-PBp"/>
                 <outlet property="rateView" destination="tpz-zm-peJ" id="Alf-MI-RxV"/>
+                <outlet property="ratingCount" destination="UmZ-ld-cXc" id="eHU-Sm-Aed"/>
             </connections>
             <point key="canvasLocation" x="263.19999999999999" y="312.14392803598201"/>
         </collectionViewCell>

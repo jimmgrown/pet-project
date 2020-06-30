@@ -1,15 +1,23 @@
 import UIKit
 
-class CategoryCollectionViewCell: UICollectionViewCell {
+final class CategoryCollectionViewCell: UICollectionViewCell {
 
+    //MARK: Outlets
+    
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var labelName: UILabel!
+    
+    //MARK: Initialization
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var labelName: UILabel!
+    
+    //MARK: Constants
     
     static let reuseID: String = .init(describing: CategoryCollectionViewCell.self)
+    
+    //MARK: Methods
     
     func setup(image: String,label: String){
         if let url = URL(string: image){
