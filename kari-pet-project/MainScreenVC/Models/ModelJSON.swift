@@ -5,7 +5,7 @@ struct Block: Decodable {
     let priority: Int
     let background: Background?
     let fontColor: FontColor?
-    let items: [Any]
+    private let items: [Any]
     let additionalData: AdditionalData?
     
     private enum CodingKeys: String, CodingKey {
@@ -49,7 +49,7 @@ struct Block: Decodable {
         return lhs.priority < rhs.priority
     }
     
-    func getItemsModel<T>() -> [T] {
-        return items as! [T]
+    func getItemsModel<Item>() -> [Item] {
+        return items as! [Item]
     }
 }

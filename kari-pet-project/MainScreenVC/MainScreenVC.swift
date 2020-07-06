@@ -40,7 +40,7 @@ final class MainScreenVC: UIViewController {
 extension MainScreenVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.blocks.count
+        return blocks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -128,10 +128,11 @@ extension MainScreenVC: UITableViewDataSource {
             
         case .categories:
             var categoryBlockItems: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
-            categoryBlockItems.sort(by: {$0.priority < $1.priority})
-            let imagesCategory = categoryBlockItems.map { $0.image}
+            #warning("Тоже неплохо бы через Comparable отсортировать")
+            categoryBlockItems.sort(by: { $0.priority < $1.priority })
+            let imagesCategory = categoryBlockItems.map { $0.image }
             let labelsCategory = categoryBlockItems.map { $0.name }
-            let imagesLabelsCategory = [imagesCategory,labelsCategory]
+            let imagesLabelsCategory = [imagesCategory, labelsCategory]
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: CategoryTableViewCell.reuseID,
