@@ -22,7 +22,6 @@ final class MainScreenVC: UIViewController {
     
     // MARK: Properties
     
-    private var blocksTypes: [BlockType] = []
     private var blocks: [Block] = [] {
         didSet {
             tableView.reloadData()
@@ -31,9 +30,7 @@ final class MainScreenVC: UIViewController {
     
     override func viewDidLoad() {
         API.loadJSON { result in
-            self.blocks = result.blocks.sorted(by: <)
-            self.blocks = self.blocks.filter { $0.type != nil }
-            self.blocksTypes = self.blocks.map { $0.type } as! [BlockType]
+            self.blocks = result.blocks.filter { $0.type != nil }.sorted(by: <)
         }
     }
 }
@@ -47,7 +44,7 @@ extension MainScreenVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch blocksTypes[indexPath.row] {
+        switch blocks[indexPath.row].type! {
         case .slider:
             let imagesStockBanner = blocks[indexPath.row].items as! [StockBannerModel]
             let imagesUrlStockBanner = imagesStockBanner.map { $0.image }
