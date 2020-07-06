@@ -1,7 +1,7 @@
 import UIKit
 import SDWebImage
 
-// MARK: - BaseMainScreenVC
+// MARK: - Base
 
 final class MainScreenVC: UIViewController {
     
@@ -28,7 +28,7 @@ final class MainScreenVC: UIViewController {
         }
     }
     
-    #warning("Такие вещи нужно инкапсулировать. Ты должен довести этот код до вида .sorted(by: <). Попытайся сделать это сам, следуя ошибкам, которые тебе будет показывать хкод")
+    #warning("Такие вещи нужно инкапсулировать. Ты должен довести этот код до вида .sorted(by: <). Попытайся сделать это сам, следуя ошибкам, которые тебе будет показывать хкод. Подсказка: нужно использовать протокол Comparable")
     
     override func viewDidLoad() {
         API.loadJSON { result in
@@ -37,7 +37,7 @@ final class MainScreenVC: UIViewController {
     }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - Table View Data Source
 
 extension MainScreenVC: UITableViewDataSource {
     
@@ -46,15 +46,17 @@ extension MainScreenVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        #warning("Чтобы не работать с нилами, нужно заранее отфильтровать blocks так, чтобы в этом массиве остались только те элементы, у которых type != nil. И после этого обращаться к этому полю, как к неопциональному. Таким образом, ты избавишься от кейса .none")
         switch blocks[indexPath.row].type {
         case .some(.slider):
             let imagesStockBanner: [StockBannerModel] = blocks[indexPath.row].items as! [StockBannerModel]
             let imagesUrlStockBanner: [String] = imagesStockBanner.map { $0.image }
+            
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: SliderTableViewCell.reuseID,
                 for: indexPath
-                ) as! SliderTableViewCell
+            ) as! SliderTableViewCell
+            
             cell.setup(images: imagesUrlStockBanner)
             return cell
             
@@ -69,17 +71,25 @@ extension MainScreenVC: UITableViewDataSource {
             let brandsProduct: [String] = productsBlock.map { $0.brand.image }
             let ratingCount: [Int] = productsBlock.map { $0.rate?.numberOfVotes ?? 0 }
             let rating: [Double] = productsBlock.map { $0.rate?.votes ?? 0 }
-            let colors: [[Colors]?] = productsBlock.map { $0.colors}
+            let colors: [[Colors]?] = productsBlock.map { $0.colors }
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: ProductsTableViewCell.reuseID,
                 for: indexPath
-                ) as! ProductsTableViewCell
-            cell.setup(images: imagesProducts, price: priceProducts,
-                       name: nameProductsBanner, color: bgColor,
-                       title: titleProductBanner, brands: brandsProduct,
-                       fontColor: fontColor, ratingCount: ratingCount,
-                       rating: rating, colors: colors)
+            ) as! ProductsTableViewCell
+            
+            cell.setup(
+                images: imagesProducts,
+                price: priceProducts,
+                name: nameProductsBanner,
+                color: bgColor,
+                title: titleProductBanner,
+                brands: brandsProduct,
+                fontColor: fontColor,
+                ratingCount: ratingCount,
+                rating: rating,
+                colors: colors
+            )
             
             return cell
             
@@ -90,7 +100,8 @@ extension MainScreenVC: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: BrandsTableViewCell.reuseID,
                 for: indexPath
-                ) as! BrandsTableViewCell
+            ) as! BrandsTableViewCell
+            
             cell.setup(images: imagesBrands)
             return cell
             
@@ -101,7 +112,8 @@ extension MainScreenVC: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: AddInfoTableViewCell.reuseID,
                 for: indexPath
-                ) as! AddInfoTableViewCell
+            ) as! AddInfoTableViewCell
+            
             cell.setup(data: imagesAddInfo)
             return cell
             
@@ -112,7 +124,8 @@ extension MainScreenVC: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: FindsTableViewCell.reuseID,
                 for: indexPath
-                ) as! FindsTableViewCell
+            ) as! FindsTableViewCell
+            
             cell.setup(images: imagesFinds)
             return cell
             
@@ -126,7 +139,8 @@ extension MainScreenVC: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: CategoryTableViewCell.reuseID,
                 for: indexPath
-                ) as! CategoryTableViewCell
+            ) as! CategoryTableViewCell
+            
             cell.setup(data: imagesLabelsCategory)
             return cell
            
@@ -134,7 +148,8 @@ extension MainScreenVC: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: CategoryTableViewCell.reuseID,
                 for: indexPath
-                ) as! CategoryTableViewCell
+            ) as! CategoryTableViewCell
+            
             return cell
         }
     }
