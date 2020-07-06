@@ -22,17 +22,18 @@ final class MainScreenVC: UIViewController {
     
     // MARK: Properties
     
+    private var blocksTypes: [BlockType] = []
     private var blocks: [Block] = [] {
         didSet {
             tableView.reloadData()
         }
     }
     
-    #warning("Такие вещи нужно инкапсулировать. Ты должен довести этот код до вида .sorted(by: <). Попытайся сделать это сам, следуя ошибкам, которые тебе будет показывать хкод. Подсказка: нужно использовать протокол Comparable")
-    
     override func viewDidLoad() {
         API.loadJSON { result in
-            self.blocks = result.blocks.sorted(by: { $0.priority < $1.priority })
+            self.blocks = result.blocks.sorted(by: <)
+            self.blocks = self.blocks.filter { $0.type != nil }
+            self.blocksTypes = self.blocks.map { $0.type } as! [BlockType]
         }
     }
 }
@@ -46,11 +47,10 @@ extension MainScreenVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        #warning("Чтобы не работать с нилами, нужно заранее отфильтровать blocks так, чтобы в этом массиве остались только те элементы, у которых type != nil. И после этого обращаться к этому полю, как к неопциональному. Таким образом, ты избавишься от кейса .none")
-        switch blocks[indexPath.row].type {
-        case .some(.slider):
-            let imagesStockBanner: [StockBannerModel] = blocks[indexPath.row].items as! [StockBannerModel]
-            let imagesUrlStockBanner: [String] = imagesStockBanner.map { $0.image }
+        switch blocksTypes[indexPath.row] {
+        case .slider:
+            let imagesStockBanner = blocks[indexPath.row].items as! [StockBannerModel]
+            let imagesUrlStockBanner = imagesStockBanner.map { $0.image }
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: SliderTableViewCell.reuseID,
@@ -60,18 +60,18 @@ extension MainScreenVC: UITableViewDataSource {
             cell.setup(images: imagesUrlStockBanner)
             return cell
             
-        case .some(.productsHot), .some(.products):
-            let bgColor: UIColor = UIColor(hexString: blocks[indexPath.row].background?.value)
-            let fontColor: UIColor = UIColor(hexString: blocks[indexPath.row].fontColor?.value)
-            let productsBlock: [ProductsModel] = blocks[indexPath.row].items as! [ProductsModel]
-            let imagesProducts: [String] = productsBlock.map { $0.preview }
-            let priceProducts: [Price] = productsBlock.map { $0.price }
-            let nameProductsBanner: String = blocks[indexPath.row].name
-            let titleProductBanner: [String] = productsBlock.map { $0.title }
-            let brandsProduct: [String] = productsBlock.map { $0.brand.image }
-            let ratingCount: [Int] = productsBlock.map { $0.rate?.numberOfVotes ?? 0 }
-            let rating: [Double] = productsBlock.map { $0.rate?.votes ?? 0 }
-            let colors: [[Colors]?] = productsBlock.map { $0.colors }
+        case .productsHot, .products:
+            let bgColor = UIColor(hexString: blocks[indexPath.row].background?.value)
+            let fontColor = UIColor(hexString: blocks[indexPath.row].fontColor?.value)
+            let productsBlock = blocks[indexPath.row].items as! [ProductsModel]
+            let imagesProducts = productsBlock.map { $0.preview }
+            let priceProducts = productsBlock.map { $0.price }
+            let nameProductsBanner = blocks[indexPath.row].name
+            let titleProductBanner = productsBlock.map { $0.title }
+            let brandsProduct = productsBlock.map { $0.brand.image }
+            let ratingCount = productsBlock.map { $0.rate?.numberOfVotes ?? 0 }
+            let rating = productsBlock.map { $0.rate?.votes ?? 0 }
+            let colors = productsBlock.map { $0.colors }
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: ProductsTableViewCell.reuseID,
@@ -93,9 +93,9 @@ extension MainScreenVC: UITableViewDataSource {
             
             return cell
             
-        case .some(.brands):
-            let brandsBlock: [BrandModel] = blocks[indexPath.row].items as! [BrandModel]
-            let imagesBrands: [String] = brandsBlock.map { $0.image }
+        case .brands:
+            let brandsBlock = blocks[indexPath.row].items as! [BrandModel]
+            let imagesBrands = brandsBlock.map { $0.image }
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: BrandsTableViewCell.reuseID,
@@ -105,9 +105,9 @@ extension MainScreenVC: UITableViewDataSource {
             cell.setup(images: imagesBrands)
             return cell
             
-        case .some(.additionalInfos):
-            let addInfoBlock: [StockBannerModel] = blocks[indexPath.row].items as! [StockBannerModel]
-            let imagesAddInfo: [String] = addInfoBlock.map { $0.image }
+        case .additionalInfos:
+            let addInfoBlock = blocks[indexPath.row].items as! [StockBannerModel]
+            let imagesAddInfo = addInfoBlock.map { $0.image }
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: AddInfoTableViewCell.reuseID,
@@ -117,9 +117,9 @@ extension MainScreenVC: UITableViewDataSource {
             cell.setup(data: imagesAddInfo)
             return cell
             
-        case .some(.finds):
-            let findsBlock: [StockBannerModel] = blocks[indexPath.row].items as! [StockBannerModel]
-            let imagesFinds: [String] = findsBlock.map { $0.image }
+        case .finds:
+            let findsBlock = blocks[indexPath.row].items as! [StockBannerModel]
+            let imagesFinds = findsBlock.map { $0.image }
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: FindsTableViewCell.reuseID,
@@ -129,12 +129,12 @@ extension MainScreenVC: UITableViewDataSource {
             cell.setup(images: imagesFinds)
             return cell
             
-        case .some(.categories):
+        case .categories:
             var categoryBlockItems = blocks[indexPath.row].items as! [StockBannerModel]
             categoryBlockItems.sort(by: {$0.priority < $1.priority})
-            let imagesCategory: [String] = categoryBlockItems.map { $0.image}
-            let labelsCategory: [String] = categoryBlockItems.map { $0.name }
-            let imagesLabelsCategory: [[String]] = [imagesCategory,labelsCategory]
+            let imagesCategory = categoryBlockItems.map { $0.image}
+            let labelsCategory = categoryBlockItems.map { $0.name }
+            let imagesLabelsCategory = [imagesCategory,labelsCategory]
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: CategoryTableViewCell.reuseID,
@@ -142,14 +142,6 @@ extension MainScreenVC: UITableViewDataSource {
             ) as! CategoryTableViewCell
             
             cell.setup(data: imagesLabelsCategory)
-            return cell
-           
-        case .none:
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: CategoryTableViewCell.reuseID,
-                for: indexPath
-            ) as! CategoryTableViewCell
-            
             return cell
         }
     }

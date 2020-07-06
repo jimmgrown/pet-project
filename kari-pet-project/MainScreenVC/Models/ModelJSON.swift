@@ -41,15 +41,12 @@ struct Block: Decodable {
         case .none:
             items = []
         }
-//        switch type {
-//        case "slider", "additional_infos", "categories", "finds":
-//            items = try container.decode([StockBannerModel].self, forKey: .items)
-//        case "products", "products_hot":
-//            items = try container.decode([ProductsModel].self, forKey: .items)
-//        case "brands":
-//            items = try container.decode([BrandModel].self, forKey: .items)
-//        default:
-//            items = []
-//        }
     }
+    
+    // MARK: Methods
+    
+    static func < (lhs: Block, rhs: Block) -> Bool {
+        return lhs.priority < rhs.priority
+    }
+    
 }
