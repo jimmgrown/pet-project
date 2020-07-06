@@ -11,6 +11,7 @@ final class MainScreenVC: UIViewController {
         didSet {
             tableView.dataSource = self
             
+//            tableView.register(SliderTableViewCell.self)
             tableView.register(SliderTableViewCell.uiNib, forCellReuseIdentifier: SliderTableViewCell.reuseID)
             tableView.register(CategoryTableViewCell.uiNib, forCellReuseIdentifier: CategoryTableViewCell.reuseID)
             tableView.register(AddInfoTableViewCell.uiNib, forCellReuseIdentifier: AddInfoTableViewCell.reuseID)
@@ -49,6 +50,9 @@ extension MainScreenVC: UITableViewDataSource {
             let imagesStockBanner: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
             let imagesUrlStockBanner = imagesStockBanner.map { $0.image }
             
+//            let cell = SliderTableViewCell.dequeueReusableCell(for: indexPath) as SliderTableViewCell
+//            let cell: SliderTableViewCell = SliderTableViewCell.dequeueReusableCell(for: indexPath)
+
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: SliderTableViewCell.reuseID,
                 for: indexPath
