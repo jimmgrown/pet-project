@@ -15,7 +15,7 @@ final class AddInfoTableViewCell: UITableViewCell {
         }
     }
     
-    //MARK: Propities
+    //MARK: Properties
     
     let uiNib: UINib = UINib(nibName: String(describing: AddInfoCollectionViewCell.self), bundle: nil)
     
@@ -40,13 +40,12 @@ final class AddInfoTableViewCell: UITableViewCell {
     }
 }
 
-//MARK: Exstensions
+//MARK: - UICollectionViewDataSource
 
-extension AddInfoTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension AddInfoTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -54,9 +53,12 @@ extension AddInfoTableViewCell: UICollectionViewDataSource, UICollectionViewDele
         let cell: AddInfoCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: AddInfoCollectionViewCell.reuseID,for: indexPath) as! AddInfoCollectionViewCell
         cell.setup(image: data[indexPath.row])
         return cell
-        
     }
-    
+}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+
+extension AddInfoTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / 1.75
         let height = collectionView.frame.height - 50

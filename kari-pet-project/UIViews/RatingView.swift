@@ -41,7 +41,7 @@ class RatingView: UIView {
 
 }
 
-//MARK: Extensions
+//MARK: - UIStackView
 
 extension UIStackView {
     

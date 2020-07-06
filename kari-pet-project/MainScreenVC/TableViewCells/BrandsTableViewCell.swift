@@ -18,7 +18,7 @@ final class BrandsTableViewCell: UITableViewCell {
         }
     }
     
-    //MARK: Propities
+    //MARK: Properties
     
     var images: [String] = [] {
         didSet {
@@ -42,9 +42,9 @@ final class BrandsTableViewCell: UITableViewCell {
     
 }
 
-//MARK: Extensions
+//MARK: - UICollectionViewDataSource
 
-extension BrandsTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension BrandsTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
@@ -58,7 +58,11 @@ extension BrandsTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
         return cell
         
     }
-    
+}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+
+extension BrandsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / 3
         let height = collectionView.frame.height / 3

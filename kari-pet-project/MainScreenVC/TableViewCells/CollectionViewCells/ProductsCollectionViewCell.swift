@@ -66,22 +66,20 @@ final class ProductsCollectionViewCell: UICollectionViewCell {
     }
 }
 
-//MARK: Extensions
+//MARK: - UICollectionViewDataSource
 
-extension ProductsCollectionViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ProductsCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colors?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: ColorsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ColorsCollectionViewCell.reuseID,for: indexPath) as! ColorsCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: ColorsCollectionViewCell.reuseID,
+            for: indexPath
+            ) as! ColorsCollectionViewCell
         cell.setup(colors: colors?[indexPath.row])
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let side = collectionView.frame.size.height
-        return CGSize(width: side, height: side)
     }
     
     //MARK: Change preview by colors
@@ -92,9 +90,12 @@ extension ProductsCollectionViewCell: UICollectionViewDataSource, UICollectionVi
 //        }
 //    }
 }
-//extension ProductsCollectionViewCell: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        rateView.firstInit(rate: Int(self.rating),stkView: rateView)
-//    }
-//
-//}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+
+extension ProductsCollectionViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let side = collectionView.frame.size.height
+        return CGSize(width: side, height: side)
+    }
+}

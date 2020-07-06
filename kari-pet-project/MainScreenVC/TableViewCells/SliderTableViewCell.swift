@@ -1,98 +1,5 @@
 import UIKit
 
-#warning("""
-Также, привыкай использовать четкую структуру файла:
-
-// MARK: - Auxiliary (опциональный блок, его может и не быть)
-
-extension SomeClass {
-
-// MARK: Types
-
-private (может быть и internal) enum/struct SomeEnumOrStruct {
-...
-}
-
-// MARK: Constants
-
-private let someConstant: Int (например) = 1000
-
-}
-
-// MARK: - Declaration
-
-(final) class SomeClass: SomeParent {
-
-// MARK: Outlets (если есть. Не забывай их всегда делать приватными и хотя бы себе ответь на вопрос, почему это нужно)
-
-@IBOutlet private weak var someLabel: UILabel!
-@IBOutlet private weak var someView: UIView!
-
-// Если ты углубляешь скоуп (т.е ставишь очередные фигурные скобки, то до и после них должен всегда быть вертикальный отступ для читабельности. То же самое относится и ко внутренностям методов и тд)
-@IBOutlet private weak var someButton: UIButton! {
-didSet {
-...
-}
-}
-
-// MARK: Public properties (если есть. Если работаешь без модульной структуры, то в эту секцию просто помещай internal проперти. В подобные секции декларации класса помещаются ТОЛЬКО stored проперти, до computed дойдем позже)
-
-// Обязательно у пропертей объекта нужно указывать явный тип. Опять же ответ на "почему?" в моем докладе
-var someProperty: Int = 10
-
-// MARK: Private properties (если есть)
-
-...
-
-// MARK: Initialization (если есть)
-
-...
-
-// MARK: Life cycle (если есть)
-
-...
-
-// MARK: Overridden API (если есть. Сюда не включается лайф сайкл контроллера, к примеру)
-
-...
-
-// MARK: Should/Must/May-be-overridden API (Эти 3 опциональных секции нужны для методов и пропертей, с которыми могут/должны происходить какие-то модификации в сабклассах)
-
-...
-
-// MARK: Deinitialization (если есть)
-
-...
-
-}
-
-// MARK: - Actions (если есть IBAction'ы. Сюда же помещаются хендлеры для gesture рекогнайзеров, добавленных программно, например. Не забывай это все тоже делать приватным)
-
-extension SomeClass {
-...
-}
-
-// MARK: - Some Protocol (обязательно для каждого протокола должен быть отдельный extension. Исключением может быть случай, когда протокол выражает весь смысл класса и без него, например, декларация класса будет просто с пустыми скобками {})
-
-extension SomeClass: SomeProtocol {
-...
-}
-
-// MARK: - Private API (приватные методы и computed проперти)
-
-extension SomeClass {
-...
-}
-
-// MARK: - Public API (публичные/internal методы и computed проперти)
-
-extension SomeClass {
-...
-}
-
-Такая структура, естественно, может подвергаться различным модификациям в зависимости от ситуации + она основана на моих предпочтениях и облегчении читаемости кода. Главное, чтобы та структура, которую ты используешь была однородна и резонна. Смотря на мой ппример обращай внимание на все вертикальные и горизонтальные отступы, на марки, дефисы в них, написание с большой буквы и тд. В проекте очень удобно использовать minimap для ориентации в коде, эти марки именно в таком виде обеспечивают хорошую структуру при просмотре)
-""")
-
 final class SliderTableViewCell: UITableViewCell {
     
     //MARK: Constants
@@ -113,7 +20,7 @@ final class SliderTableViewCell: UITableViewCell {
         
     }
     
-    //MARK: Propities
+    //MARK: Properties
     
     let uiNib: UINib = UINib(nibName: String(describing: SliderCollectionViewCell.self), bundle: nil)
     var images: [String] = [] {
@@ -152,9 +59,9 @@ final class SliderTableViewCell: UITableViewCell {
 //    }
 }
 
-//MARK: Extensions
+//MARK: - UICollectionViewDataSource
 
-extension SliderTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SliderTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -168,20 +75,27 @@ extension SliderTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: SliderCollectionViewCell.reuseID,
+            for: indexPath
+            ) as! SliderCollectionViewCell
         
-        let cell: SliderCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: SliderCollectionViewCell.reuseID,for: indexPath) as! SliderCollectionViewCell
         cell.setup(image: self.images[indexPath.row])//% images.count
         return cell
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+            self.pageControl.currentPage = indexPath.row //% self.images.count
+    }
+}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+
+extension SliderTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let heightSize = collectionView.frame.size.height
         let widthSize = collectionView.frame.size.width
         return CGSize(width: widthSize, height: heightSize)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-            self.pageControl.currentPage = indexPath.row //% self.images.count
     }
 }

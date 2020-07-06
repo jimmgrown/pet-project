@@ -1,7 +1,7 @@
-private enum BlockTypes: String {
+enum BlockType: String {
     case slider
     case products
-    case productsHot = "productsHot"
+    case productsHot = "products_hot"
     case brands
     case additionalInfos = "additional_infos"
     case finds

@@ -1,6 +1,6 @@
 struct Block: Decodable {
     let blockId: Int
-    let type: String
+    let type: BlockType?
     let name: String
     let priority: Int
     let background: Background?
@@ -25,21 +25,31 @@ struct Block: Decodable {
         blockId = try container.decode(Int.self, forKey: .blockId)
         name = try container.decode(String.self, forKey: .name)
         priority = try container.decode(Int.self, forKey: .priority)
-        type = try container.decode(String.self, forKey: .type)
+        type = BlockType(rawValue: try container.decode(String.self, forKey: .type))
         
         background = try container.decodeIfPresent(Background.self, forKey: .background)
         fontColor = try container.decodeIfPresent(FontColor.self, forKey: .fontColor)
         additionalData = try container.decodeIfPresent(AdditionalData.self, forKey: .additionalData)
         
         switch type {
-        case "slider", "additional_infos", "categories", "finds":
+        case .some(.slider), .some(.additionalInfos), .some(.categories), .some(.finds):
             items = try container.decode([StockBannerModel].self, forKey: .items)
-        case "products", "products_hot":
+        case .some(.products), .some(.productsHot):
             items = try container.decode([ProductsModel].self, forKey: .items)
-        case "brands":
+        case .some(.brands):
             items = try container.decode([BrandModel].self, forKey: .items)
-        default:
+        case .none:
             items = []
         }
+//        switch type {
+//        case "slider", "additional_infos", "categories", "finds":
+//            items = try container.decode([StockBannerModel].self, forKey: .items)
+//        case "products", "products_hot":
+//            items = try container.decode([ProductsModel].self, forKey: .items)
+//        case "brands":
+//            items = try container.decode([BrandModel].self, forKey: .items)
+//        default:
+//            items = []
+//        }
     }
 }

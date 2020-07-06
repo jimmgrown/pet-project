@@ -18,7 +18,7 @@ final class ProductsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelName: UILabel!
     
-    //MARK: Propities
+    //MARK: Properties
     
     let uiNib: UINib = UINib(nibName: String(describing: ProductsCollectionViewCell.self), bundle: nil)
     
@@ -36,7 +36,9 @@ final class ProductsTableViewCell: UITableViewCell {
     
     //MARK: Methods
     
-    func setup(images: [String], price: [Price], name: String, color: UIColor, title: [String], brands: [String], fontColor: UIColor, ratingCount: [Int], rating: [Double], colors: [[Colors]?]) {
+    func setup(images: [String], price: [Price], name: String, color: UIColor,
+        title: [String], brands: [String], fontColor: UIColor, ratingCount: [Int],
+        rating: [Double], colors: [[Colors]?]) {
         self.colors = colors
         self.images = images
         self.price = price
@@ -61,9 +63,9 @@ final class ProductsTableViewCell: UITableViewCell {
     
 }
 
-//MARK: Exstensions
+//MARK: - UICollectionViewDataSource
 
-extension ProductsTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ProductsTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
@@ -71,13 +73,20 @@ extension ProductsTableViewCell: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: ProductsCollectionViewCell.reuseID,
+            for: indexPath
+            ) as! ProductsCollectionViewCell
         
-        let cell: ProductsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductsCollectionViewCell.reuseID,for: indexPath) as! ProductsCollectionViewCell
         cell.setup(image: images[indexPath.row], price: price[indexPath.row], title: title[indexPath.row], brand: brands[indexPath.row], votes: ratingCount[indexPath.row], rating: rating[indexPath.row], colors: colors[indexPath.row])
         return cell
         
     }
-    
+}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+
+extension ProductsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / 1.85
         let height = collectionView.frame.height

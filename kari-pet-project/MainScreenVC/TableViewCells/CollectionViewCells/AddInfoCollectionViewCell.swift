@@ -10,7 +10,6 @@ final class AddInfoCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     //MARK: Constants

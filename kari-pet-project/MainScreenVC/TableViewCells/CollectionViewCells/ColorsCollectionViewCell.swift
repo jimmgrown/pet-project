@@ -29,11 +29,16 @@ final class ColorsCollectionViewCell: UICollectionViewCell {
     func setup(colors:Colors?){
         switch colors?.hex {
             
+        case "":
+            switch colors?.colorName {
+            default:
+                imageView.backgroundColor = UIColor(hexString: "#b6e6d6")
+            }
         case "#FFFFFF":
             imageView.backgroundColor = UIColor(hexString: "#e6e6e6")
             
         default:
-            imageView.backgroundColor = UIColor(hexString: colors?.hex ?? "#FFFFFF")
+            imageView.backgroundColor = UIColor(hexString: colors?.hex)
         }
     }
 

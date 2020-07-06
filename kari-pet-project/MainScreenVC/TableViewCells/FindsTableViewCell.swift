@@ -18,7 +18,7 @@ final class FindsTableViewCell: UITableViewCell {
         }
     }
     
-    //MARK: Propities
+    //MARK: Properties
     
     var images: [String] = [] {
         didSet {
@@ -42,9 +42,9 @@ final class FindsTableViewCell: UITableViewCell {
     
 }
 
-//MARK: Extensions
+//MARK: - UICollectionViewDataSource
 
-extension FindsTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension FindsTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
@@ -58,7 +58,11 @@ extension FindsTableViewCell: UICollectionViewDataSource, UICollectionViewDelega
         return cell
         
     }
-    
+}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+
+extension FindsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / 1.25
         let height = collectionView.frame.height

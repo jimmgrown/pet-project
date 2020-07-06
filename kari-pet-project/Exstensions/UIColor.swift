@@ -12,11 +12,11 @@ import UIKit
 //MARK: Exstensions
 
 extension UIColor {
-    convenience init(hexString: String, alpha: CGFloat = 1.0) {
+    convenience init(hexString: String?, alpha: CGFloat = 1.0) {
         
-        //MARK: Propities
+        //MARK: Properties
         
-        let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let hexString: String = hexString?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) ?? "#FFFFFF"
         let scanner = Scanner(string: hexString)
         
         if (hexString.hasPrefix("#")) {
