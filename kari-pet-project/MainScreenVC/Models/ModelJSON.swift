@@ -49,4 +49,7 @@ struct Block: Decodable {
         return lhs.priority < rhs.priority
     }
     
+    func getItemsModel<T>() -> [T] {
+        return items as! [T]
+    }
 }

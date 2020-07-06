@@ -46,7 +46,7 @@ extension MainScreenVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch blocks[indexPath.row].type! {
         case .slider:
-            let imagesStockBanner = blocks[indexPath.row].items as! [StockBannerModel]
+            let imagesStockBanner: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
             let imagesUrlStockBanner = imagesStockBanner.map { $0.image }
             
             let cell = tableView.dequeueReusableCell(
@@ -60,7 +60,7 @@ extension MainScreenVC: UITableViewDataSource {
         case .productsHot, .products:
             let bgColor = UIColor(hexString: blocks[indexPath.row].background?.value)
             let fontColor = UIColor(hexString: blocks[indexPath.row].fontColor?.value)
-            let productsBlock = blocks[indexPath.row].items as! [ProductsModel]
+            let productsBlock: [ProductsModel] = blocks[indexPath.row].getItemsModel()
             let imagesProducts = productsBlock.map { $0.preview }
             let priceProducts = productsBlock.map { $0.price }
             let nameProductsBanner = blocks[indexPath.row].name
@@ -91,7 +91,7 @@ extension MainScreenVC: UITableViewDataSource {
             return cell
             
         case .brands:
-            let brandsBlock = blocks[indexPath.row].items as! [BrandModel]
+            let brandsBlock: [BrandModel] = blocks[indexPath.row].getItemsModel()
             let imagesBrands = brandsBlock.map { $0.image }
             
             let cell = tableView.dequeueReusableCell(
@@ -103,7 +103,7 @@ extension MainScreenVC: UITableViewDataSource {
             return cell
             
         case .additionalInfos:
-            let addInfoBlock = blocks[indexPath.row].items as! [StockBannerModel]
+            let addInfoBlock: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
             let imagesAddInfo = addInfoBlock.map { $0.image }
             
             let cell = tableView.dequeueReusableCell(
@@ -115,7 +115,7 @@ extension MainScreenVC: UITableViewDataSource {
             return cell
             
         case .finds:
-            let findsBlock = blocks[indexPath.row].items as! [StockBannerModel]
+            let findsBlock: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
             let imagesFinds = findsBlock.map { $0.image }
             
             let cell = tableView.dequeueReusableCell(
@@ -127,7 +127,7 @@ extension MainScreenVC: UITableViewDataSource {
             return cell
             
         case .categories:
-            var categoryBlockItems = blocks[indexPath.row].items as! [StockBannerModel]
+            var categoryBlockItems: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
             categoryBlockItems.sort(by: {$0.priority < $1.priority})
             let imagesCategory = categoryBlockItems.map { $0.image}
             let labelsCategory = categoryBlockItems.map { $0.name }
