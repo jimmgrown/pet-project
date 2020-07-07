@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-//MARK: Protocols
+// MARK: - Protocols
 
 protocol ReusableView: class {
-    static var defaultReuseIdentifier: String { get }
+    static var reuseID: String { get }
 }
 
 protocol NibLoadableView: class {
@@ -20,53 +20,46 @@ protocol NibLoadableView: class {
 }
 
 extension ReusableView where Self: UIView {
-    static var defaultReuseIdentifier: String {
+
+    static var reuseID: String {
         return String(describing: self)
     }
+
 }   
 
 extension NibLoadableView where Self: UIView {
+
     static var nibName: String {
         return String(describing: self)
     }
-}
 
-// MARK: - Register
+}
 
 extension UICollectionView {
     
-    func register<T: UICollectionViewCell>(_: T.Type) where T: ReusableView, T: NibLoadableView {
-        let bundle = Bundle(for: T.self)
-        let nib = UINib(nibName: T.nibName, bundle: bundle)
-        register(nib, forCellWithReuseIdentifier: T.defaultReuseIdentifier)
+    func register<Cell: UICollectionViewCell>(_: Cell.Type) where Cell: ReusableView & NibLoadableView {
+        #warning("В чем смысл NibLoadableView, если ты не вынес в него код для создания ниба? В текущем виде у тебя оба протокола делают одну и ту же работу")
+        let bundle = Bundle(for: Cell.self)
+        let nib = UINib(nibName: Cell.nibName, bundle: bundle)
+        register(nib, forCellWithReuseIdentifier: Cell.reuseID)
     }
-    
-    //MARK: Dequeing
-    
-    func dequeueReusableCell<T: UICollectionViewCell>(for indexPath: IndexPath) -> T where T: ReusableView {
-        guard let cell = dequeueReusableCell(withReuseIdentifier: T.defaultReuseIdentifier, for: indexPath) as? T else {
-            fatalError("Could not dequeue cell with identifier: \(T.defaultReuseIdentifier)")
-        }
-        return cell
+        
+    func dequeueReusableCell<Cell: UICollectionViewCell>(for indexPath: IndexPath) -> Cell where Cell: ReusableView {
+        return dequeueReusableCell(withReuseIdentifier: Cell.reuseID, for: indexPath) as! Cell
     }
+
 }
 
 extension UITableView {
-    
-    //MARK: Registering Cell
-    
-    func register<T: UITableViewCell>(_: T.Type) where T: ReusableView, T: NibLoadableView {
-        let bundle = Bundle(for: T.self)
-        let nib = UINib(nibName: T.nibName, bundle: bundle)
-        register(nib, forCellReuseIdentifier: T.defaultReuseIdentifier)
+        
+    func register<Cell: UITableViewCell>(_: Cell.Type) where Cell: ReusableView & NibLoadableView {
+        let bundle = Bundle(for: Cell.self)
+        let nib = UINib(nibName: Cell.nibName, bundle: bundle)
+        register(nib, forCellReuseIdentifier: Cell.reuseID)
     }
-    
-    //MARK: Dequeing
-    
-    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T where T: ReusableView {
-        guard let cell = dequeueReusableCell(withIdentifier: T.defaultReuseIdentifier, for: indexPath) as? T else {
-            fatalError("Could not dequeue cell with identifier: \(T.defaultReuseIdentifier)")
-        }
-        return cell
+        
+    func dequeueReusableCell<Cell: UITableViewCell>(for indexPath: IndexPath) -> Cell where Cell: ReusableView {
+        return dequeueReusableCell(withIdentifier: Cell.reuseID, for: indexPath) as! Cell
     }
+
 }
