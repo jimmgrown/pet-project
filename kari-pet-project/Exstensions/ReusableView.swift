@@ -6,6 +6,9 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
+#warning("Название и содержимое файла не соответствуют друг другу + лучше всего не лепить все в одно место. Если файл называется ReusableView, то здесь должен находиться ТОЛЬКО его протокол с его экстеншнами (НЕ экстеншнами посторонних типов). Правильно назвать файл с экстеншном существующего типа можно следующим образом: UITableView+ТоЧтоТыДобавляешь, в твоем случае UITableView+CellRegistration (процесс регистрации и декьюинга можно объединить одним понятием - регистрация ячеек)")
+
+#warning("Следи за импортами, лишних быть не должно. По дефолту из файла всегда убирай все импорты, пока не понадобится какой-то конкретный. В данном случае нужно убрать Foundation")
 import Foundation
 import UIKit
 
@@ -15,17 +18,17 @@ protocol ReusableView: class {
     static var reuseID: String { get }
 }
 
-protocol NibLoadableView: class {
-    static var nibName: String { get }
-}
-
 extension ReusableView where Self: UIView {
 
     static var reuseID: String {
         return String(describing: self)
     }
 
-}   
+}
+
+protocol NibLoadableView: class {
+    static var nibName: String { get }
+}
 
 extension NibLoadableView where Self: UIView {
 
@@ -35,6 +38,9 @@ extension NibLoadableView where Self: UIView {
 
 }
 
+// MARK: - Extensions
+
+#warning("Вспомни мой доклад и найди здесь ошибку, она у тебя в каждом методе ниже повторяется")
 extension UICollectionView {
     
     func register<Cell: UICollectionViewCell>(_: Cell.Type) where Cell: ReusableView & NibLoadableView {
@@ -52,6 +58,7 @@ extension UICollectionView {
 
 extension UITableView {
         
+    #warning("То, как ты писал констреинты через запятую, - не очень. Можно через такую protocol composition прямо на месте делать ограничение, либо эту же композицию через typealias определить в отдельный псевдотип")
     func register<Cell: UITableViewCell>(_: Cell.Type) where Cell: ReusableView & NibLoadableView {
         let bundle = Bundle(for: Cell.self)
         let nib = UINib(nibName: Cell.nibName, bundle: bundle)
