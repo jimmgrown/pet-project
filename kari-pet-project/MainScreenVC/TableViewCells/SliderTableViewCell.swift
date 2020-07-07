@@ -1,11 +1,6 @@
 import UIKit
 
-final class SliderTableViewCell: UITableViewCell {
-    
-    //MARK: Constants
-    
-    static let uiNib: UINib = UINib(nibName: String(describing: SliderTableViewCell.self), bundle: nil)
-    static let reuseID: String = .init(describing: SliderTableViewCell.self)
+final class SliderTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
     
     //MARK: Outlets
     
@@ -15,14 +10,13 @@ final class SliderTableViewCell: UITableViewCell {
         didSet{
             collectionView.dataSource = self
             collectionView.delegate = self
-            collectionView.register(uiNib, forCellWithReuseIdentifier: SliderCollectionViewCell.reuseID)
+            collectionView.register(SliderCollectionViewCell.self)
         }
         
     }
     
     //MARK: Properties
     
-    let uiNib: UINib = UINib(nibName: String(describing: SliderCollectionViewCell.self), bundle: nil)
     var images: [String] = [] {
         didSet {
             self.collectionView.reloadData()
@@ -75,10 +69,7 @@ extension SliderTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: SliderCollectionViewCell.reuseID,
-            for: indexPath
-            ) as! SliderCollectionViewCell
+        let cell: SliderCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         
         cell.setup(image: self.images[indexPath.row])//% images.count
         return cell

@@ -10,7 +10,7 @@ import UIKit
 
 //MARK: Outlets
 
-final class ColorsCollectionViewCell: UICollectionViewCell {
+final class ColorsCollectionViewCell: UICollectionViewCell, ReusableView, NibLoadableView  {
     @IBOutlet private weak var imageView: UIImageView!
     
     //MARK: Initialization
@@ -18,11 +18,6 @@ final class ColorsCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
-    //MARK: Constants
-    
-    static let uiNib: UINib = UINib(nibName: String(describing: ColorsCollectionViewCell.self), bundle: nil)
-    static let reuseID: String = .init(describing: ColorsCollectionViewCell.self)
     
     //MARK: Methods
     

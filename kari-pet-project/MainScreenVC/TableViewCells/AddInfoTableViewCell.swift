@@ -1,9 +1,6 @@
 import UIKit
 
-final class AddInfoTableViewCell: UITableViewCell {
-
-    static let uiNib: UINib = UINib(nibName: String(describing: AddInfoTableViewCell.self), bundle: nil)
-    static let reuseID: String = .init(describing: AddInfoTableViewCell.self)
+final class AddInfoTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
     
     //MARK: Outlets
     
@@ -11,13 +8,11 @@ final class AddInfoTableViewCell: UITableViewCell {
         didSet {
             collectionView.dataSource = self
             collectionView.delegate = self
-            collectionView.register(uiNib, forCellWithReuseIdentifier: AddInfoCollectionViewCell.reuseID)
+            collectionView.register(AddInfoCollectionViewCell.self)
         }
     }
     
     //MARK: Properties
-    
-    let uiNib: UINib = UINib(nibName: String(describing: AddInfoCollectionViewCell.self), bundle: nil)
     
     var data: [String] = [] {
         didSet {
@@ -50,7 +45,7 @@ extension AddInfoTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell: AddInfoCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: AddInfoCollectionViewCell.reuseID,for: indexPath) as! AddInfoCollectionViewCell
+        let cell: AddInfoCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.setup(image: data[indexPath.row])
         return cell
     }

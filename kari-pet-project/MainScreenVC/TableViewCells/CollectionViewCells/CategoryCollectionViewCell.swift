@@ -1,6 +1,6 @@
 import UIKit
 
-final class CategoryCollectionViewCell: UICollectionViewCell {
+final class CategoryCollectionViewCell: UICollectionViewCell, ReusableView, NibLoadableView  {
 
     //MARK: Outlets
     
@@ -12,10 +12,6 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
-    //MARK: Constants
-    
-    static let reuseID: String = .init(describing: CategoryCollectionViewCell.self)
     
     //MARK: Methods
     

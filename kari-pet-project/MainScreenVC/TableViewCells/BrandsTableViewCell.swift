@@ -1,12 +1,8 @@
 import UIKit
 
-final class BrandsTableViewCell: UITableViewCell {
+final class BrandsTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
 
     //MARK: Constants
-    
-    static let uiNib: UINib = UINib(nibName: String(describing: BrandsTableViewCell.self), bundle: nil)
-    static let reuseID: String = .init(describing: BrandsTableViewCell.self)
-    let uiNib: UINib = UINib(nibName: String(describing: BrandsCollectionViewCell.self), bundle: nil)
     
     //MARK: Outlets
     
@@ -14,7 +10,7 @@ final class BrandsTableViewCell: UITableViewCell {
         didSet {
             collectionView.dataSource = self
             collectionView.delegate = self
-            collectionView.register(uiNib, forCellWithReuseIdentifier: BrandsCollectionViewCell.reuseID)
+            collectionView.register(BrandsCollectionViewCell.self)
         }
     }
     
@@ -53,7 +49,7 @@ extension BrandsTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell: BrandsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: BrandsCollectionViewCell.reuseID,for: indexPath) as! BrandsCollectionViewCell
+        let cell: BrandsCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.setup(image: images[indexPath.row])
         return cell
         

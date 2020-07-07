@@ -1,12 +1,6 @@
 import UIKit
 
-final class FindsTableViewCell: UITableViewCell {
-
-    //MARK: Constants
-    
-    static let uiNib: UINib = UINib(nibName: String(describing: FindsTableViewCell.self), bundle: nil)
-    static let reuseID: String = .init(describing: FindsTableViewCell.self)
-    let uiNib: UINib = UINib(nibName: String(describing: FindsCollectionViewCell.self), bundle: nil)
+final class FindsTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
     
     //MARK: Outlets
     
@@ -14,7 +8,7 @@ final class FindsTableViewCell: UITableViewCell {
         didSet {
             collectionView.dataSource = self
             collectionView.delegate = self
-            collectionView.register(uiNib, forCellWithReuseIdentifier: FindsCollectionViewCell.reuseID)
+            collectionView.register(FindsCollectionViewCell.self)
         }
     }
     
@@ -53,7 +47,7 @@ extension FindsTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell: FindsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: FindsCollectionViewCell.reuseID,for: indexPath) as! FindsCollectionViewCell
+        let cell: FindsCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.setup(image: images[indexPath.row])
         return cell
         

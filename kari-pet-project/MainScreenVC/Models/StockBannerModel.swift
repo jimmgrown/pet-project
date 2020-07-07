@@ -12,4 +12,10 @@ struct StockBannerModel: Decodable {
     let priority: Int
     let image: String
     let action: Action
+    
+    static func < (lhs: StockBannerModel, rhs: StockBannerModel) -> Bool {
+        return lhs.priority < rhs.priority
+    }
 }
+
+

@@ -1,9 +1,6 @@
 import UIKit
 
-final class ProductsTableViewCell: UITableViewCell {
-
-    static let uiNib: UINib = UINib(nibName: String(describing: ProductsTableViewCell.self), bundle: nil)
-    static let reuseID: String = .init(describing: ProductsTableViewCell.self)
+final class ProductsTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
     
     //MARK: Outlets
     
@@ -12,15 +9,13 @@ final class ProductsTableViewCell: UITableViewCell {
         didSet {
             collectionView.dataSource = self
             collectionView.delegate = self
-            collectionView.register(uiNib, forCellWithReuseIdentifier: ProductsCollectionViewCell.reuseID)
+            collectionView.register(ProductsCollectionViewCell.self)
         }
     }
     
     @IBOutlet weak var labelName: UILabel!
     
     //MARK: Properties
-    
-    let uiNib: UINib = UINib(nibName: String(describing: ProductsCollectionViewCell.self), bundle: nil)
     
     var ratingCount: [Int] = []
     var title: [String] = []
@@ -73,10 +68,7 @@ extension ProductsTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: ProductsCollectionViewCell.reuseID,
-            for: indexPath
-            ) as! ProductsCollectionViewCell
+        let cell: ProductsCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         
         cell.setup(image: images[indexPath.row], price: price[indexPath.row], title: title[indexPath.row], brand: brands[indexPath.row], votes: ratingCount[indexPath.row], rating: rating[indexPath.row], colors: colors[indexPath.row])
         return cell

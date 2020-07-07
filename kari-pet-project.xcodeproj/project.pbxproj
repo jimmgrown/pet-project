@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		843B533A24AAF5ED007C4CBB /* ColorsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B533824AAF5ED007C4CBB /* ColorsCollectionViewCell.swift */; };
 		843B533B24AAF5ED007C4CBB /* ColorsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843B533924AAF5ED007C4CBB /* ColorsCollectionViewCell.xib */; };
+		843F373724B434D1000ED099 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F373624B434D1000ED099 /* ReusableView.swift */; };
 		8453423E24A1EA1E0003EFB7 /* FindsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453423C24A1EA1E0003EFB7 /* FindsTableViewCell.swift */; };
 		8453423F24A1EA1E0003EFB7 /* FindsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8453423D24A1EA1E0003EFB7 /* FindsTableViewCell.xib */; };
 		8453424224A1EA3A0003EFB7 /* FindsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453424024A1EA3A0003EFB7 /* FindsCollectionViewCell.swift */; };
@@ -88,6 +89,7 @@
 		354DE11A5CABB6548C5CCE2B /* Pods_kari_pet_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kari_pet_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		843B533824AAF5ED007C4CBB /* ColorsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCollectionViewCell.swift; sourceTree = "<group>"; };
 		843B533924AAF5ED007C4CBB /* ColorsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorsCollectionViewCell.xib; sourceTree = "<group>"; };
+		843F373624B434D1000ED099 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		8453423C24A1EA1E0003EFB7 /* FindsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindsTableViewCell.swift; sourceTree = "<group>"; };
 		8453423D24A1EA1E0003EFB7 /* FindsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindsTableViewCell.xib; sourceTree = "<group>"; };
 		8453424024A1EA3A0003EFB7 /* FindsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				846FF0DF24A5C76B00E04182 /* UIColor.swift */,
+				843F373624B434D1000ED099 /* ReusableView.swift */,
 			);
 			path = Exstensions;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				845397DD249CC30100BF7B53 /* CategoryTableViewCell.swift in Sources */,
 				8463C89024A0684200417B51 /* AddInfoTableViewCell.swift in Sources */,
 				846FF0F224A5E08400E04182 /* CollectionField.swift in Sources */,
+				843F373724B434D1000ED099 /* ReusableView.swift in Sources */,
 				845397E1249CC6D800BF7B53 /* CategoryCollectionViewCell.swift in Sources */,
 				846FF0F424A5E09500E04182 /* Price.swift in Sources */,
 				8456EE4F248F8309009DB9F5 /* API.swift in Sources */,

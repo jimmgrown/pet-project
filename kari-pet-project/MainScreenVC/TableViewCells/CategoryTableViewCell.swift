@@ -1,21 +1,14 @@
 import UIKit
 
-final class CategoryTableViewCell: UITableViewCell {
+final class CategoryTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
 
-    //MARK: Constants
-    
-    static let uiNib: UINib = UINib(nibName: String(describing: CategoryTableViewCell.self), bundle: nil)
-    static let reuseID: String = .init(describing: CategoryTableViewCell.self)
-    
-    let uiNib: UINib = UINib(nibName: String(describing: CategoryCollectionViewCell.self), bundle: nil)
-    
     //MARK: Outlets
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet{
             collectionView.dataSource = self
             collectionView.delegate = self
-            collectionView.register(uiNib, forCellWithReuseIdentifier: CategoryCollectionViewCell.reuseID)
+            collectionView.register(CategoryCollectionViewCell.self)
         }
     }
     
@@ -53,10 +46,7 @@ extension CategoryTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: CategoryCollectionViewCell.reuseID,
-            for: indexPath
-            ) as! CategoryCollectionViewCell
+        let cell: CategoryCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         
         cell.setup(image: data[0][indexPath.row],label: data[1][indexPath.row])
         return cell

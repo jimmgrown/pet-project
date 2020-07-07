@@ -1,6 +1,6 @@
 import UIKit
 
-final class ProductsCollectionViewCell: UICollectionViewCell {
+final class ProductsCollectionViewCell: UICollectionViewCell, ReusableView, NibLoadableView  {
 
     //MARK: Outlets
     
@@ -18,14 +18,12 @@ final class ProductsCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        colorsCollectionView.register(ColorsCollectionViewCell.uiNib, forCellWithReuseIdentifier: ColorsCollectionViewCell.reuseID)
+        colorsCollectionView.register(ColorsCollectionViewCell.self)
         colorsCollectionView.dataSource = self
         colorsCollectionView.delegate = self
     }
     
     //MARK: Constants
-    
-    static let reuseID: String = .init(describing: ProductsCollectionViewCell.self)
     
     var rating: Int = 0
     var image: String = ""
@@ -74,10 +72,7 @@ extension ProductsCollectionViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: ColorsCollectionViewCell.reuseID,
-            for: indexPath
-            ) as! ColorsCollectionViewCell
+        let cell: ColorsCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.setup(colors: colors?[indexPath.row])
         return cell
     }
