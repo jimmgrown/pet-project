@@ -29,9 +29,15 @@ final class MainScreenVC: UIViewController {
     }
     
     override func viewDidLoad() {
-        API.loadJSON { result in
-            self.blocks = result.blocks.filter { $0.type != nil }.sorted(by: <)
+        let apiClient = APIClient()
+        apiClient.send(GetMainScreenData()) { response in
+            print(response)
+            //self.blocks = response
         }
+//        APIClient.send(GetMainScreenData) { response in
+//        //APIClient.loadMainScreen() { response in
+//            self.blocks = response.blocks.filter { $0.type != nil }.sorted(by: <)
+//        }
     }
 }
 

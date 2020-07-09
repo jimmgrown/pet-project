@@ -275,5 +275,69 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kari-pet-project/MainScreenVC/MainScreenVC.swift"
+            timestampString = "615988781.169948"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kari-pet-project/MainScreenVC/MainScreenVC.swift"
+            timestampString = "615988781.170472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kari_pet_project.MainScreenVC.viewDidLoad() -&gt; ()"
+                  moduleName = "kari-pet-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/kari_pet_project/kari-pet-project/MainScreenVC/MainScreenVC.swift"
+                  timestampString = "615988781.3747261"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "46">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (kari_pet_project.Result&lt;kari_pet_project.DataContainer&lt;kari_pet_project.ResponseMainScreen&gt;&gt;) -&gt; () in kari_pet_project.MainScreenVC.viewDidLoad() -&gt; ()"
+                  moduleName = "kari-pet-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/kari_pet_project/kari-pet-project/MainScreenVC/MainScreenVC.swift"
+                  timestampString = "615988781.378852"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
