@@ -6,6 +6,7 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
+#warning("Что за resourceName?")
 protocol APIRequest: Encodable {
     associatedtype Response: Decodable
     var resourceName: String { get }

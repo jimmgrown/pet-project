@@ -6,11 +6,10 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
+#warning("Зачем здесь паблик?")
+#warning("Зачем еще одна обертка над контейнером?")
 public struct APIResponse<Response: Decodable>: Decodable {
-    /// Whether it was ok or not
     public let status: String?
-    /// Message that usually gives more information about some error
     public let message: String?
-    /// Requested data
     public let data: DataContainer<Response>?
 }
