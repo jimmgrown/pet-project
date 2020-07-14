@@ -27,7 +27,10 @@ final class MainScreenVC: UIViewController {
             tableView.reloadData()
         }
     }
-    
+
+    #warning("Приведи в порядок вертикальные отступы в скоупе ниже")
+    #warning("Ты будешь при каждом использовании апи клиента создавать новый инстанс?")
+    #warning("Придумай, как отрефакторить обработку резалта через свитч, а то писать это после каждого запроса - излишняя дупликация кода")
     override func viewDidLoad() {
         let apiClient = APIClient()
         apiClient.send(GetMainScreenData()) { response in
@@ -56,6 +59,7 @@ final class MainScreenVC: UIViewController {
         performSegue(withIdentifier: identifier, sender: self)
     }
 }
+#warning("Не хватает вертикального отступа перед скобкой выше")
 
 // MARK: - Table View Data Source
 

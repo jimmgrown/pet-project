@@ -9,12 +9,15 @@ enum API {
 // MARK: - Main
 
 extension API {
-    
+
+    #warning("Сможешь объяснить, почему здесь используется case-free enum?")
     enum Main {
+        #warning("Теперь можно убрать параметр client")
         static func mainScreenURL(client: String) -> String {
             return "\(baseURL_v2)/screen/main?locationId=\(baseLocationId)&client=\(client)"
         }
-        
+
+        #warning("Почему тут не используются общие константы?")
         static func goodsCardURL() -> String {
             return "https://i-dev.api.kari.com/mobile/v1/goods/product/card?locationId=7400000100000&articuls=01808050&withTableSize=true"
         }

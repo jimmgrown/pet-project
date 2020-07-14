@@ -6,6 +6,7 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
+#warning("Ты здесь не обойдешься протоколом Error, тебе нужен отдельный дженерик с констреинтом на конформинг Error")
 enum Result<T> {
     case success(T)
     case failure(Error)

@@ -19,18 +19,23 @@ final class APIClient {
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.httpMethod
-        
+
+        #warning("Приведи в порядок вертикальные отступы в скоупе ниже")
         let task = URLSession.shared.dataTask(with: urlRequest) { data, _, error in
+            #warning("Нейминг должен соответствовать естественному языку, то не dataUnwrapped, а unwrappedData")
+            #warning("В optional binding конструкциях лучшей практикой является применение variable shadowing")
+            #warning("guard здесь не подойдет, потому что таким образом ты игнорируешь здесь все ошибки нетворкинга")
             guard let dataUnwrapped = data else {
                 return
             }
             if let result = try? JSONDecoder().decode(APIResponse<T.Response>.self, from: dataUnwrapped) {
                 if let dataContainer = result.data {
-                    
+
                     DispatchQueue.main.async {
                         completion(.success(dataContainer))
                     }
                 } else {
+                    #warning("Вообще, ошибку надо развернуть через optional binding, но тут это нерелевантно, потому что нужен кастомный тип ошибки, там тебе не придется с опшналами работать")
                     completion(.failure(error.unsafelyUnwrapped))
                     print("Wrapping error")
                 }
@@ -44,31 +49,3 @@ final class APIClient {
     }
 
 }
-
-// MARK: Old working version
-
-//typealias JSON = [String: Any]
-//
-//enum APIClient {
-//
-//    static func loadMainScreen(completion: @escaping (ResponseMainScreen) -> Void) {
-//        guard let url = URL(string: API.Main.mainScreenURL(client: "app_mobile")) else {
-//            return
-//        }
-//
-//        let request = URLRequest(url: url)
-//        let task = URLSession.shared.dataTask(with: request) { data, _, error in
-//
-//            if let result = try? JSONDecoder().decode(ResponseMainScreen.self,from:data!) {
-//                DispatchQueue.main.async {
-//                    completion(result)
-//                }
-//            } else {
-//                print("Parse error")
-//            }
-//            //print(try JSONSerialization.jsonObject(with: data!, options: []))
-//
-//        }
-//        task.resume()
-//    }
-//}
