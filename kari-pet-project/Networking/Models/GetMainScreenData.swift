@@ -6,10 +6,6 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-public struct GetMainScreenData: APIRequest {
-    typealias Response = ResponseMainScreen
-    
-    public var resourceName: String {
-        return "_placeholder_"
-    }
+struct GetMainScreenData: APIRequest {
+    typealias Response = [Block]
 }

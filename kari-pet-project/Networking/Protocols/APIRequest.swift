@@ -6,8 +6,21 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-#warning("Что за resourceName?")
 protocol APIRequest: Encodable {
     associatedtype Response: Decodable
-    var resourceName: String { get }
+    var httpMethod: String { get }
+    var url: String { get }
+}
+
+extension APIRequest {
+    var httpMethod: String { return HttpMethod.get.rawValue }
+    var url: String { return API.Main.mainScreenURL(client: API.client) }
+}
+
+protocol APIGoodsCard: APIRequest {
+    var url: String { get }
+}
+
+extension APIGoodsCard {
+    var url: String { return API.Main.goodsCardURL() }
 }

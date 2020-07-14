@@ -17,6 +17,7 @@ final class ProductsTableViewCell: UITableViewCell, ReusableView, NibLoadableVie
     
     //MARK: Properties
     
+    var vc = MainScreenVC()
     var ratingCount: [Int] = []
     var title: [String] = []
     var price: [Price] = []
@@ -33,7 +34,7 @@ final class ProductsTableViewCell: UITableViewCell, ReusableView, NibLoadableVie
     
     func setup(images: [String], price: [Price], name: String, color: UIColor,
         title: [String], brands: [String], fontColor: UIColor, ratingCount: [Int],
-        rating: [Double], colors: [[Colors]?]) {
+        rating: [Double], colors: [[Colors]?], vc: MainScreenVC) {
         self.colors = colors
         self.images = images
         self.price = price
@@ -41,6 +42,7 @@ final class ProductsTableViewCell: UITableViewCell, ReusableView, NibLoadableVie
         self.brands = brands
         self.ratingCount = ratingCount
         self.rating = rating
+        self.vc = vc
         
         labelName.text = name
         labelName.textColor = fontColor
@@ -73,6 +75,10 @@ extension ProductsTableViewCell: UICollectionViewDataSource {
         cell.setup(image: images[indexPath.row], price: price[indexPath.row], title: title[indexPath.row], brand: brands[indexPath.row], votes: ratingCount[indexPath.row], rating: rating[indexPath.row], colors: colors[indexPath.row])
         return cell
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            vc.switchToViewController(identifier: "goods")
     }
 }
 

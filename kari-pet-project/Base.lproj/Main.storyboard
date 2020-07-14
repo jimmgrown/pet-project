@@ -35,11 +35,42 @@
                     <tabBarItem key="tabBarItem" title="Item" id="4oM-SW-lNe"/>
                     <connections>
                         <outlet property="tableView" destination="O9E-mv-xAZ" id="XHP-84-4bS"/>
+                        <segue destination="mC6-1F-OKh" kind="show" identifier="goods" id="a0d-c7-Q2Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0eb-d7-lwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1070" y="457"/>
+        </scene>
+        <!--GoodsVC-->
+        <scene sceneID="d8B-qb-3bl">
+            <objects>
+                <viewController storyboardIdentifier="goodsID" id="mC6-1F-OKh" customClass="GoodsVC" customModule="kari_pet_project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h7J-km-gbj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nak-Fw-96n">
+                                <rect key="frame" x="0.0" y="20" width="375" height="680"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Nak-Fw-96n" firstAttribute="leading" secondItem="QQi-H5-jtQ" secondAttribute="leading" id="54G-yF-0wq"/>
+                            <constraint firstItem="QQi-H5-jtQ" firstAttribute="trailing" secondItem="Nak-Fw-96n" secondAttribute="trailing" id="gTx-rf-iQn"/>
+                            <constraint firstItem="QQi-H5-jtQ" firstAttribute="bottom" secondItem="Nak-Fw-96n" secondAttribute="bottom" id="hFZ-lZ-l5w"/>
+                            <constraint firstItem="Nak-Fw-96n" firstAttribute="top" secondItem="QQi-H5-jtQ" secondAttribute="top" id="ps8-jA-QjP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QQi-H5-jtQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Nak-Fw-96n" id="TqK-6F-htQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z5R-jA-iUE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1886" y="457"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="7X4-L5-GdE">

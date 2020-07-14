@@ -31,13 +31,29 @@ final class MainScreenVC: UIViewController {
     override func viewDidLoad() {
         let apiClient = APIClient()
         apiClient.send(GetMainScreenData()) { response in
-            print(response)
-            //self.blocks = response
+            switch response {
+            case .success(let arrayBlocks):
+                self.blocks = arrayBlocks.filter { $0.type != nil }.sorted(by: <)
+            case .failure(let error):
+                print("error:\(error)")
+            }
+            //self.blocks = response.filter { $0.type != nil }.sorted(by: <)
         }
 //        APIClient.send(GetMainScreenData) { response in
-//        //APIClient.loadMainScreen() { response in
+//            APIClient.loadMainScreen() { response in
 //            self.blocks = response.blocks.filter { $0.type != nil }.sorted(by: <)
 //        }
+    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?)  {
+//        let destVC = segue.destination as UIViewController
+//        dismiss(animated: true) { () -> Void in
+//            self.present(destVC, animated: true, completion: nil)
+//        }
+//    }
+    
+    func switchToViewController(identifier: String) {
+        performSegue(withIdentifier: identifier, sender: self)
     }
 }
 
@@ -86,7 +102,8 @@ extension MainScreenVC: UITableViewDataSource {
                 fontColor: fontColor,
                 ratingCount: ratingCount,
                 rating: rating,
-                colors: colors
+                colors: colors,
+                vc: self
             )
             
             return cell

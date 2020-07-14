@@ -6,8 +6,7 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-#warning("Зачем здесь паблик?")
-public enum Result<T> {
+enum Result<T> {
     case success(T)
     case failure(Error)
 }

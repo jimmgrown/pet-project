@@ -6,9 +6,6 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-#warning("Название и содержимое файла не соответствуют друг другу + лучше всего не лепить все в одно место. Если файл называется ReusableView, то здесь должен находиться ТОЛЬКО его протокол с его экстеншнами (НЕ экстеншнами посторонних типов). Правильно назвать файл с экстеншном существующего типа можно следующим образом: UITableView+ТоЧтоТыДобавляешь, в твоем случае UITableView+CellRegistration (процесс регистрации и декьюинга можно объединить одним понятием - регистрация ячеек)")
-
-#warning("Следи за импортами, лишних быть не должно. По дефолту из файла всегда убирай все импорты, пока не понадобится какой-то конкретный. В данном случае нужно убрать Foundation")
 import UIKit
 
 // MARK: - Protocols
@@ -37,7 +34,7 @@ extension NibLoadableView where Self: UIView {
 
 }
 
-// MARK: - Extensions
+// MARK: - UICollectionView
 
 #warning("Вспомни мой доклад и найди здесь ошибку, она у тебя в каждом методе ниже повторяется")
 extension UICollectionView {
@@ -54,6 +51,8 @@ extension UICollectionView {
     }
 
 }
+
+// MARK: - UITableView
 
 extension UITableView {
         
