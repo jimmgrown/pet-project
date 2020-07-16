@@ -3,7 +3,7 @@ import SDWebImage
 
 // MARK: - Base
 
-final class MainScreenVC: UIViewController {
+final class MainScreenVC: UIViewController, SwitcherVC {
     
     // MARK: Outlets
     
@@ -20,46 +20,30 @@ final class MainScreenVC: UIViewController {
         }
     }
     
-    // MARK: Properties
+    // MARK: Private properties
     
+    private let apiClient = APIClient()
     private var blocks: [Block] = [] {
         didSet {
             tableView.reloadData()
         }
     }
 
-    #warning("Приведи в порядок вертикальные отступы в скоупе ниже")
-    #warning("Ты будешь при каждом использовании апи клиента создавать новый инстанс?")
-    #warning("Придумай, как отрефакторить обработку резалта через свитч, а то писать это после каждого запроса - излишняя дупликация кода")
+    // MARK: Life cycle
+    
     override func viewDidLoad() {
-        let apiClient = APIClient()
         apiClient.send(GetMainScreenData()) { response in
-            switch response {
-            case .success(let arrayBlocks):
-                self.blocks = arrayBlocks.filter { $0.type != nil }.sorted(by: <)
-            case .failure(let error):
-                print("error:\(error)")
+            let result = self.apiClient.responseProcess(response: response)
+            if let result = result.0 {
+                    self.blocks = result.filter { $0.type != nil }.sorted(by: <)
+            } else
+            if let error = result.1 {
+                error.alertError(vc: self)
             }
-            //self.blocks = response.filter { $0.type != nil }.sorted(by: <)
         }
-//        APIClient.send(GetMainScreenData) { response in
-//            APIClient.loadMainScreen() { response in
-//            self.blocks = response.blocks.filter { $0.type != nil }.sorted(by: <)
-//        }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?)  {
-//        let destVC = segue.destination as UIViewController
-//        dismiss(animated: true) { () -> Void in
-//            self.present(destVC, animated: true, completion: nil)
-//        }
-//    }
-    
-    func switchToViewController(identifier: String) {
-        performSegue(withIdentifier: identifier, sender: self)
-    }
 }
-#warning("Не хватает вертикального отступа перед скобкой выше")
 
 // MARK: - Table View Data Source
 
@@ -74,8 +58,6 @@ extension MainScreenVC: UITableViewDataSource {
         case .slider:
             let imagesStockBanner: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
             let imagesUrlStockBanner = imagesStockBanner.map { $0.image }
-            
-//            let cell = SliderTableViewCell.dequeueReusableCell(for: indexPath) as SliderTableViewCell
             let cell: SliderTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             
             cell.setup(images: imagesUrlStockBanner)

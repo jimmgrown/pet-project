@@ -10,16 +10,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Main ScreenVC-->
         <scene sceneID="0VQ-Xk-Dhz">
             <objects>
                 <viewController id="anv-9b-30x" customClass="MainScreenVC" customModule="kari_pet_project" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sB3-3m-gZg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="636"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O9E-mv-xAZ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="631"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -32,26 +32,26 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xdA-6Q-uSX"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="4oM-SW-lNe"/>
+                    <navigationItem key="navigationItem" id="mFI-zY-Iw5"/>
                     <connections>
                         <outlet property="tableView" destination="O9E-mv-xAZ" id="XHP-84-4bS"/>
-                        <segue destination="mC6-1F-OKh" kind="show" identifier="goods" id="a0d-c7-Q2Q"/>
+                        <segue destination="mC6-1F-OKh" kind="show" identifier="GoodsVC" id="a0d-c7-Q2Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0eb-d7-lwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1070" y="457"/>
+            <point key="canvasLocation" x="2008.8" y="456.97151424287858"/>
         </scene>
         <!--GoodsVC-->
         <scene sceneID="d8B-qb-3bl">
             <objects>
-                <viewController storyboardIdentifier="goodsID" id="mC6-1F-OKh" customClass="GoodsVC" customModule="kari_pet_project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GoodsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mC6-1F-OKh" customClass="GoodsVC" customModule="kari_pet_project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h7J-km-gbj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="636"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nak-Fw-96n">
-                                <rect key="frame" x="0.0" y="20" width="375" height="680"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nak-Fw-96n">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -70,7 +70,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z5R-jA-iUE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886" y="457"/>
+            <point key="canvasLocation" x="2746" y="457"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="7X4-L5-GdE">
@@ -83,12 +83,34 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="anv-9b-30x" kind="relationship" relationship="viewControllers" id="gx4-VQ-0nh"/>
+                        <segue destination="N3I-VQ-xTN" kind="relationship" relationship="viewControllers" id="gx4-VQ-0nh"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hKw-jL-fnJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="308" y="457"/>
+            <point key="canvasLocation" x="502" y="457"/>
+        </scene>
+        <!--Главный экран-->
+        <scene sceneID="brX-NP-1Ow">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="N3I-VQ-xTN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Главный экран" id="4oM-SW-lNe" userLabel="Item"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="jnm-B9-9pv">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DKA-lu-hXK">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="anv-9b-30x" kind="relationship" relationship="rootViewController" id="pYj-xR-di6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gvY-5R-ZLO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1249" y="457"/>
         </scene>
     </scenes>
 </document>

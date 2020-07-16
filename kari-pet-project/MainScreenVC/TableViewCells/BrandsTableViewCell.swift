@@ -1,10 +1,10 @@
 import UIKit
 
-final class BrandsTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
+// MARK: - Declaration
 
-    //MARK: Constants
+final class BrandsTableViewCell: UITableViewCell, CellsRegistration {
     
-    //MARK: Outlets
+    // MARK: Outlets
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
@@ -14,7 +14,7 @@ final class BrandsTableViewCell: UITableViewCell, ReusableView, NibLoadableView 
         }
     }
     
-    //MARK: Properties
+    // MARK: Public roperties
     
     var images: [String] = [] {
         didSet {
@@ -22,23 +22,17 @@ final class BrandsTableViewCell: UITableViewCell, ReusableView, NibLoadableView 
         }
     }
     
-    //MARK: Methods
-    
+}
+
+// MARK: - Public API
+
+extension BrandsTableViewCell {
     func setup(images: [String]) {
         self.images = images
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
 }
 
-//MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 
 extension BrandsTableViewCell: UICollectionViewDataSource {
     
@@ -56,7 +50,7 @@ extension BrandsTableViewCell: UICollectionViewDataSource {
     }
 }
 
-//MARK: - UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension BrandsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

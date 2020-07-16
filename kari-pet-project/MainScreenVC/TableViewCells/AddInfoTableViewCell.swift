@@ -1,8 +1,10 @@
 import UIKit
 
-final class AddInfoTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
+// MARK: - Declaration
+
+final class AddInfoTableViewCell: UITableViewCell, CellsRegistration {
     
-    //MARK: Outlets
+    // MARK: Outlets
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
@@ -12,7 +14,7 @@ final class AddInfoTableViewCell: UITableViewCell, ReusableView, NibLoadableView
         }
     }
     
-    //MARK: Properties
+    // MARK: Public roperties
     
     var data: [String] = [] {
         didSet {
@@ -20,22 +22,17 @@ final class AddInfoTableViewCell: UITableViewCell, ReusableView, NibLoadableView
         }
     }
     
-    //MARK: Methods
-    
+}
+
+// MARK: - Public API
+
+extension AddInfoTableViewCell {
     func setup(data: [String]) {
         self.data = data
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
 }
 
-//MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 
 extension AddInfoTableViewCell: UICollectionViewDataSource {
     
@@ -51,7 +48,7 @@ extension AddInfoTableViewCell: UICollectionViewDataSource {
     }
 }
 
-//MARK: - UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension AddInfoTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

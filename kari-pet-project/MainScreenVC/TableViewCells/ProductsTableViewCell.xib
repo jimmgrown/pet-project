@@ -52,9 +52,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="bgView" destination="H2p-sc-9uM" id="7y4-qg-upn"/>
                 <outlet property="collectionView" destination="lKp-Oz-qwk" id="3BJ-fZ-qH9"/>
-                <outlet property="labelName" destination="qbF-FT-otW" id="kZa-DC-RZk"/>
+                <outlet property="productsBackgroundView" destination="H2p-sc-9uM" id="kGv-hl-8T0"/>
+                <outlet property="titleLabel" destination="qbF-FT-otW" id="kZa-DC-RZk"/>
             </connections>
             <point key="canvasLocation" x="176.80000000000001" y="400.29985007496254"/>
         </tableViewCell>

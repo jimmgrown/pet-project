@@ -1,8 +1,10 @@
 import UIKit
 
-final class SliderTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
+// MARK: - Declaration
+
+final class SliderTableViewCell: UITableViewCell, CellsRegistration {
     
-    //MARK: Outlets
+    // MARK: Outlets
     
     @IBOutlet private weak var pageControl: UIPageControl!
     @IBOutlet private weak var collectionView: UICollectionView! {
@@ -15,45 +17,43 @@ final class SliderTableViewCell: UITableViewCell, ReusableView, NibLoadableView 
         
     }
     
-    //MARK: Properties
+    // MARK: Public roperties
     
     var images: [String] = [] {
         didSet {
             self.collectionView.reloadData()
         }
     }
+//    var x = 1
+//    let infiniteSize = 10000000
     
-    //MARK: Methods
-    
+}
+
+// MARK: - Public API
+
+extension SliderTableViewCell {
     func setup(images: [String]) {
         self.images = images
         //setTimer()
     }
     
-//    var x = 1
-//    let infiniteSize = 10000000
+    //    func setTimer() {
+    //        let _ = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
+    //    }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-//    func setTimer() {
-//        let _ = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
-//    }
-    
-//    @objc func autoScroll() {
-//        if self.x < infiniteSize {
-//            let indexPath = IndexPath(item: x, section: 0)
-//            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-//            self.x = self.x + 1
-//        } else {
-//            self.x = 1
-//            self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
-//        }
-//    }
+    //    @objc func autoScroll() {
+    //        if self.x < infiniteSize {
+    //            let indexPath = IndexPath(item: x, section: 0)
+    //            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    //            self.x = self.x + 1
+    //        } else {
+    //            self.x = 1
+    //            self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
+    //        }
+    //    }
 }
 
-//MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 
 extension SliderTableViewCell: UICollectionViewDataSource {
     
@@ -81,7 +81,7 @@ extension SliderTableViewCell: UICollectionViewDataSource {
     }
 }
 
-//MARK: - UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension SliderTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

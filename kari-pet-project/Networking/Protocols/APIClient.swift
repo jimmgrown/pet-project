@@ -10,7 +10,20 @@ import UIKit
 
 typealias ResultCallback<Value> = (Result<Value>) -> Void
 
+// MARK: - Declaration
+
 final class APIClient {
+    
+    // MARK: - Public API
+    
+    func responseProcess<Response>(response: Result<Response>) -> (Response?, CustomError?) {
+        switch response {
+        case .success(let result):
+            return (result, nil)
+        case .failure(let error):
+            return (nil, error)
+        }
+    }
     
     func send<T: APIRequest>(_ request: T, completion: @escaping ResultCallback<T.Response>) {
         guard let url = URL(string: request.url) else {
@@ -18,34 +31,35 @@ final class APIClient {
         }
 
         var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = request.httpMethod
+        urlRequest.httpMethod = request.httpMethod.rawValue
 
-        #warning("Приведи в порядок вертикальные отступы в скоупе ниже")
         let task = URLSession.shared.dataTask(with: urlRequest) { data, _, error in
-            #warning("Нейминг должен соответствовать естественному языку, то не dataUnwrapped, а unwrappedData")
-            #warning("В optional binding конструкциях лучшей практикой является применение variable shadowing")
-            #warning("guard здесь не подойдет, потому что таким образом ты игнорируешь здесь все ошибки нетворкинга")
-            guard let dataUnwrapped = data else {
-                return
-            }
-            if let result = try? JSONDecoder().decode(APIResponse<T.Response>.self, from: dataUnwrapped) {
-                if let dataContainer = result.data {
-
-                    DispatchQueue.main.async {
-                        completion(.success(dataContainer))
+            if error != nil {
+                completion(.failure(.lostConnection))
+            } else
+            if let data = data {
+                
+                if let result = try? JSONDecoder().decode(APIResponse<T.Response>.self, from: data) {
+                    
+                    if let dataContainer = result.data {
+                        DispatchQueue.main.async {
+                            completion(.success(dataContainer))
+                        }
+                    } else {
+                        completion(.failure(.badDecode))
                     }
+                    
                 } else {
-                    #warning("Вообще, ошибку надо развернуть через optional binding, но тут это нерелевантно, потому что нужен кастомный тип ошибки, там тебе не придется с опшналами работать")
-                    completion(.failure(error.unsafelyUnwrapped))
-                    print("Wrapping error")
+                    completion(.failure(.badDecode))
                 }
-            } else {
-                completion(.failure(error.unsafelyUnwrapped))
-                print("Parse error")
+                
             }
+            //completion(.failure(.lostConnection))
+            
         }
-
         task.resume()
+        
     }
-
+    
+    
 }

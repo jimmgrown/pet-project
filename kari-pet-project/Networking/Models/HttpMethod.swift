@@ -6,6 +6,8 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
+// MARK: Types
+
 enum HttpMethod: String {
     case get = "GET"
     case post = "POST"

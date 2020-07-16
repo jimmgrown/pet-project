@@ -8,6 +8,10 @@
 
 import UIKit
 
+// MARK: - Auxiliary 
+
+typealias CellsRegistration = ReusableView & NibLoadableView
+
 // MARK: - Protocols
 
 protocol ReusableView: class {
@@ -24,46 +28,46 @@ extension ReusableView where Self: UIView {
 
 protocol NibLoadableView: class {
     static var nibName: String { get }
+    static var bundle: Bundle { get }
+    static var nib: UINib { get }
 }
 
 extension NibLoadableView where Self: UIView {
-
     static var nibName: String {
         return String(describing: self)
+    }
+    static var bundle: Bundle {
+        return Bundle(for: Self.self)
+    }
+    static var nib: UINib {
+        return UINib(nibName: Self.nibName, bundle: bundle)
     }
 
 }
 
 // MARK: - UICollectionView
 
-#warning("Вспомни мой доклад и найди здесь ошибку, она у тебя в каждом методе ниже повторяется")
 extension UICollectionView {
     
-    func register<Cell: UICollectionViewCell>(_: Cell.Type) where Cell: ReusableView & NibLoadableView {
-        #warning("В чем смысл NibLoadableView, если ты не вынес в него код для создания ниба? В текущем виде у тебя оба протокола делают одну и ту же работу")
-        let bundle = Bundle(for: Cell.self)
-        let nib = UINib(nibName: Cell.nibName, bundle: bundle)
-        register(nib, forCellWithReuseIdentifier: Cell.reuseID)
+    final func register<Cell: UICollectionViewCell>(_: Cell.Type) where Cell: CellsRegistration {
+        register(Cell.nib, forCellWithReuseIdentifier: Cell.reuseID)
     }
-        
-    func dequeueReusableCell<Cell: UICollectionViewCell>(for indexPath: IndexPath) -> Cell where Cell: ReusableView {
+    
+    final func dequeueReusableCell<Cell: UICollectionViewCell>(for indexPath: IndexPath) -> Cell where Cell: ReusableView {
         return dequeueReusableCell(withReuseIdentifier: Cell.reuseID, for: indexPath) as! Cell
     }
-
+    
 }
 
 // MARK: - UITableView
 
 extension UITableView {
-        
-    #warning("То, как ты писал констреинты через запятую, - не очень. Можно через такую protocol composition прямо на месте делать ограничение, либо эту же композицию через typealias определить в отдельный псевдотип")
-    func register<Cell: UITableViewCell>(_: Cell.Type) where Cell: ReusableView & NibLoadableView {
-        let bundle = Bundle(for: Cell.self)
-        let nib = UINib(nibName: Cell.nibName, bundle: bundle)
-        register(nib, forCellReuseIdentifier: Cell.reuseID)
+    
+    final func register<Cell: UITableViewCell>(_: Cell.Type) where Cell: CellsRegistration {
+        register(Cell.nib, forCellReuseIdentifier: Cell.reuseID)
     }
         
-    func dequeueReusableCell<Cell: UITableViewCell>(for indexPath: IndexPath) -> Cell where Cell: ReusableView {
+    final func dequeueReusableCell<Cell: UITableViewCell>(for indexPath: IndexPath) -> Cell where Cell: ReusableView {
         return dequeueReusableCell(withIdentifier: Cell.reuseID, for: indexPath) as! Cell
     }
 

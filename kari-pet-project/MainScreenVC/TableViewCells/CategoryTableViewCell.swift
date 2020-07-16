@@ -1,8 +1,10 @@
 import UIKit
 
-final class CategoryTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
+// MARK: - Declaration
 
-    //MARK: Outlets
+final class CategoryTableViewCell: UITableViewCell, CellsRegistration {
+
+    // MARK: Outlets
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet{
@@ -12,31 +14,25 @@ final class CategoryTableViewCell: UITableViewCell, ReusableView, NibLoadableVie
         }
     }
     
-    //MARK: Properties
+    // MARK: Public roperties
     
     var data: [[String]] = [[]] {
         didSet {
             self.collectionView.reloadData()
         }
     }
-    
-    //MARK: Methods
-    
+
+}
+
+// MARK: - Public API
+
+extension CategoryTableViewCell {
     func setup(data: [[String]]) {
         self.data = data
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
 }
 
-//MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 
 extension CategoryTableViewCell: UICollectionViewDataSource {
     
@@ -53,7 +49,7 @@ extension CategoryTableViewCell: UICollectionViewDataSource {
     }
 }
 
-//MARK: - UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension CategoryTableViewCell: UICollectionViewDelegateFlowLayout {
     

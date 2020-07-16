@@ -1,6 +1,8 @@
 import UIKit
 
-final class ProductsCollectionViewCell: UICollectionViewCell, ReusableView, NibLoadableView  {
+// MARK: - Declaration
+
+final class ProductsCollectionViewCell: UICollectionViewCell, CellsRegistration  {
 
     //MARK: Outlets
     
@@ -12,26 +14,34 @@ final class ProductsCollectionViewCell: UICollectionViewCell, ReusableView, NibL
     @IBOutlet private weak var brandIcon: UIImageView!
     @IBOutlet private weak var rateView: RatingView!
     @IBOutlet private weak var ratingCount: UILabel!
-    @IBOutlet private weak var colorsCollectionView: UICollectionView!
-    
-    //MARK: Initialization
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        colorsCollectionView.register(ColorsCollectionViewCell.self)
-        colorsCollectionView.dataSource = self
-        colorsCollectionView.delegate = self
+    @IBOutlet private weak var colorsCollectionView: UICollectionView! {
+        didSet {
+            colorsCollectionView.register(ColorsCollectionViewCell.self)
+            colorsCollectionView.dataSource = self
+            colorsCollectionView.delegate = self
+        }
     }
     
-    //MARK: Constants
+    // MARK: Public roperties
     
     var rating: Int = 0
     var image: String = ""
     var colors: [Colors]? = []
-    
-    //MARK: Methods
-    
-    func setup(image:String, price:Price, title: String, brand: String, votes: Int, rating: Double, colors: [Colors]?){
+
+}
+
+// MARK: - Public API
+
+extension ProductsCollectionViewCell {
+    func setup(
+        image:String,
+        price:Price,
+        title: String,
+        brand: String,
+        votes: Int,
+        rating: Double,
+        colors: [Colors]?
+        ){
         
         if let url = URL(string: image){
             imageView.sd_setImage(with: url)

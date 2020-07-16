@@ -8,19 +8,19 @@
 
 import UIKit
 
-//MARK: Outlets
+// MARK: - Declaration
 
-final class ColorsCollectionViewCell: UICollectionViewCell, ReusableView, NibLoadableView  {
+final class ColorsCollectionViewCell: UICollectionViewCell, CellsRegistration  {
+    
+    //MARK: Outlets
+
     @IBOutlet private weak var imageView: UIImageView!
-    
-    //MARK: Initialization
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    //MARK: Methods
-    
+
+}
+
+// MARK: - Public API
+
+extension ColorsCollectionViewCell {
     func setup(colors:Colors?){
         switch colors?.hex {
             
@@ -36,5 +36,4 @@ final class ColorsCollectionViewCell: UICollectionViewCell, ReusableView, NibLoa
             imageView.backgroundColor = UIColor(hexString: colors?.hex)
         }
     }
-
 }

@@ -1,8 +1,10 @@
 import UIKit
 
-final class FindsTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
+// MARK: - Declaration
+
+final class FindsTableViewCell: UITableViewCell, CellsRegistration {
     
-    //MARK: Outlets
+    // MARK: Outlets
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
@@ -12,7 +14,7 @@ final class FindsTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
         }
     }
     
-    //MARK: Properties
+    // MARK: Public roperties
     
     var images: [String] = [] {
         didSet {
@@ -20,23 +22,17 @@ final class FindsTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
         }
     }
     
-    //MARK: Methods
-    
+}
+
+// MARK: - Public API
+
+extension FindsTableViewCell {
     func setup(images: [String]) {
         self.images = images
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
 }
 
-//MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 
 extension FindsTableViewCell: UICollectionViewDataSource {
     
@@ -54,7 +50,7 @@ extension FindsTableViewCell: UICollectionViewDataSource {
     }
 }
 
-//MARK: - UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension FindsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

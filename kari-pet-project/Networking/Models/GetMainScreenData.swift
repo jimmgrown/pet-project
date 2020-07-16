@@ -6,6 +6,10 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
+// MARK: Types
+
 struct GetMainScreenData: APIRequest {
     typealias Response = [Block]
+    var httpMethod: HttpMethod { return HttpMethod.get }
+    var url: String { return API.Main.mainScreenURL() }
 }

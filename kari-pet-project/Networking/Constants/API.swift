@@ -1,3 +1,5 @@
+// MARK: Types
+
 enum API {
     static var serverURL: String { return "https://i.api.kari.com" }
     private static var baseURL: String { return "\(serverURL)/mobile/v1" }
@@ -10,20 +12,14 @@ enum API {
 
 extension API {
 
-    #warning("Сможешь объяснить, почему здесь используется case-free enum?")
     enum Main {
-        #warning("Теперь можно убрать параметр client")
-        static func mainScreenURL(client: String) -> String {
+        static func mainScreenURL() -> String {
             return "\(baseURL_v2)/screen/main?locationId=\(baseLocationId)&client=\(client)"
         }
 
-        #warning("Почему тут не используются общие константы?")
-        static func goodsCardURL() -> String {
-            return "https://i-dev.api.kari.com/mobile/v1/goods/product/card?locationId=7400000100000&articuls=01808050&withTableSize=true"
+        static func goodsCardURL(articul: String) -> String {
+            return "\(baseURL)/goods/product/card?locationId=\(baseLocationId)&articuls=\(articul)&withTableSize=true"
         }
     }
     
 }
-
-//https://i-dev.api.kari.com/mobile/v1/goods/product/card?locationId=7400000100000&articuls=01808050&withTableSize=true
-//https://i.api.kari.com/mobile/v2/screen/main?locationId=7400000100000&client=app_mobile
