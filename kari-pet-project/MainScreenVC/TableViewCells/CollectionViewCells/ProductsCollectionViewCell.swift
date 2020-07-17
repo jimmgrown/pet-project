@@ -2,10 +2,13 @@ import UIKit
 
 // MARK: - Declaration
 
+#warning("Лишний пробел перед {")
 final class ProductsCollectionViewCell: UICollectionViewCell, CellsRegistration  {
 
+    #warning("Пробел после //")
     //MARK: Outlets
     
+    #warning("Вертикальные отступы")
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var firstPriceLabel: UILabel!
     @IBOutlet private weak var currentPriceLabel: UILabel!
@@ -22,17 +25,21 @@ final class ProductsCollectionViewCell: UICollectionViewCell, CellsRegistration 
         }
     }
     
+    #warning("А почему они тут не приватные?")
     // MARK: Public roperties
     
     var rating: Int = 0
     var image: String = ""
+    #warning("Почему этот массив опшнал?")
     var colors: [Colors]? = []
 
 }
 
 // MARK: - Public API
 
+#warning("Вертикальные отступы - недостающие между скоупами и лишние внутри скоупов")
 extension ProductsCollectionViewCell {
+    #warning("Пробелы после :, ) нужно сместить на таб левее и поставить пробел перед {")
     func setup(
         image:String,
         price:Price,
@@ -58,24 +65,33 @@ extension ProductsCollectionViewCell {
         rateView.firstInit(rate: Int(rating),stkView: rateView)
         if price.discount != nil {
             
+            #warning("Зачем тут проверка на нил в ифе, а потом форс анрэп, если есть опшнал байндинг?")
             currentPriceLabel.text = "\(String(price.current)) ₽"
             discountLabel.text = "-\(String(describing: price.discount!))%"
             
+            #warning("Cлишком длинные строки")
+            #warning("Лишний пробел после =; форс анрэп тут плох")
+            #warning("Зачем ты используешь интерполяцию вместе с инитом стринга? Интерполяция сама умеет кастить в стринг, она для этого и существует))))")
             let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "\(String(price.first!)) ₽")
+            #warning("Используй тайп инференс")
             attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
             firstPriceLabel.attributedText = attributeString
             
+            #warning("Форматируй if-elseif-else конструкции верным образом")
         }
         else {
             firstPriceLabel.isHidden = true
             discountLabel.isHidden = true
+            #warning("Опять лишний инит стринга")
             currentPriceLabel.text = "\(String(price.current)) ₽"
         }
     }
 }
 
+#warning("Пробел после //")
 //MARK: - UICollectionViewDataSource
 
+#warning("Вертикальные отступы + лишний код")
 extension ProductsCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colors?.count ?? 0
@@ -96,8 +112,10 @@ extension ProductsCollectionViewCell: UICollectionViewDataSource {
 //    }
 }
 
+#warning("Пробел после //")
 //MARK: - UICollectionViewDelegateFlowLayout
 
+#warning("Вертикальные отступы")
 extension ProductsCollectionViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let side = collectionView.frame.size.height

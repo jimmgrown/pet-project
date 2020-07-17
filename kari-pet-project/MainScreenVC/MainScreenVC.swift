@@ -33,8 +33,11 @@ final class MainScreenVC: UIViewController, SwitcherVC {
     
     override func viewDidLoad() {
         apiClient.send(GetMainScreenData()) { response in
+            #warning("Вертикальные отступы и формат if-elseif-else")
             let result = self.apiClient.responseProcess(response: response)
+            #warning("Таплу всегда нужно давать лейблы для элементов, никогда не используй их по индексу - это абсолютно нечитабильно")
             if let result = result.0 {
+                #warning("Что с табуляцией?")
                     self.blocks = result.filter { $0.type != nil }.sorted(by: <)
             } else
             if let error = result.1 {
@@ -131,3 +134,4 @@ extension MainScreenVC: UITableViewDataSource {
         }
     }
 }
+#warning("Не хватает отступа перед последней скобкой")

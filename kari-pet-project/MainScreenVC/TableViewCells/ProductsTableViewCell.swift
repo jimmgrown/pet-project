@@ -100,6 +100,7 @@ extension ProductsTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        #warning("Да почему у тебя ячейка определяет, какой контроллер должен открыться? Это не ее ответственность, она вообще ничего не должна знать про своего владельца. То, что ты забил на сегвей и написал протокол для програмной навигации, не исправило твою ошибку. Примени здесь паттерн делегата")
         vc?.switchController(GoodsVC.self)
     }
 }

@@ -8,8 +8,9 @@
 
 import UIKit
 
-// MARK: - Auxiliary 
+// MARK: - Auxiliary
 
+#warning("Что это за имя для типа? Надо что-то типа ReusableCell/DequeueableCell")
 typealias CellsRegistration = ReusableView & NibLoadableView
 
 // MARK: - Protocols
@@ -32,6 +33,7 @@ protocol NibLoadableView: class {
     static var nib: UINib { get }
 }
 
+#warning("Вертикальные отступы")
 extension NibLoadableView where Self: UIView {
     static var nibName: String {
         return String(describing: self)

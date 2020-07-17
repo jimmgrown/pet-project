@@ -2,6 +2,7 @@ import UIKit
 
 // MARK: - Declaration
 
+#warning("Лишний пробел перед {")
 final class AddInfoCollectionViewCell: UICollectionViewCell, CellsRegistration  {
 
     // MARK: Outlets
@@ -12,6 +13,7 @@ final class AddInfoCollectionViewCell: UICollectionViewCell, CellsRegistration  
 
 // MARK: - Public API
 
+#warning("Вертикальные отступы и пробелы после : и перед {")
 extension AddInfoCollectionViewCell {
     func setup(image:String){
         if let url = URL(string: image){

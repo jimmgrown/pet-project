@@ -2,8 +2,10 @@ import UIKit
 
 // MARK: - Declaration
 
+#warning("Лишний пробел перед {")
 final class FindsCollectionViewCell: UICollectionViewCell, CellsRegistration  {
 
+    #warning("Пробел после //")
     //MARK: Outlets
     
     @IBOutlet private weak var imageView: UIImageView!
@@ -12,6 +14,7 @@ final class FindsCollectionViewCell: UICollectionViewCell, CellsRegistration  {
 
 // MARK: - Public API
 
+#warning("Вертикальные отступы и пробелы после : и перед {")
 extension FindsCollectionViewCell {
     func setup(image:String){
         if let url = URL(string: image){
