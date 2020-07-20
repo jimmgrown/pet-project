@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - Declaration
 
-final class GoodsCardCollectionViewCell: UICollectionViewCell, CellsRegistration {
+final class GoodsCardCollectionViewCell: UICollectionViewCell, ReusableCell {
 
     // MARK: Outlets
     

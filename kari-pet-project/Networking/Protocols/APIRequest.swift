@@ -6,10 +6,6 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-#warning("Пробел после // + марка тут не нужна")
-
-//MARK: APIRequest Protocol
-
 protocol APIRequest: Encodable {
     associatedtype Response: Decodable
     var httpMethod: HttpMethod { get }

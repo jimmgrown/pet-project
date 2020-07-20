@@ -3,7 +3,7 @@ import SDWebImage
 
 // MARK: - Base
 
-final class MainScreenVC: UIViewController, SwitcherVC {
+final class MainScreenVC: UIViewController {
     
     // MARK: Outlets
     
@@ -31,21 +31,27 @@ final class MainScreenVC: UIViewController, SwitcherVC {
 
     // MARK: Life cycle
     
-    override func viewDidLoad() {
-        apiClient.send(GetMainScreenData()) { response in
-            #warning("Вертикальные отступы и формат if-elseif-else")
-            let result = self.apiClient.responseProcess(response: response)
-            #warning("Таплу всегда нужно давать лейблы для элементов, никогда не используй их по индексу - это абсолютно нечитабильно")
-            if let result = result.0 {
-                #warning("Что с табуляцией?")
-                    self.blocks = result.filter { $0.type != nil }.sorted(by: <)
-            } else
-            if let error = result.1 {
-                error.alertError(vc: self)
+        override func viewDidLoad() {
+            apiClient.send(GetMainScreenData()) { response in
+                self.apiClient.handle(response: response) { res, err in
+                    if let result = res {
+                        self.blocks = result.filter { $0.type != nil }.sorted(by: <)
+                    } else if let error = err {
+                        error.present(on: self)
+                    }
+                }
             }
         }
-    }
+}
+
+extension MainScreenVC: ProductsTableViewCellDelegate {
     
+    func productsCell() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let secondVC = storyboard.instantiateViewController(withIdentifier: GoodsVC.reuseID)
+        
+        show(secondVC, sender: self)
+    }
 }
 
 // MARK: - Table View Data Source
@@ -92,7 +98,7 @@ extension MainScreenVC: UITableViewDataSource {
                 ratingCount: ratingCount,
                 rating: rating,
                 colors: colors,
-                vc: self
+                delegate: self
             )
             
             return cell
@@ -133,5 +139,5 @@ extension MainScreenVC: UITableViewDataSource {
             return cell
         }
     }
+    
 }
-#warning("Не хватает отступа перед последней скобкой")

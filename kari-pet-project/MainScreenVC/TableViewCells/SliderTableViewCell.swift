@@ -2,7 +2,7 @@ import UIKit
 
 // MARK: - Declaration
 
-final class SliderTableViewCell: UITableViewCell, CellsRegistration {
+final class SliderTableViewCell: UITableViewCell, ReusableCell {
     
     // MARK: Outlets
     

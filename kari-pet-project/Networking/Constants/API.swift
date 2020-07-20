@@ -17,8 +17,8 @@ extension API {
             return "\(baseURL_v2)/screen/main?locationId=\(baseLocationId)&client=\(client)"
         }
 
-        static func goodsCardURL(articul: String) -> String {
-            return "\(baseURL)/goods/product/card?locationId=\(baseLocationId)&articuls=\(articul)&withTableSize=true"
+        static func goodsCardURL(vendorCode: String) -> String {
+            return "\(baseURL)/goods/product/card?locationId=\(baseLocationId)&articuls=\(vendorCode)&withTableSize=true"
         }
     }
     

@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - Declaration
 
-final class OtherColorsCollectionViewCell: UICollectionViewCell, CellsRegistration {
+final class OtherColorsCollectionViewCell: UICollectionViewCell, ReusableCell {
 
     // MARK: Outlets
     

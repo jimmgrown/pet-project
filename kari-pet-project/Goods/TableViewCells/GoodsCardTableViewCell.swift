@@ -2,7 +2,7 @@ import UIKit
 
 // MARK: - Declaration
 
-final class GoodsCardTableViewCell: UITableViewCell, CellsRegistration {
+final class GoodsCardTableViewCell: UITableViewCell, ReusableCell {
 
     // MARK: Outlets
     

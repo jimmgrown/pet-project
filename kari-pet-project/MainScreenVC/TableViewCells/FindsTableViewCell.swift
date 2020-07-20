@@ -2,7 +2,7 @@ import UIKit
 
 // MARK: - Declaration
 
-final class FindsTableViewCell: UITableViewCell, CellsRegistration {
+final class FindsTableViewCell: UITableViewCell, ReusableCell {
     
     // MARK: Outlets
     

@@ -10,11 +10,9 @@ import UIKit
 
 // MARK: - Declaration
 
-#warning("Лишний пробел перед {")
-final class ColorsCollectionViewCell: UICollectionViewCell, CellsRegistration  {
+final class ColorsCollectionViewCell: UICollectionViewCell, ReusableCell {
     
-    #warning("Пробел после //")
-    //MARK: Outlets
+    // MARK: Outlets
 
     @IBOutlet private weak var imageView: UIImageView!
 
@@ -22,17 +20,14 @@ final class ColorsCollectionViewCell: UICollectionViewCell, CellsRegistration  {
 
 // MARK: - Public API
 
-#warning("Вертикальные отступы и пробелы после : и перед {")
 extension ColorsCollectionViewCell {
-    func setup(colors:Colors?){
-        #warning("""Видишь вложенные свитчи - знай, что-то ты не так написал. Особенно, когда у одного из них только дефолт кейс, такой свитч не делает ровным счетом ничего""")
+    
+    func setup(colors: Colors?){
         switch colors?.hex {
             
         case "":
-            switch colors?.colorName {
-            default:
-                imageView.backgroundColor = UIColor(hexString: "#b6e6d6")
-            }
+            imageView.backgroundColor = UIColor(hexString: "#b6e6d6")
+            
         case "#FFFFFF":
             imageView.backgroundColor = UIColor(hexString: "#e6e6e6")
             
@@ -40,4 +35,5 @@ extension ColorsCollectionViewCell {
             imageView.backgroundColor = UIColor(hexString: colors?.hex)
         }
     }
+    
 }

@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: - Declaration
 
-final class GoodsVC: UIViewController, SwitcherVC {
+final class GoodsVC: UIViewController, ReusableVC {
     
     // MARK: Outlets
     
@@ -29,8 +29,10 @@ final class GoodsVC: UIViewController, SwitcherVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         apiClient.send(GetGoodsCard()) { response in
-            if let goodsCards = self.apiClient.responseProcess(response: response).0 {
-                self.goodCards = goodsCards
+            self.apiClient.handle(response: response) { res, err  in
+                if let goodCards = res {
+                    self.goodCards = goodCards
+                }
             }
         }
     }

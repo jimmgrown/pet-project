@@ -10,8 +10,7 @@ import UIKit
 
 // MARK: - Auxiliary
 
-#warning("Что это за имя для типа? Надо что-то типа ReusableCell/DequeueableCell")
-typealias CellsRegistration = ReusableView & NibLoadableView
+typealias ReusableCell = ReusableView & NibLoadableView
 
 // MARK: - Protocols
 
@@ -33,8 +32,8 @@ protocol NibLoadableView: class {
     static var nib: UINib { get }
 }
 
-#warning("Вертикальные отступы")
 extension NibLoadableView where Self: UIView {
+    
     static var nibName: String {
         return String(describing: self)
     }
@@ -51,7 +50,7 @@ extension NibLoadableView where Self: UIView {
 
 extension UICollectionView {
     
-    final func register<Cell: UICollectionViewCell>(_: Cell.Type) where Cell: CellsRegistration {
+    final func register<Cell: UICollectionViewCell>(_: Cell.Type) where Cell: ReusableCell {
         register(Cell.nib, forCellWithReuseIdentifier: Cell.reuseID)
     }
     
@@ -65,7 +64,7 @@ extension UICollectionView {
 
 extension UITableView {
     
-    final func register<Cell: UITableViewCell>(_: Cell.Type) where Cell: CellsRegistration {
+    final func register<Cell: UITableViewCell>(_: Cell.Type) where Cell: ReusableCell {
         register(Cell.nib, forCellReuseIdentifier: Cell.reuseID)
     }
         

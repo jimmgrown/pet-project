@@ -1,8 +1,12 @@
 import UIKit
 
+protocol ProductsTableViewCellDelegate {
+    func productsCell()
+}
+
 // MARK: - Declaration
 
-final class ProductsTableViewCell: UITableViewCell, CellsRegistration {
+final class ProductsTableViewCell: UITableViewCell, ReusableCell {
 
     // MARK: Outlets
 
@@ -20,7 +24,7 @@ final class ProductsTableViewCell: UITableViewCell, CellsRegistration {
     
     // MARK: Public roperties
 
-    var vc: MainScreenVC?
+    var delegate: ProductsTableViewCellDelegate?
     var ratingCount: [Int] = []
     var title: [String] = []
     var price: [Price] = []
@@ -49,7 +53,7 @@ extension ProductsTableViewCell {
         ratingCount: [Int],
         rating: [Double],
         colors: [[Colors]?],
-        vc: MainScreenVC
+        delegate: ProductsTableViewCellDelegate
         ) {
         self.colors = colors
         self.images = images
@@ -58,7 +62,7 @@ extension ProductsTableViewCell {
         self.brands = brands
         self.ratingCount = ratingCount
         self.rating = rating
-        self.vc = vc
+        self.delegate = delegate
         
         titleLabel.text = name
         titleLabel.textColor = fontColor
@@ -100,7 +104,6 @@ extension ProductsTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        #warning("Да почему у тебя ячейка определяет, какой контроллер должен открыться? Это не ее ответственность, она вообще ничего не должна знать про своего владельца. То, что ты забил на сегвей и написал протокол для програмной навигации, не исправило твою ошибку. Примени здесь паттерн делегата")
-        vc?.switchController(GoodsVC.self)
+        delegate?.productsCell()
     }
 }

@@ -2,8 +2,7 @@ import UIKit
 
 // MARK: - Declaration
 
-#warning("Лишний пробел перед {")
-final class SliderCollectionViewCell: UICollectionViewCell, CellsRegistration  {
+final class SliderCollectionViewCell: UICollectionViewCell, ReusableCell {
 
     // MARK: Outlets
     
@@ -13,11 +12,12 @@ final class SliderCollectionViewCell: UICollectionViewCell, CellsRegistration  {
 
 // MARK: - Public API
 
-#warning("Вертикальные отступы и пробелы после : и перед {")
 extension SliderCollectionViewCell {
-    func setup(image:String){
-        if let url = URL(string: image){
+    
+    func setup(image: String) {
+        if let url = URL(string: image) {
             imageView.sd_setImage(with: url)
         }
     }
+    
 }
