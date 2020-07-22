@@ -1,12 +1,15 @@
 import SDWebImage
 import UIKit
 
+#warning("Разберись с вертикальными отступами в этом файле, связанными со скоупами")
+
 // MARK: - Declaration
 
 final class GoodsVC: UIViewController, ReusableVC {
     
     // MARK: Outlets
     
+    #warning("private")
     @IBOutlet weak var tableView: UITableView!  {
         didSet {
             tableView.dataSource = self
@@ -15,11 +18,14 @@ final class GoodsVC: UIViewController, ReusableVC {
         }
     }
     
+    #warning("Марка не соответствует написанному под ней")
     // MARK: Public roperties
     
+    #warning("Recommended")
     private var recomendedProducts: RecomendedProducts?
     private var uniqueSizesId: [[String]] = [[]] {
         didSet {
+            #warning("У тебя нет кода, инициализируюего инстанс RecomendedProducts, а тут ты просто в nil засовываешь какие-то данные. Как это должно работать?")
             recomendedProducts?.uniqueSizeIds = uniqueSizesId[0]
             recomendedProducts?.locationId = API.Main.getBaseLocationId()
             recomendedProducts?.page = 1
@@ -66,6 +72,7 @@ extension GoodsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: GoodsCardTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         
+        #warning("Избавься здесь от дупликации кода")
         cell.setup(
             title: goodCards[indexPath.row].title,
             brandImage: goodCards[indexPath.row].brand.image,

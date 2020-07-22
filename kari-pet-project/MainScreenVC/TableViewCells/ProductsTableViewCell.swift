@@ -1,6 +1,7 @@
 import UIKit
 
 protocol ProductsTableViewCellDelegate {
+    #warning("Что это за имя?))) Пожалуйста, прочитай гайдлайны эпла, которые я кидал тебе, либо просто посмотри, как их делегаты оформлены")
     func productsCell()
 }
 
@@ -22,8 +23,10 @@ final class ProductsTableViewCell: UITableViewCell, ReusableCell {
 
     @IBOutlet private weak var titleLabel: UILabel!
     
+    #warning("Почему эти проперти публичны?")
     // MARK: Public roperties
 
+    #warning("Сам здесь найди недопустимую ошибку. Запиши ее себе куда-нибудь и запомни, потому что ее вообще никогда нельзя допускать")
     var delegate: ProductsTableViewCellDelegate?
     var ratingCount: [Int] = []
     var title: [String] = []

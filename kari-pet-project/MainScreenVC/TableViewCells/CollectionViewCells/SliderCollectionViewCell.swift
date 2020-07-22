@@ -12,6 +12,7 @@ final class SliderCollectionViewCell: UICollectionViewCell, ReusableCell {
 
 // MARK: - Public API
 
+#warning("Вот тут ты сделал верные вертикальные отступы (см. CategoryCollectionViewCell для продолжения)")
 extension SliderCollectionViewCell {
     
     func setup(image: String) {

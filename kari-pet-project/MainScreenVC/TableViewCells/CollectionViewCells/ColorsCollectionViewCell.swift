@@ -21,8 +21,8 @@ final class ColorsCollectionViewCell: UICollectionViewCell, ReusableCell {
 // MARK: - Public API
 
 extension ColorsCollectionViewCell {
-    
     func setup(colors: Colors?){
+        #warning("Здесь не нужны отсутпы между кейсами")
         switch colors?.hex {
             
         case "":

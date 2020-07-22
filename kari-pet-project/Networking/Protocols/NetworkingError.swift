@@ -8,6 +8,7 @@ enum NetworkingError: Error {
     case badDecode
     case badRequest
     
+    #warning("Что за сокращение Val? Нужно писать целиком, autocompletion в xcode существует именно для того, чтобы ты мог давать полные имена переменным, не печатая их вручную")
     var presentationVal: String {
         switch self {
         case .lostConnection: return "Проверьте интернет подключение!"

@@ -21,10 +21,12 @@ extension API {
             return "\(baseURL)/goods/product/card?locationId=\(baseLocationId)&articuls=\(vendorCode)&withTableSize=true"
         }
         
+        #warning("Почему опять все в виде литерала?")
         static func recommendedProducts() -> String {
             return "https://i.api.kari.com/mobile/v1/goods/recommends/alternative"
         }
         
+        #warning("В чем смысл этого метода?")
         static func getBaseLocationId() -> String {
             return API.baseLocationId
         }

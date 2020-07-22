@@ -12,6 +12,7 @@ final class BrandsCollectionViewCell: UICollectionViewCell, ReusableCell {
 
 // MARK: - Public API
 
+#warning("См. ворнинг в CategoryCollectionViewCell")
 extension BrandsCollectionViewCell {
     func setup(image: String) {
         
