@@ -33,7 +33,9 @@ final class APIClient {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.httpMethod.rawValue
-        urlRequest.httpBody = try? JSONEncoder().encode(request)
+        if urlRequest.httpMethod == "POST" {
+            urlRequest.httpBody = try? JSONEncoder().encode(request)
+        }
         print(urlRequest.cURL)
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
