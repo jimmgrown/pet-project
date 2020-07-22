@@ -9,35 +9,37 @@ final class GoodsVC: UIViewController, ReusableVC {
     
     // MARK: Outlets
     
-    #warning("private")
-    @IBOutlet weak var tableView: UITableView!  {
+    @IBOutlet private weak var tableView: UITableView!  {
+        
         didSet {
             tableView.dataSource = self
-            
             tableView.register(GoodsCardTableViewCell.self)
         }
+        
     }
     
-    #warning("Марка не соответствует написанному под ней")
-    // MARK: Public roperties
+    // MARK: Private roperties
     
-    #warning("Recommended")
-    private var recomendedProducts: RecomendedProducts?
+    private var recommendedProducts: RecomendedProducts?
     private var uniqueSizesId: [[String]] = [[]] {
+        
         didSet {
             #warning("У тебя нет кода, инициализируюего инстанс RecomendedProducts, а тут ты просто в nil засовываешь какие-то данные. Как это должно работать?")
-            recomendedProducts?.uniqueSizeIds = uniqueSizesId[0]
-            recomendedProducts?.locationId = API.Main.getBaseLocationId()
-            recomendedProducts?.page = 1
-            recomendedProducts?.size = 2
+            recommendedProducts?.uniqueSizesIds = uniqueSizesId[0]
+            recommendedProducts?.locationId = API.Main.getBaseLocationId()
+            recommendedProducts?.page = 1
+            recommendedProducts?.size = 2
             //print(recomendedProducts)
         }
+        
     }
     private let apiClient = APIClient()
     private var goodCards: [GoodsCard] = [] {
+        
         didSet {
             tableView.reloadData()
         }
+        
     }
     
     // MARK: Life cycle
@@ -45,21 +47,24 @@ final class GoodsVC: UIViewController, ReusableVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         apiClient.send(GetGoodsCard()) { response in
+            
             self.apiClient.handle(response: response) { res, err  in
                 if let goodCards = res {
                     self.goodCards = goodCards
                     self.uniqueSizesId = goodCards.map { $0.uniqueSizesIds.map { String($0.value) }}
                 }
+                
             }
-            let data = try? JSONEncoder().encode(self.recomendedProducts)
-            self.apiClient.send(GetRecomendedProducts(httpBody: data)) { response in
+            
+            self.apiClient.send(RecomendedProducts(locationId: "7400000100000", size: 2, page: 1, uniqueSizesIds: ["329317"])) { response in
+                
                 //print(try? JSONSerialization.jsonObject(with: data!, options: []))
                 print(response)
             }
+            
         }
-        
-        
     }
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -71,14 +76,14 @@ extension GoodsVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: GoodsCardTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        
+        let card = goodCards[indexPath.row]
         #warning("Избавься здесь от дупликации кода")
         cell.setup(
-            title: goodCards[indexPath.row].title,
-            brandImage: goodCards[indexPath.row].brand.image,
-            price: goodCards[indexPath.row].price,
-            colors: goodCards[indexPath.row].colors,
-            sizes: goodCards[indexPath.row].sizes
+            title: card.title,
+            brandImage: card.brand.image,
+            price: card.price,
+            colors: card.colors,
+            sizes: card.sizes
         )
         return cell
     }

@@ -23,18 +23,17 @@ final class ProductsTableViewCell: UITableViewCell, ReusableCell {
 
     @IBOutlet private weak var titleLabel: UILabel!
     
-    #warning("Почему эти проперти публичны?")
-    // MARK: Public roperties
+    // MARK: private roperties
 
     #warning("Сам здесь найди недопустимую ошибку. Запиши ее себе куда-нибудь и запомни, потому что ее вообще никогда нельзя допускать")
-    var delegate: ProductsTableViewCellDelegate?
-    var ratingCount: [Int] = []
-    var title: [String] = []
-    var price: [Price] = []
-    var brands: [String] = []
-    var rating: [Double] = []
-    var colors: [[Colors]?] = [[]]
-    var images: [String] = [] {
+    private var delegate: ProductsTableViewCellDelegate?
+    private var ratingCount: [Int] = []
+    private var title: [String] = []
+    private var price: [Price] = []
+    private var brands: [String] = []
+    private var rating: [Double] = []
+    private var colors: [[Colors]?] = [[]]
+    private var images: [String] = [] {
         didSet {
             collectionView.reloadData()
         }

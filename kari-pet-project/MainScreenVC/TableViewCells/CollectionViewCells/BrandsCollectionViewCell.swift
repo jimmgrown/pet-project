@@ -12,13 +12,12 @@ final class BrandsCollectionViewCell: UICollectionViewCell, ReusableCell {
 
 // MARK: - Public API
 
-#warning("См. ворнинг в CategoryCollectionViewCell")
 extension BrandsCollectionViewCell {
+    
     func setup(image: String) {
-        
         if let url = URL(string: image) {
             imageView.sd_setImage(with: url)
         }
-        
     }
+    
 }

@@ -21,18 +21,17 @@ final class ColorsCollectionViewCell: UICollectionViewCell, ReusableCell {
 // MARK: - Public API
 
 extension ColorsCollectionViewCell {
+    
     func setup(colors: Colors?){
-        #warning("Здесь не нужны отсутпы между кейсами")
         switch colors?.hex {
             
         case "":
             imageView.backgroundColor = UIColor(hexString: "#b6e6d6")
-            
         case "#FFFFFF":
             imageView.backgroundColor = UIColor(hexString: "#e6e6e6")
-            
         default:
             imageView.backgroundColor = UIColor(hexString: colors?.hex)
+
         }
     }
     

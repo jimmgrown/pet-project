@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kari-pet-project/Goods/GoodsVC.swift"
-            timestampString = "617089673.354378"
+            timestampString = "617105607.918871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "goodCards"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "uniqueSizesId"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kari-pet-project/Goods/GoodsVC.swift"
-            timestampString = "617089673.3545099"
+            timestampString = "617105607.918986"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
             <Locations>
@@ -153,11 +153,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kari-pet-project/Goods/GoodsVC.swift"
-            timestampString = "617089673.354627"
+            timestampString = "617105607.919085"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "uniqueSizesId"
             landmarkType = "24">
          </BreakpointContent>
@@ -169,27 +169,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kari-pet-project/Networking/Protocols/APIClient.swift"
-            timestampString = "617089673.354741"
+            timestampString = "617105607.919183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "send(_:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "kari-pet-project/Networking/Protocols/APIClient.swift"
-            timestampString = "617089673.355669"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "send(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -201,11 +185,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kari-pet-project/Networking/Protocols/APIClient.swift"
-            timestampString = "617089673.356148"
+            timestampString = "617105607.919286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "send(_:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kari_pet_project.APIClient.send&lt;A where A: kari_pet_project.APIRequest&gt;(_: A, completion: (kari_pet_project.Result&lt;A.Response, kari_pet_project.NetworkingError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "kari-pet-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/kari_pet_project/kari-pet-project/Networking/Protocols/APIClient.swift"
+                  timestampString = "617096762.144006"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "1008">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in kari_pet_project.APIClient.send&lt;A where A: kari_pet_project.APIRequest&gt;(_: A, completion: (kari_pet_project.Result&lt;A.Response, kari_pet_project.NetworkingError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "kari-pet-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/kari_pet_project/kari-pet-project/Networking/Protocols/APIClient.swift"
+                  timestampString = "617096762.147885"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "545">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kari-pet-project/Networking/Protocols/APIClient.swift"
+            timestampString = "617105607.919386"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "send(_:completion:)"
             landmarkType = "7">
             <Locations>
@@ -245,11 +277,27 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kari-pet-project/Networking/Protocols/APIClient.swift"
-            timestampString = "617089673.356554"
+            timestampString = "617105607.919484"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "send(_:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kari-pet-project/Networking/Protocols/APIClient.swift"
+            timestampString = "617105607.919582"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
@@ -258,33 +306,33 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "kari_pet_project.APIClient.send&lt;A where A: kari_pet_project.APIRequest&gt;(_: A, completion: (kari_pet_project.Result&lt;A.Response, kari_pet_project.NetworkingError&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "kari-pet-project"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/kari_pet_project/kari-pet-project/Networking/Protocols/APIClient.swift"
-                  timestampString = "617089673.54135"
+                  timestampString = "617105248.121125"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "1008">
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "1246">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in kari_pet_project.APIClient.send&lt;A where A: kari_pet_project.APIRequest&gt;(_: A, completion: (kari_pet_project.Result&lt;A.Response, kari_pet_project.NetworkingError&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "kari-pet-project"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/kari_pet_project/kari-pet-project/Networking/Protocols/APIClient.swift"
-                  timestampString = "617089673.548357"
+                  timestampString = "617105248.124971"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
                   offsetFromSymbolStart = "561">
                </Location>
             </Locations>
@@ -297,13 +345,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kari-pet-project/Networking/Protocols/APIClient.swift"
-            timestampString = "617089673.35697"
+            timestampString = "617105607.9196711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "send(_:completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in kari_pet_project.APIClient.send&lt;A where A: kari_pet_project.APIRequest&gt;(_: A, completion: (kari_pet_project.Result&lt;A.Response, kari_pet_project.NetworkingError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "kari-pet-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/kari_pet_project/kari-pet-project/Networking/Protocols/APIClient.swift"
+                  timestampString = "617105248.134951"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "3151">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in kari_pet_project.APIClient.send&lt;A where A: kari_pet_project.APIRequest&gt;(_: A, completion: (kari_pet_project.Result&lt;A.Response, kari_pet_project.NetworkingError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "kari-pet-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/kari_pet_project/kari-pet-project/Networking/Protocols/APIClient.swift"
+                  timestampString = "617105248.138783"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "190">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

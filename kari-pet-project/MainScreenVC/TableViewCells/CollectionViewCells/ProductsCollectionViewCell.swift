@@ -24,8 +24,7 @@ final class ProductsCollectionViewCell: UICollectionViewCell, ReusableCell {
         }
     }
     
-    #warning("Внутренние марки должны начинаться с большой буквы, а внешние вообще должны быть капитализированы. И проверь на наличие опечаток")
-    // MARK: private roperties
+    // MARK: Private properties
     
     private var rating: Int = 0
     private var image: String = ""
@@ -37,15 +36,14 @@ final class ProductsCollectionViewCell: UICollectionViewCell, ReusableCell {
 
 extension ProductsCollectionViewCell {
 
-    #warning("Здесь у тебя табуляция нарушена")
     func setup(
-    image: String,
-    price: Price,
-    title: String,
-    brand: String,
-    votes: Int,
-    rating: Double,
-    colors: [Colors]?
+        image: String,
+        price: Price,
+        title: String,
+        brand: String,
+        votes: Int,
+        rating: Double,
+        colors: [Colors]?
         ) {
         
         if let url = URL(string: image){
@@ -90,8 +88,10 @@ extension ProductsCollectionViewCell: UICollectionViewDataSource {
         return colors.count
     }
     
-    #warning("Ты включил себе визуальное ограничение в 120 символов в хкоде? У тебя здесь выход за рамки")
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         let cell: ColorsCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.setup(colors: colors[indexPath.row])
         return cell
@@ -103,8 +103,11 @@ extension ProductsCollectionViewCell: UICollectionViewDataSource {
 
 extension ProductsCollectionViewCell: UICollectionViewDelegateFlowLayout {
     
-    #warning("Здесь тоже выход за рамки 120 символов")
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
         let side = collectionView.frame.size.height
         return CGSize(width: side, height: side)
     }

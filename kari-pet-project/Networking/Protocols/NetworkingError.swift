@@ -8,8 +8,7 @@ enum NetworkingError: Error {
     case badDecode
     case badRequest
     
-    #warning("Что за сокращение Val? Нужно писать целиком, autocompletion в xcode существует именно для того, чтобы ты мог давать полные имена переменным, не печатая их вручную")
-    var presentationVal: String {
+    var presentationValue: String {
         switch self {
         case .lostConnection: return "Проверьте интернет подключение!"
         case .badDecode: return "Что-то пошло не так!"
@@ -23,7 +22,7 @@ enum NetworkingError: Error {
 extension NetworkingError {
     
     func present(on vc: UIViewController) {
-        let error = presentationVal
+        let error = presentationValue
         let alert = UIAlertController(title: "Ошибка", message: error, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ладно", style: .default, handler: nil))
         vc.present(alert, animated: true, completion: nil)

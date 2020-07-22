@@ -33,11 +33,10 @@ final class APIClient {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.httpMethod.rawValue
-        #warning("Тело реквеста надо здесь инкодить, не нужно создавать в нем поле типа Foundation.Data")
-        urlRequest.httpBody = request.httpBody
-        #warning("Что опять с вертикальными отступами до и перед скоупами ниже? Еще лишний пробел стоит перед запятой после response")
+        urlRequest.httpBody = try? JSONEncoder().encode(request)
         print(urlRequest.cURL)
-        let task = URLSession.shared.dataTask(with: urlRequest) { data, response , error in
+        
+        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             print(response)
             if let response = response as? HTTPURLResponse {
                 #warning("Во-первых, почему ты решил обработать именно эти коды в этом ифе? Другие ошибочные коды типа должны просто проигнориться? Во-вторых, это не тот статус код, 580 тебе сюда никогда не прилетит, потому что он кастомный. Я уже говорил, что нужно отлавливать этот код из БОДИ респонса, так как в дефолтный статус код тебе всегда 200 будет прилетать, потому что наш бэк основан на КАСТОМНЫХ статус кодах. В-третьих, как я уже говорил, отдельные условия в ифе стоит всегда переносить на новые строки, чтобы было удобно ставить брейкпоинты")
