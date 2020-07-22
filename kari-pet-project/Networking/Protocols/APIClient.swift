@@ -33,10 +33,12 @@ final class APIClient {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.httpMethod.rawValue
-        
+        urlRequest.httpBody = request.httpBody
+        print(urlRequest.cURL)
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response , error in
+            print(response)
             if let response = response as? HTTPURLResponse {
-                if response.statusCode == 580 || response.statusCode == 401 {
+                if response.statusCode == 580 || response.statusCode == 401 || response.statusCode == 400 {
                     DispatchQueue.main.async {
                         completion(.failure(.badRequest))
                     }
@@ -48,12 +50,14 @@ final class APIClient {
                 }
             } else if let data = data {
                 if let result = try? JSONDecoder().decode(APIResponse<T.Response>.self, from: data) {
+                    print(result.message)
                     if let dataContainer = result.data {
                         DispatchQueue.main.async {
                             completion(.success(dataContainer))
                         }
                     } else {
                         DispatchQueue.main.async {
+                            print("lvl1 badDecode")
                             completion(.failure(.badDecode))
                         }
                     }

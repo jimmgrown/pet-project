@@ -7,4 +7,5 @@ struct GoodsCard: Decodable {
     let brand: Brand
     let colors: [Colors]
     let sizes: [Size]
+    let uniqueSizesIds: [String: Int]
 }

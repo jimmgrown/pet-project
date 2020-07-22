@@ -17,6 +17,16 @@ final class GoodsVC: UIViewController, ReusableVC {
     
     // MARK: Public roperties
     
+    private var recomendedProducts: RecomendedProducts?
+    private var uniqueSizesId: [[String]] = [[]] {
+        didSet {
+            recomendedProducts?.uniqueSizeIds = uniqueSizesId[0]
+            recomendedProducts?.locationId = API.Main.getBaseLocationId()
+            recomendedProducts?.page = 1
+            recomendedProducts?.size = 2
+            //print(recomendedProducts)
+        }
+    }
     private let apiClient = APIClient()
     private var goodCards: [GoodsCard] = [] {
         didSet {
@@ -32,9 +42,17 @@ final class GoodsVC: UIViewController, ReusableVC {
             self.apiClient.handle(response: response) { res, err  in
                 if let goodCards = res {
                     self.goodCards = goodCards
+                    self.uniqueSizesId = goodCards.map { $0.uniqueSizesIds.map { String($0.value) }}
                 }
             }
+            let data = try? JSONEncoder().encode(self.recomendedProducts)
+            self.apiClient.send(GetRecomendedProducts(httpBody: data)) { response in
+                //print(try? JSONSerialization.jsonObject(with: data!, options: []))
+                print(response)
+            }
         }
+        
+        
     }
 }
 

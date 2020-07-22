@@ -20,6 +20,14 @@ extension API {
         static func goodsCardURL(vendorCode: String) -> String {
             return "\(baseURL)/goods/product/card?locationId=\(baseLocationId)&articuls=\(vendorCode)&withTableSize=true"
         }
+        
+        static func recommendedProducts() -> String {
+            return "https://i.api.kari.com/mobile/v1/goods/recommends/alternative"
+        }
+        
+        static func getBaseLocationId() -> String {
+            return API.baseLocationId
+        }
     }
     
 }
