@@ -1,13 +1,13 @@
 import UIKit
 
-class RatingView: UIView {
+final class RatingView: UIView {
 
-    //MARK: Outlets
+    // MARK: Outlets
     
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var stackView: UIStackView!
     
-    //MARK: Initialization
+    // MARK: Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,6 +18,12 @@ class RatingView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
+
+}
+
+// MARK: Private API
+
+extension RatingView {
     
     private func commonInit() {
         Bundle.main.loadNibNamed("RatingView", owner: self, options: nil)
@@ -26,8 +32,12 @@ class RatingView: UIView {
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         stackView.changeImages(stkView: self.stackView)
     }
+    
+}
 
-    //MARK: Methods
+// MARK: Public API
+
+extension RatingView {
     
     func firstInit(rate: Int, stkView: RatingView) {
         let views = stkView.stackView.subviews.filter { $0 is UIButton }
@@ -38,10 +48,10 @@ class RatingView: UIView {
             }
         }
     }
-
+    
 }
 
-//MARK: - UIStackView
+// MARK: - UIStackView
 
 extension UIStackView {
     
@@ -58,7 +68,6 @@ extension UIStackView {
     }
     
     @objc func pressed(sender: UIButton) {
-
         let views = self.subviews.filter { $0 is UIButton }
 
         for view in views {
@@ -68,7 +77,6 @@ extension UIStackView {
                 } else {
                     theButton.setImage(UIImage(named: "starsFilled"), for: .normal)
                 }
-
             }
         }
     }

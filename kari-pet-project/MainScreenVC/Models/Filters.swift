@@ -6,8 +6,6 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-import Foundation
-
 struct Filters: Decodable {
     let sort: String?
     let guids: [String]?

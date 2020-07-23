@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryCell" id="gTV-IL-0wX" customClass="CategoryCell" customModule="kari_pet_project" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AjV-CP-L7W">
+                        <rect key="frame" x="15" y="0.0" width="60" height="63.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="63.5" id="fDU-S9-KAH"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Для мам и детей" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvs-gL-3lr">
+                        <rect key="frame" x="0.0" y="63.5" width="90" height="26.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Gvs-gL-3lr" secondAttribute="bottom" id="DZJ-Kx-AfN"/>
+                <constraint firstItem="AjV-CP-L7W" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Shi-ov-Vid"/>
+                <constraint firstItem="AjV-CP-L7W" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="Wpq-uP-njq"/>
+                <constraint firstItem="Gvs-gL-3lr" firstAttribute="top" secondItem="AjV-CP-L7W" secondAttribute="bottom" id="Y6Y-42-5oT"/>
+                <constraint firstItem="Gvs-gL-3lr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="a4N-Ue-d8l"/>
+                <constraint firstAttribute="trailing" secondItem="AjV-CP-L7W" secondAttribute="trailing" constant="15" id="bQX-5T-PnT"/>
+                <constraint firstAttribute="trailing" secondItem="Gvs-gL-3lr" secondAttribute="trailing" id="tIW-xe-faW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="90" height="90"/>
+            <connections>
+                <outlet property="imageView" destination="AjV-CP-L7W" id="1Kd-ut-VdG"/>
+                <outlet property="labelName" destination="Gvs-gL-3lr" id="Z9O-GM-cJf"/>
+            </connections>
+            <point key="canvasLocation" x="73.599999999999994" y="64.767616191904054"/>
+        </collectionViewCell>
+    </objects>
+</document>

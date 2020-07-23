@@ -6,8 +6,6 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-import Foundation
-
 struct Action: Decodable {
     let url: String
     let params: Params?

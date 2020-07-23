@@ -9,7 +9,7 @@
 struct ProductsModel: Decodable {
     //let breadCrumbs: [BreadCrumbs]
     //let tags: [String]
-    //let articul: String
+    let articul: String
     let preview: String
     let title: String
     let withVideo: Bool

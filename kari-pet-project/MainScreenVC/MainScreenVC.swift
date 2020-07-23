@@ -11,12 +11,12 @@ final class MainScreenVC: UIViewController {
         didSet {
             tableView.dataSource = self
             
-            tableView.register(SliderTableViewCell.self)
-            tableView.register(CategoryTableViewCell.self)
-            tableView.register(AddInfoTableViewCell.self)
-            tableView.register(ProductsTableViewCell.self)
-            tableView.register(BrandsTableViewCell.self)
-            tableView.register(FindsTableViewCell.self)
+            tableView.register(SliderCell.self)
+            tableView.register(CategoriesCell.self)
+            tableView.register(InformationCell.self)
+            tableView.register(CatalogCell.self)
+            tableView.register(BrandsCell.self)
+            tableView.register(FindsCell.self)
         }
     }
     
@@ -44,12 +44,11 @@ final class MainScreenVC: UIViewController {
         }
 }
 
-extension MainScreenVC: ProductsTableViewCellDelegate {
-    
-    func productsCell() {
+extension MainScreenVC: CatalogCellDelegate {
+    func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendoreCode: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let secondVC = storyboard.instantiateViewController(withIdentifier: GoodsVC.reuseID)
-        
+        guard let secondVC = storyboard.instantiateViewController(withIdentifier: GoodsVC.reuseID) as? GoodsVC else { return }
+        secondVC.vendoreCode = vendoreCode
         show(secondVC, sender: self)
     }
 }
@@ -67,7 +66,7 @@ extension MainScreenVC: UITableViewDataSource {
         case .slider:
             let imagesStockBanner: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
             let imagesUrlStockBanner = imagesStockBanner.map { $0.image }
-            let cell: SliderTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            let cell: SliderCell = tableView.dequeueReusableCell(for: indexPath)
             
             cell.setup(images: imagesUrlStockBanner)
             return cell
@@ -84,10 +83,12 @@ extension MainScreenVC: UITableViewDataSource {
             let ratingCount = productsBlock.map { $0.rate?.numberOfVotes ?? 0 }
             let rating = productsBlock.map { $0.rate?.votes ?? 0 }
             let colors = productsBlock.map { $0.colors }
+            let vendorCode = productsBlock.map { $0.articul }
             
-            let cell: ProductsTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            let cell: CatalogCell = tableView.dequeueReusableCell(for: indexPath)
             
             cell.setup(
+                vendorCode: vendorCode,
                 images: imagesProducts,
                 price: priceProducts,
                 name: nameProductsBanner,
@@ -107,7 +108,7 @@ extension MainScreenVC: UITableViewDataSource {
             let brandsBlock: [BrandModel] = blocks[indexPath.row].getItemsModel()
             let imagesBrands = brandsBlock.map { $0.image }
             
-            let cell: BrandsTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            let cell: BrandsCell = tableView.dequeueReusableCell(for: indexPath)
             cell.setup(images: imagesBrands)
             return cell
             
@@ -115,7 +116,7 @@ extension MainScreenVC: UITableViewDataSource {
             let addInfoBlock: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
             let imagesAddInfo = addInfoBlock.map { $0.image }
             
-            let cell: AddInfoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            let cell: InformationCell = tableView.dequeueReusableCell(for: indexPath)
             cell.setup(data: imagesAddInfo)
             return cell
             
@@ -123,7 +124,7 @@ extension MainScreenVC: UITableViewDataSource {
             let findsBlock: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
             let imagesFinds = findsBlock.map { $0.image }
             
-            let cell: FindsTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            let cell: FindsCell = tableView.dequeueReusableCell(for: indexPath)
             cell.setup(images: imagesFinds)
             return cell
             
@@ -134,7 +135,7 @@ extension MainScreenVC: UITableViewDataSource {
             let labelsCategory = categoryBlockItems.map { $0.name }
             let imagesLabelsCategory = [imagesCategory, labelsCategory]
             
-            let cell: CategoryTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            let cell: CategoriesCell = tableView.dequeueReusableCell(for: indexPath)
             cell.setup(data: imagesLabelsCategory)
             return cell
         }

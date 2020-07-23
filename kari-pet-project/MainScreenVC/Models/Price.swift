@@ -6,8 +6,6 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-import Foundation
-
 struct Price: Decodable {
     let current: Int
     let first: Int?

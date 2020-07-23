@@ -6,8 +6,6 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-import Foundation
-
 struct Rate: Decodable {
     let numberOfVotes: Int
     let votes: Double

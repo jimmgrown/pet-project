@@ -33,7 +33,6 @@ protocol NibLoadableView: class {
 }
 
 extension NibLoadableView where Self: UIView {
-    
     static var nibName: String {
         return String(describing: self)
     }
@@ -43,7 +42,6 @@ extension NibLoadableView where Self: UIView {
     static var nib: UINib {
         return UINib(nibName: Self.nibName, bundle: bundle)
     }
-
 }
 
 // MARK: - UICollectionView
@@ -54,7 +52,9 @@ extension UICollectionView {
         register(Cell.nib, forCellWithReuseIdentifier: Cell.reuseID)
     }
     
-    final func dequeueReusableCell<Cell: UICollectionViewCell>(for indexPath: IndexPath) -> Cell where Cell: ReusableView {
+    final func dequeueReusableCell<Cell: UICollectionViewCell>(
+        for indexPath: IndexPath
+    ) -> Cell where Cell: ReusableView {
         return dequeueReusableCell(withReuseIdentifier: Cell.reuseID, for: indexPath) as! Cell
     }
     

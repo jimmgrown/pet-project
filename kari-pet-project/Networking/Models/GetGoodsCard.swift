@@ -11,5 +11,5 @@ import Foundation
 struct GetGoodsCard: APIRequest {
     typealias Response = [GoodsCard]
     var httpMethod: HttpMethod { return HttpMethod.get}
-    var url: String { return API.Main.goodsCardURL(vendorCode: "01808050") }
+    var url: String
 }

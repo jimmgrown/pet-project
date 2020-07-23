@@ -6,8 +6,6 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-import Foundation
-
 struct FontColor: Decodable {
     let type: String
     let value: String

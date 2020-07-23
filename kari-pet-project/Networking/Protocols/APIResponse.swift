@@ -10,4 +10,6 @@ struct APIResponse<Response: Decodable>: Decodable {
     let status: String?
     let message: String?
     let data: Response?
+    let error: String?
+    let statusCode: Int?
 }
