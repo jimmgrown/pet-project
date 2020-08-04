@@ -8,13 +8,11 @@ final class GoodsVC: UIViewController, ReusableVC {
     // MARK: Outlets
     
     @IBOutlet private weak var tableView: UITableView! {
-        
         didSet {
             tableView.dataSource = self
             tableView.register(GoodsCardsCell.self)
             tableView.register(CatalogCell.self)
         }
-        
     }
     
     // MARK: Properties
@@ -23,28 +21,14 @@ final class GoodsVC: UIViewController, ReusableVC {
     
     // MARK: Private roperties
     
-    private var relatedProducts: [ProductsModel] = [] {
-        
-        didSet {
-            tableView.reloadData()
-        }
-        
-    }
-    private var recommendedProducts: [ProductsModel] = [] {
-        
-        didSet {
-            tableView.reloadData()
-        }
-        
-    }
+    private var relatedProducts: [ProductsModel] = []
+    private var recommendedProducts: [ProductsModel] = []
     private var uniqueSizesId: [[String]] = [[]]
     private let apiClient = APIClient()
     private var goodCards: [GoodsCard] = [] {
-        
         didSet {
             tableView.reloadData()
         }
-        
     }
     
     // MARK: Life cycle
@@ -53,40 +37,51 @@ final class GoodsVC: UIViewController, ReusableVC {
         super.viewDidLoad()
         
         apiClient.send(GetGoodsCard(url: API.Main.goodsCardURL(for: vendoreCode))) { response in
+            
             self.apiClient.handle(response: response) { result, error in
                 if let goodCards = result {
                     self.goodCards = goodCards
                     self.uniqueSizesId = goodCards.map { $0.uniqueSizesIDs.map { String($0.value) }}
                 }
+                
             }
             
             let productsGroup = DispatchGroup()
             
-            DispatchQueue.global().async(group: productsGroup) {
-                self.apiClient.send(GetRecomendedProducts(locationId: API.baseLocationId, size: 5, page: 1, uniqueSizesIds: self.uniqueSizesId[0])) { response in
-                    self.apiClient.handle(response: response) { result, error in
-                        if let products = result {
-                            self.recommendedProducts = products.data.products
-                        }
+            productsGroup.enter()
+            self.apiClient.send(GetRecomendedProducts(locationId: API.baseLocationId, size: 5, page: 1, uniqueSizesIds: self.uniqueSizesId[0])) { response in
+                
+                self.apiClient.handle(response: response) { result, error in
+                    if let products = result {
+                        self.recommendedProducts = products.data.products
+                    } else if let error = error {
+                        error.present(on: self)
                     }
-                    //print(try? JSONSerialization.jsonObject(with: data!, options: []))
+                    productsGroup.leave()
                 }
+                
+                //print(try? JSONSerialization.jsonObject(with: data!, options: []))
             }
             
-            DispatchQueue.global(qos: .userInitiated).async(group: productsGroup) {
-                self.apiClient.send(GetRelatedProducts(locationId: API.baseLocationId, size: 5, page: 1, uniqueSizesIds: self.uniqueSizesId[0])) { response in
-                    self.apiClient.handle(response: response) { result, error in
-                        if let products = result {
-                            self.relatedProducts = products.data.products
-                        }
+            productsGroup.enter()
+            self.apiClient.send(GetRelatedProducts(locationId: API.baseLocationId, size: 5, page: 1, uniqueSizesIds: self.uniqueSizesId[0])) { response in
+                
+                self.apiClient.handle(response: response) { result, error in
+                    if let products = result {
+                        self.relatedProducts = products.data.products
+                    } else if let error = error {
+                        error.present(on: self)
                     }
-                    //print(try? JSONSerialization.jsonObject(with: data!, options: []))
+                    productsGroup.leave()
                 }
+                
+                //print(try? JSONSerialization.jsonObject(with: data!, options: []))
             }
             
             productsGroup.notify(queue: DispatchQueue.main) {
                 self.tableView.reloadData()
             }
+            
         }
         
     }
@@ -121,9 +116,11 @@ extension GoodsVC: UITableViewDataSource {
         switch indexPath.row {
         case 1, 2:
             var nameProductsBanner: String = ProductsType.alternative
+            
             if indexPath.row == 2 {
                 nameProductsBanner = ProductsType.related
             }
+            
             let products: [[ProductsModel]] = [recommendedProducts, relatedProducts]
             let bgColor: UIColor = .white
             let fontColor: UIColor = .black

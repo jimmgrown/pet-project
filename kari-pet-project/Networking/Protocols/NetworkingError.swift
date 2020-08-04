@@ -6,7 +6,7 @@ enum NetworkingError: Error {
     case lostConnection
     case badDecode
     case badRequest
-    case serverError(message: String)
+    case serverError(message: String, statusCode: Int)
     case badUnwrapping
     
     var presentationValue: String {
@@ -14,7 +14,7 @@ enum NetworkingError: Error {
         case .lostConnection: return "Проверьте интернет подключение!"
         case .badDecode: return "Что-то пошло не так!"
         case .badRequest: return "Сервер не отвечает!"
-        case .serverError(let message): return message
+        case .serverError(let message, _): return message
         case .badUnwrapping: return "Bad unwrapping"
         }
     }

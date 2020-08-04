@@ -13,23 +13,19 @@ final class GoodsCardsCell: UITableViewCell, ReusableCell {
     @IBOutlet private weak var pageControl: UIPageControl!
     @IBOutlet private weak var brandImage: UIImageView!
     @IBOutlet private weak var collectionView: UICollectionView! {
-        
         didSet {
             collectionView.dataSource = self
             collectionView.delegate = self
             collectionView.register(GoodsCardCell.self)
         }
-        
     }
     
     @IBOutlet private weak var otherColorsCollectionView: UICollectionView! {
-        
         didSet {
             otherColorsCollectionView.dataSource = self
             otherColorsCollectionView.delegate = self
             otherColorsCollectionView.register(OtherColorCell.self)
         }
-        
     }
     
     @IBOutlet private weak var sizesCollectionView: UICollectionView!  {
@@ -56,9 +52,11 @@ extension GoodsCardsCell {
         self.sizes = sizes
         self.colors = colors
         self.title.text = title
+        
         if let url = URL(string: brandImage) {
             self.brandImage.sd_setImage(with: url)
         }
+
         guard let firstPrice = price.first else { return }
         if let discount = price.discount {
             currentPriceLabel.text = "\(String(price.current)) ₽"
