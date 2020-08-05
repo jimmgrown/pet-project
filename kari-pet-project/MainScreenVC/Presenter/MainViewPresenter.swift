@@ -13,9 +13,14 @@ protocol VCDelegate {
     func getResponse(with error: NetworkingError)
 }
 
+protocol MainPresenter {
+    func getData()
+    func blocksCount() -> Int
+}
+
 // MARK: - Declaration
 
-final class MainVCPresenter: NSObject {
+final class MainVCPresenter: MainPresenter {
     
     // MARK: Private properties
     

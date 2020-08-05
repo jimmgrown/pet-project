@@ -13,9 +13,14 @@ protocol GoodsVCDelegate {
     func getResponse(with error: NetworkingError)
 }
 
+protocol GoodsPresenter {
+    func getData(for vendoreCode: String)
+    func blocksCount() -> Int
+}
+
 // MARK: - Declaration
 
-final class GoodsVCPresenter: NSObject {
+final class GoodsVCPresenter: GoodsPresenter {
     
     // MARK: Private properties
     
