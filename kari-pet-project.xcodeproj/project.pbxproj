@@ -10,6 +10,8 @@
 		843B533A24AAF5ED007C4CBB /* ColorsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B533824AAF5ED007C4CBB /* ColorsCell.swift */; };
 		843B533B24AAF5ED007C4CBB /* ColorsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843B533924AAF5ED007C4CBB /* ColorsCell.xib */; };
 		843F373724B434D1000ED099 /* UITableView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F373624B434D1000ED099 /* UITableView+CellRegistration.swift */; };
+		8440BD9B24D9534700A5E16C /* MainViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440BD9A24D9534700A5E16C /* MainViewPresenter.swift */; };
+		8442404424DA704300692CD1 /* GoodsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442404324DA704300692CD1 /* GoodsViewPresenter.swift */; };
 		845105D924BEFE6F0023FB0F /* OtherColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845105D724BEFE6F0023FB0F /* OtherColorCell.swift */; };
 		845105DA24BEFE6F0023FB0F /* OtherColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845105D824BEFE6F0023FB0F /* OtherColorCell.xib */; };
 		845105DD24BF07C70023FB0F /* SizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845105DB24BF07C70023FB0F /* SizeCell.swift */; };
@@ -116,6 +118,8 @@
 		843B533824AAF5ED007C4CBB /* ColorsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCell.swift; sourceTree = "<group>"; };
 		843B533924AAF5ED007C4CBB /* ColorsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorsCell.xib; sourceTree = "<group>"; };
 		843F373624B434D1000ED099 /* UITableView+CellRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+CellRegistration.swift"; sourceTree = "<group>"; };
+		8440BD9A24D9534700A5E16C /* MainViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenter.swift; sourceTree = "<group>"; };
+		8442404324DA704300692CD1 /* GoodsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsViewPresenter.swift; sourceTree = "<group>"; };
 		845105D724BEFE6F0023FB0F /* OtherColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherColorCell.swift; sourceTree = "<group>"; };
 		845105D824BEFE6F0023FB0F /* OtherColorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherColorCell.xib; sourceTree = "<group>"; };
 		845105DB24BF07C70023FB0F /* SizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCell.swift; sourceTree = "<group>"; };
@@ -231,6 +235,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8440BD9924D9531F00A5E16C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8440BD9A24D9534700A5E16C /* MainViewPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8442404224DA702B00692CD1 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8442404324DA704300692CD1 /* GoodsViewPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		8453423B24A1BC750003EFB7 /* UIViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				848B2FE324BC6D1600E6AEEF /* GoodsVC.swift */,
+				8442404224DA702B00692CD1 /* Presenter */,
 				8455750424C866110042140C /* Enums */,
 				84DD66BD24BC8A51009665B4 /* Models */,
 				84DD66B824BC839D009665B4 /* TableViewCells */,
@@ -405,6 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				84CE118C249B9D0700CA3FA2 /* MainScreenVC.swift */,
+				8440BD9924D9531F00A5E16C /* Presenter */,
 				8456EE48248F6B18009DB9F5 /* Models */,
 				84B97F972498AFF5000AB86B /* TableViewCells */,
 			);
@@ -698,6 +720,7 @@
 				846FF0EC24A5E03800E04182 /* Params.swift in Sources */,
 				8496845224B71C1900B56D3B /* GetMainScreenData.swift in Sources */,
 				846FF0F924A5E0C200E04182 /* Colors.swift in Sources */,
+				8442404424DA704300692CD1 /* GoodsViewPresenter.swift in Sources */,
 				846FF10124A5E12E00E04182 /* CategoriesTree.swift in Sources */,
 				8453424224A1EA3A0003EFB7 /* FindsBannerCell.swift in Sources */,
 				84CE118D249B9D0700CA3FA2 /* MainScreenVC.swift in Sources */,
@@ -721,6 +744,7 @@
 				843B533A24AAF5ED007C4CBB /* ColorsCell.swift in Sources */,
 				846FF0E024A5C76B00E04182 /* UIColor+Hex.swift in Sources */,
 				84DD66BB24BC8472009665B4 /* GoodsCardsCell.swift in Sources */,
+				8440BD9B24D9534700A5E16C /* MainViewPresenter.swift in Sources */,
 				846FF0FB24A5E0E100E04182 /* Rate.swift in Sources */,
 				84BE46BE24C6E8CF00692B8A /* GetRecomendedProducts.swift in Sources */,
 				846FF0E824A5E00500E04182 /* FontColor.swift in Sources */,

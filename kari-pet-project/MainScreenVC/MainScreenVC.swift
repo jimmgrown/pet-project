@@ -3,7 +3,7 @@ import SDWebImage
 
 // MARK: - Base
 
-final class MainScreenVC: UIViewController {
+final class MainScreenVC: UIViewController, VCDelegate {
     
     // MARK: Outlets
     
@@ -22,35 +22,45 @@ final class MainScreenVC: UIViewController {
     
     // MARK: Private properties
     
-    private let apiClient = APIClient()
-    private var blocks: [Block] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+        private var presenter: MainVCPresenter!
 
     // MARK: Life cycle
     
         override func viewDidLoad() {
-            apiClient.send(GetMainScreenData()) { response in
-                self.apiClient.handle(response: response) { res, err in
-                    if let result = res {
-                        self.blocks = result.filter { $0.type != nil }.sorted(by: <)
-                    } else if let error = err {
-                        error.present(on: self)
-                    }
-                }
-            }
+            presenter = MainVCPresenter()
+            presenter.getData()
+            presenter.delegate = self
         }
+    
 }
 
+// MARK: - Public API
+
+extension MainScreenVC {
+    
+    func updateData() {
+        tableView.reloadData()
+    }
+    
+    func getResponse(with error: NetworkingError) {
+        error.present(on: self)
+    }
+    
+}
+
+// MARK: - CatalogCellDelegate
+
 extension MainScreenVC: CatalogCellDelegate {
+    
     func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendoreCode: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let secondVC = storyboard.instantiateViewController(withIdentifier: GoodsVC.reuseID) as? GoodsVC else { return }
+        guard let secondVC = storyboard.instantiateViewController(
+            withIdentifier: GoodsVC.reuseID
+        ) as? GoodsVC else { return }
         secondVC.vendoreCode = vendoreCode
         show(secondVC, sender: self)
     }
+    
 }
 
 // MARK: - Table View Data Source
@@ -58,13 +68,15 @@ extension MainScreenVC: CatalogCellDelegate {
 extension MainScreenVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return blocks.count
+        return presenter.blocksCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch blocks[indexPath.row].type! {
+        let block = presenter.blocks[indexPath.row]
+        
+        switch block.type! {
         case .slider:
-            let imagesStockBanner: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
+            let imagesStockBanner: [StockBannerModel] = block.getItemsModel()
             let imagesUrlStockBanner = imagesStockBanner.map { $0.image }
             let cell: SliderCell = tableView.dequeueReusableCell(for: indexPath)
             
@@ -72,12 +84,12 @@ extension MainScreenVC: UITableViewDataSource {
             return cell
             
         case .productsHot, .products:
-            let bgColor = UIColor(hexString: blocks[indexPath.row].background?.value)
-            let fontColor = UIColor(hexString: blocks[indexPath.row].fontColor?.value)
-            let productsBlock: [ProductsModel] = blocks[indexPath.row].getItemsModel()
+            let bgColor = UIColor(hexString: block.background?.value)
+            let fontColor = UIColor(hexString: block.fontColor?.value)
+            let productsBlock: [ProductsModel] = block.getItemsModel()
             let imagesProducts = productsBlock.map { $0.preview }
             let priceProducts = productsBlock.map { $0.price }
-            let nameProductsBanner = blocks[indexPath.row].name
+            let nameProductsBanner = block.name
             let titleProductBanner = productsBlock.map { $0.title }
             let brandsProduct = productsBlock.map { $0.brand.image }
             let ratingCount = productsBlock.map { $0.rate?.numberOfVotes ?? 0 }
@@ -105,7 +117,7 @@ extension MainScreenVC: UITableViewDataSource {
             return cell
             
         case .brands:
-            let brandsBlock: [BrandModel] = blocks[indexPath.row].getItemsModel()
+            let brandsBlock: [BrandModel] = block.getItemsModel()
             let imagesBrands = brandsBlock.map { $0.image }
             
             let cell: BrandsCell = tableView.dequeueReusableCell(for: indexPath)
@@ -113,7 +125,7 @@ extension MainScreenVC: UITableViewDataSource {
             return cell
             
         case .additionalInfos:
-            let addInfoBlock: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
+            let addInfoBlock: [StockBannerModel] = block.getItemsModel()
             let imagesAddInfo = addInfoBlock.map { $0.image }
             
             let cell: InformationCell = tableView.dequeueReusableCell(for: indexPath)
@@ -121,7 +133,7 @@ extension MainScreenVC: UITableViewDataSource {
             return cell
             
         case .finds:
-            let findsBlock: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
+            let findsBlock: [StockBannerModel] = block.getItemsModel()
             let imagesFinds = findsBlock.map { $0.image }
             
             let cell: FindsCell = tableView.dequeueReusableCell(for: indexPath)
@@ -129,7 +141,7 @@ extension MainScreenVC: UITableViewDataSource {
             return cell
             
         case .categories:
-            var categoryBlockItems: [StockBannerModel] = blocks[indexPath.row].getItemsModel()
+            var categoryBlockItems: [StockBannerModel] = block.getItemsModel()
             categoryBlockItems.sort(by: <)
             let imagesCategory = categoryBlockItems.map { $0.image }
             let labelsCategory = categoryBlockItems.map { $0.name }
@@ -139,6 +151,7 @@ extension MainScreenVC: UITableViewDataSource {
             cell.setup(data: imagesLabelsCategory)
             return cell
         }
+        
     }
     
 }

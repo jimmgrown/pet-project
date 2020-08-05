@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 extension URLRequest {
     
     var cURL: String {
