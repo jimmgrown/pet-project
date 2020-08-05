@@ -12,6 +12,12 @@
 		843F373724B434D1000ED099 /* UITableView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F373624B434D1000ED099 /* UITableView+CellRegistration.swift */; };
 		8440BD9B24D9534700A5E16C /* MainViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440BD9A24D9534700A5E16C /* MainViewPresenter.swift */; };
 		8442404424DA704300692CD1 /* GoodsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442404324DA704300692CD1 /* GoodsViewPresenter.swift */; };
+		8442404624DAA98100692CD1 /* MainConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442404524DAA98100692CD1 /* MainConfigurator.swift */; };
+		8442404824DAAA9D00692CD1 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442404724DAAA9D00692CD1 /* MainInteractor.swift */; };
+		8442404A24DAABBD00692CD1 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442404924DAABBD00692CD1 /* MainRouter.swift */; };
+		8442404C24DACDF400692CD1 /* GoodsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442404B24DACDF400692CD1 /* GoodsConfigurator.swift */; };
+		8442404E24DACE3300692CD1 /* GoodsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442404D24DACE3300692CD1 /* GoodsInteractor.swift */; };
+		8442405024DACF5A00692CD1 /* GoodsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442404F24DACF5A00692CD1 /* GoodsRouter.swift */; };
 		845105D924BEFE6F0023FB0F /* OtherColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845105D724BEFE6F0023FB0F /* OtherColorCell.swift */; };
 		845105DA24BEFE6F0023FB0F /* OtherColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845105D824BEFE6F0023FB0F /* OtherColorCell.xib */; };
 		845105DD24BF07C70023FB0F /* SizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845105DB24BF07C70023FB0F /* SizeCell.swift */; };
@@ -120,6 +126,12 @@
 		843F373624B434D1000ED099 /* UITableView+CellRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+CellRegistration.swift"; sourceTree = "<group>"; };
 		8440BD9A24D9534700A5E16C /* MainViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenter.swift; sourceTree = "<group>"; };
 		8442404324DA704300692CD1 /* GoodsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsViewPresenter.swift; sourceTree = "<group>"; };
+		8442404524DAA98100692CD1 /* MainConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainConfigurator.swift; sourceTree = "<group>"; };
+		8442404724DAAA9D00692CD1 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
+		8442404924DAABBD00692CD1 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		8442404B24DACDF400692CD1 /* GoodsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsConfigurator.swift; sourceTree = "<group>"; };
+		8442404D24DACE3300692CD1 /* GoodsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsInteractor.swift; sourceTree = "<group>"; };
+		8442404F24DACF5A00692CD1 /* GoodsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsRouter.swift; sourceTree = "<group>"; };
 		845105D724BEFE6F0023FB0F /* OtherColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherColorCell.swift; sourceTree = "<group>"; };
 		845105D824BEFE6F0023FB0F /* OtherColorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherColorCell.xib; sourceTree = "<group>"; };
 		845105DB24BF07C70023FB0F /* SizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCell.swift; sourceTree = "<group>"; };
@@ -239,6 +251,9 @@
 			isa = PBXGroup;
 			children = (
 				8440BD9A24D9534700A5E16C /* MainViewPresenter.swift */,
+				8442404524DAA98100692CD1 /* MainConfigurator.swift */,
+				8442404724DAAA9D00692CD1 /* MainInteractor.swift */,
+				8442404924DAABBD00692CD1 /* MainRouter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -247,6 +262,9 @@
 			isa = PBXGroup;
 			children = (
 				8442404324DA704300692CD1 /* GoodsViewPresenter.swift */,
+				8442404B24DACDF400692CD1 /* GoodsConfigurator.swift */,
+				8442404D24DACE3300692CD1 /* GoodsInteractor.swift */,
+				8442404F24DACF5A00692CD1 /* GoodsRouter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -717,15 +735,18 @@
 				846FF0EE24A5E05D00E04182 /* Action.swift in Sources */,
 				84B97FA42498B5FB000AB86B /* BannerCell.swift in Sources */,
 				8457A51A248E4FB400E2943F /* AppDelegate.swift in Sources */,
+				8442404A24DAABBD00692CD1 /* MainRouter.swift in Sources */,
 				846FF0EC24A5E03800E04182 /* Params.swift in Sources */,
 				8496845224B71C1900B56D3B /* GetMainScreenData.swift in Sources */,
 				846FF0F924A5E0C200E04182 /* Colors.swift in Sources */,
 				8442404424DA704300692CD1 /* GoodsViewPresenter.swift in Sources */,
 				846FF10124A5E12E00E04182 /* CategoriesTree.swift in Sources */,
 				8453424224A1EA3A0003EFB7 /* FindsBannerCell.swift in Sources */,
+				8442404624DAA98100692CD1 /* MainConfigurator.swift in Sources */,
 				84CE118D249B9D0700CA3FA2 /* MainScreenVC.swift in Sources */,
 				84D2BD1B24BD83F400298C94 /* GetGoodsCard.swift in Sources */,
 				845105E024BF0A2C0023FB0F /* Size.swift in Sources */,
+				8442404824DAAA9D00692CD1 /* MainInteractor.swift in Sources */,
 				84D2BD1724BD813500298C94 /* GoodsCard.swift in Sources */,
 				846FF0E424A5DE1100E04182 /* BrandModel.swift in Sources */,
 				8463C89424A068D900417B51 /* InfoBannerCell.swift in Sources */,
@@ -734,6 +755,7 @@
 				846FF10324A5E14200E04182 /* AdditionalData.swift in Sources */,
 				846FF0EA24A5E02100E04182 /* Filters.swift in Sources */,
 				846FF0F724A5E0AD00E04182 /* Brand.swift in Sources */,
+				8442404C24DACDF400692CD1 /* GoodsConfigurator.swift in Sources */,
 				846FF10524A6123F00E04182 /* BlockType.swift in Sources */,
 				84511A8024B6E42200282BCF /* Result.swift in Sources */,
 				8455750624C8663C0042140C /* ProductsType.swift in Sources */,
@@ -761,12 +783,14 @@
 				84FF3A0624C0497300A2F11E /* NetworkingError.swift in Sources */,
 				8455750124C7F5B60042140C /* ProductDataModel.swift in Sources */,
 				8463C89024A0684200417B51 /* InformationCell.swift in Sources */,
+				8442405024DACF5A00692CD1 /* GoodsRouter.swift in Sources */,
 				845105D924BEFE6F0023FB0F /* OtherColorCell.swift in Sources */,
 				84D2BD1924BD822200298C94 /* Media.swift in Sources */,
 				846FF0F224A5E08400E04182 /* CollectionField.swift in Sources */,
 				848B2FD724BC375F00E6AEEF /* HttpMethod.swift in Sources */,
 				84FF3A0824C074FF00A2F11E /* ReusableVC.swift in Sources */,
 				843F373724B434D1000ED099 /* UITableView+CellRegistration.swift in Sources */,
+				8442404E24DACE3300692CD1 /* GoodsInteractor.swift in Sources */,
 				845397E1249CC6D800BF7B53 /* CategoryCell.swift in Sources */,
 				84D0894524B5C55F00997EF4 /* APIClient.swift in Sources */,
 				84BE46C624C7133200692B8A /* URLRequest+cURL.swift in Sources */,

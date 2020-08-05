@@ -22,14 +22,14 @@ final class MainScreenVC: UIViewController, VCDelegate {
     
     // MARK: Private properties
     
-        private var presenter: MainVCPresenter!
+        internal var presenter: MainVCPresenter!
+        let configurator: MainConfiguratorProtocol = MainConfigurator()
 
     // MARK: Life cycle
     
         override func viewDidLoad() {
-            presenter = MainVCPresenter()
-            presenter.getData()
-            presenter.delegate = self
+            configurator.configure(with: self)
+            presenter.configureView()
         }
     
 }

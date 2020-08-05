@@ -17,7 +17,8 @@ final class GoodsVC: UIViewController, ReusableVC, GoodsVCDelegate {
     
     // MARK: Private properties
     
-    private var presenter: GoodsVCPresenter!
+    internal var presenter: GoodsVCPresenter!
+    let configurator: GoodsConfiguratorProtocol = GoodsConfigurator()
     
     // MARK: Properties
     
@@ -27,9 +28,8 @@ final class GoodsVC: UIViewController, ReusableVC, GoodsVCDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = GoodsVCPresenter()
-        presenter.getData(for: vendoreCode)
-        presenter.delegate = self
+        configurator.configure(with: self)
+        presenter.configureView(with: vendoreCode)
     }
     
 }

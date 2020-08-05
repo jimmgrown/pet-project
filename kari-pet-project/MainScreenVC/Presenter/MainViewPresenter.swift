@@ -9,26 +9,32 @@
 import UIKit
 
 protocol VCDelegate: class {
+    var presenter: MainVCPresenter! { get set }
     func updateData()
     func getResponse(with error: NetworkingError)
 }
 
-protocol MainPresenter {
-    func getData()
+protocol MainPresenterProtocol: class {
+    var blocks: [Block] { get set }
+    var delegate: VCDelegate! { get set }
+    var router: MainRouterProtocol! { set get }
+    func configureView()
     func blocksCount() -> Int
 }
 
 // MARK: - Declaration
 
-final class MainVCPresenter: MainPresenter {
+class MainVCPresenter: MainPresenterProtocol {
     
-    // MARK: Private properties
-    
-    private let apiClient = APIClient()
+    init(view: VCDelegate) {
+        self.delegate = view
+    }
     
     // MARK: Properties
     
     weak var delegate: VCDelegate!
+    var interactor: MainInteractorProtocol!
+    var router: MainRouterProtocol!
     
     var blocks: [Block] = [] {
         didSet {
@@ -42,16 +48,8 @@ final class MainVCPresenter: MainPresenter {
 
 extension MainVCPresenter {
     
-    final func getData() {
-        apiClient.send(GetMainScreenData()) { response in
-            self.apiClient.handle(response: response) { result, error in
-                if let result = result {
-                    self.blocks = result.filter { $0.type != nil }.sorted(by: <)
-                } else if let error = error {
-                    self.delegate.getResponse(with: error)
-                }
-            }
-        }
+    final func configureView() {
+        self.interactor.getData()
     }
     
     final func blocksCount() -> Int {

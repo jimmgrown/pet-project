@@ -6,29 +6,36 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-import UIKit
-
 protocol GoodsVCDelegate: class {
+    var presenter: GoodsVCPresenter! { get set }
     func updateData()
     func getResponse(with error: NetworkingError)
 }
 
-protocol GoodsPresenter {
-    func getData(for vendoreCode: String)
+protocol GoodsPresenterProtocol: class {
+    var goodCards: [GoodsCard] { get set}
+    var relatedProducts: [ProductsModel] { get set }
+    var recommendedProducts: [ProductsModel] { get set }
+    var uniqueSizesId: [[String]] { get set }
+    var delegate: GoodsVCDelegate! { get set }
+    var router: GoodsRouterProtocol! { set get }
+    func configureView(with vendoreCode: String)
     func blocksCount() -> Int
 }
 
 // MARK: - Declaration
 
-final class GoodsVCPresenter: GoodsPresenter {
+final class GoodsVCPresenter: GoodsPresenterProtocol {
     
-    // MARK: Private properties
-    
-    private let apiClient = APIClient()
+    init(view: GoodsVCDelegate) {
+        self.delegate = view
+    }
     
     // MARK: Properties
     
     weak var delegate: GoodsVCDelegate!
+    var interactor: GoodsInteractorProtocol!
+    var router: GoodsRouterProtocol!
     var uniqueSizesId: [[String]] = [[]]
     
     var relatedProducts: [ProductsModel] = []  {
@@ -55,63 +62,8 @@ final class GoodsVCPresenter: GoodsPresenter {
 
 extension GoodsVCPresenter {
     
-    final func getData(for vendoreCode: String) {
-        apiClient.send(GetGoodsCard(url: API.Main.goodsCardURL(for: vendoreCode))) { response in
-            self.apiClient.handle(response: response) { result, error in
-                if let goodCards = result {
-                    self.goodCards = goodCards
-                    self.uniqueSizesId = goodCards.map { $0.uniqueSizesIDs.map { String($0.value) }}
-                } else if let error = error {
-                    self.delegate.getResponse(with: error)
-                }
-            }
-            
-            let productsGroup = DispatchGroup()
-            
-            DispatchQueue.global().async(group: productsGroup) {
-                self.apiClient.send(
-                    GetRecomendedProducts(
-                        locationId: API.baseLocationId,
-                        size: 5,
-                        page: 1,
-                        uniqueSizesIds: self.uniqueSizesId[0]
-                    )
-                ) { response in
-                        self.apiClient.handle(response: response) { result, error in
-                            if let products = result {
-                                self.recommendedProducts = products.data.products
-                            } else if let error = error {
-                                self.delegate.getResponse(with: error)
-                            }
-                        }
-                    //print(try? JSONSerialization.jsonObject(with: data!, options: []))
-                }
-            }
-            
-            DispatchQueue.global(qos: .userInitiated).async(group: productsGroup) {
-                self.apiClient.send(
-                    GetRelatedProducts(
-                        locationId: API.baseLocationId,
-                        size: 5,
-                        page: 1,
-                        uniqueSizesIds: self.uniqueSizesId[0]
-                    )
-                ) { response in
-                        self.apiClient.handle(response: response) { result, error in
-                            if let products = result {
-                                self.relatedProducts = products.data.products
-                            } else if let error = error {
-                                self.delegate.getResponse(with: error)
-                            }
-                        }
-                    //print(try? JSONSerialization.jsonObject(with: data!, options: []))
-                }
-            }
-            
-            productsGroup.notify(queue: DispatchQueue.main) {
-                self.delegate.updateData()
-            }
-        }
+    func configureView(with vendoreCode: String) {
+        self.interactor.getData(with: vendoreCode)
     }
     
     final func blocksCount() -> Int {
