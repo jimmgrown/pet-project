@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol VCDelegate {
+protocol VCDelegate: class {
     func updateData()
     func getResponse(with error: NetworkingError)
 }
@@ -28,7 +28,7 @@ final class MainVCPresenter: MainPresenter {
     
     // MARK: Properties
     
-    var delegate: VCDelegate!
+    weak var delegate: VCDelegate!
     
     var blocks: [Block] = [] {
         didSet {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol GoodsVCDelegate {
+protocol GoodsVCDelegate: class {
     func updateData()
     func getResponse(with error: NetworkingError)
 }
@@ -28,7 +28,7 @@ final class GoodsVCPresenter: GoodsPresenter {
     
     // MARK: Properties
     
-    var delegate: GoodsVCDelegate!
+    weak var delegate: GoodsVCDelegate!
     var uniqueSizesId: [[String]] = [[]]
     
     var relatedProducts: [ProductsModel] = []  {
