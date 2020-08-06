@@ -12,14 +12,14 @@ protocol MainRouterProtocol: class {
     func show()
 }
 
-class MainRouter: MainRouterProtocol {
+final class MainRouter: MainRouterProtocol {
     weak var viewController: VCDelegate!
     
     init(viewController: VCDelegate) {
         self.viewController = viewController
     }
 
-    func show() {
+    final func show() {
         viewController.prepare()
     }
     

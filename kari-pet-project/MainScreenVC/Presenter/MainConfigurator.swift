@@ -15,10 +15,13 @@ class MainConfigurator: MainConfiguratorProtocol {
     func configure(with viewController: VCDelegate) {
         let presenter = MainVCPresenter(view: viewController)
         let interactor = MainInteractor(presenter: presenter)
+        let worker = MainWorker(interactor: interactor)
         let router = MainRouter(viewController: viewController)
         
         viewController.presenter = presenter
-        presenter.interactor = interactor
+        interactor.worker = worker
+        viewController.interactor = interactor
         presenter.router = router
+        
     }
 }

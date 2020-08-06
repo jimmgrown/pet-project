@@ -59,6 +59,8 @@
 		8463C8A124A0AAD400417B51 /* BrandsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8463C89F24A0AAD400417B51 /* BrandsCell.xib */; };
 		8463C8A424A0AAFC00417B51 /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463C8A224A0AAFC00417B51 /* BrandCell.swift */; };
 		8463C8A524A0AAFC00417B51 /* BrandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8463C8A324A0AAFC00417B51 /* BrandCell.xib */; };
+		84687FEB24DBF55500F45057 /* GoodsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84687FEA24DBF55500F45057 /* GoodsWorker.swift */; };
+		84687FED24DBF56A00F45057 /* MainWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84687FEC24DBF56A00F45057 /* MainWorker.swift */; };
 		846FF0E024A5C76B00E04182 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846FF0DF24A5C76B00E04182 /* UIColor+Hex.swift */; };
 		846FF0E424A5DE1100E04182 /* BrandModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846FF0E324A5DE1100E04182 /* BrandModel.swift */; };
 		846FF0E624A5DE3C00E04182 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846FF0E524A5DE3C00E04182 /* Background.swift */; };
@@ -179,6 +181,8 @@
 		8463C89F24A0AAD400417B51 /* BrandsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrandsCell.xib; sourceTree = "<group>"; };
 		8463C8A224A0AAFC00417B51 /* BrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandCell.swift; sourceTree = "<group>"; };
 		8463C8A324A0AAFC00417B51 /* BrandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrandCell.xib; sourceTree = "<group>"; };
+		84687FEA24DBF55500F45057 /* GoodsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsWorker.swift; sourceTree = "<group>"; };
+		84687FEC24DBF56A00F45057 /* MainWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWorker.swift; sourceTree = "<group>"; };
 		846FF0DF24A5C76B00E04182 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		846FF0E324A5DE1100E04182 /* BrandModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandModel.swift; sourceTree = "<group>"; };
 		846FF0E524A5DE3C00E04182 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
@@ -254,6 +258,7 @@
 				8442404524DAA98100692CD1 /* MainConfigurator.swift */,
 				8442404724DAAA9D00692CD1 /* MainInteractor.swift */,
 				8442404924DAABBD00692CD1 /* MainRouter.swift */,
+				84687FEC24DBF56A00F45057 /* MainWorker.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 				8442404B24DACDF400692CD1 /* GoodsConfigurator.swift */,
 				8442404D24DACE3300692CD1 /* GoodsInteractor.swift */,
 				8442404F24DACF5A00692CD1 /* GoodsRouter.swift */,
+				84687FEA24DBF55500F45057 /* GoodsWorker.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -749,6 +755,7 @@
 				8442404824DAAA9D00692CD1 /* MainInteractor.swift in Sources */,
 				84D2BD1724BD813500298C94 /* GoodsCard.swift in Sources */,
 				846FF0E424A5DE1100E04182 /* BrandModel.swift in Sources */,
+				84687FEB24DBF55500F45057 /* GoodsWorker.swift in Sources */,
 				8463C89424A068D900417B51 /* InfoBannerCell.swift in Sources */,
 				846FF0F024A5E06F00E04182 /* BreadCrumbs.swift in Sources */,
 				84B97FA02498B563000AB86B /* SliderCell.swift in Sources */,
@@ -797,6 +804,7 @@
 				846FF0F424A5E09500E04182 /* Price.swift in Sources */,
 				8456EE4F248F8309009DB9F5 /* API.swift in Sources */,
 				84511A7C24B6D4DC00282BCF /* APIRequest.swift in Sources */,
+				84687FED24DBF56A00F45057 /* MainWorker.swift in Sources */,
 				8463C8A024A0AAD400417B51 /* BrandsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

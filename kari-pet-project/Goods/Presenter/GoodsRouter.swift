@@ -10,15 +10,14 @@ protocol GoodsRouterProtocol: class {
     func show()
 }
 
-class GoodsRouter: GoodsRouterProtocol {
-    
+final class GoodsRouter: GoodsRouterProtocol {
     weak var viewController: GoodsVCDelegate!
     
     init(viewController: GoodsVCDelegate) {
         self.viewController = viewController
     }
     
-    func show() {
+    final func show() {
         viewController.prepare()
     }
     

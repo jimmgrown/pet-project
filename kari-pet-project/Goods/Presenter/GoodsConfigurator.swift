@@ -10,15 +10,18 @@ protocol GoodsConfiguratorProtocol: class {
     func configure(with viewController: GoodsVCDelegate)
 }
 
-class GoodsConfigurator: GoodsConfiguratorProtocol {
+final class GoodsConfigurator: GoodsConfiguratorProtocol {
     
-    func configure(with viewController: GoodsVCDelegate) {
+    final func configure(with viewController: GoodsVCDelegate) {
         let presenter = GoodsVCPresenter(view: viewController)
         let interactor = GoodsInteractor(presenter: presenter)
+        let worker = GoodsWorker(interactor: interactor)
         let router = GoodsRouter(viewController: viewController)
         
         viewController.presenter = presenter
-        presenter.interactor = interactor
+        interactor.worker = worker
+        viewController.interactor = interactor
         presenter.router = router
     }
+    
 }

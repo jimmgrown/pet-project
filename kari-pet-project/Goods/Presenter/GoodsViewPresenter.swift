@@ -8,21 +8,24 @@
 
 protocol GoodsVCDelegate: class {
     var presenter: GoodsVCPresenter! { get set }
+    var interactor: GoodsInteractor! { get set }
     func prepare()
     func updateData()
     func getResponse(with error: NetworkingError)
 }
 
+// MARK: - GoodsPresenterProtocol
+
 protocol GoodsPresenterProtocol: class {
-    var vendoreCode: String { get set }
+    var vendorCode: String { get set }
     var goodCards: [GoodsCard] { get set}
     var relatedProducts: [ProductsModel] { get set }
     var recommendedProducts: [ProductsModel] { get set }
-    var uniqueSizesId: [[String]] { get set }
     var delegate: GoodsVCDelegate! { get set }
     var router: GoodsRouterProtocol! { set get }
-    func configureView(with vendoreCode: String)
+    func updateData()
     func blocksCount() -> Int
+    func sendError(with error: NetworkingError)
 }
 
 // MARK: - Declaration
@@ -36,22 +39,10 @@ final class GoodsVCPresenter: GoodsPresenterProtocol {
     // MARK: Properties
     
     weak var delegate: GoodsVCDelegate!
-    var interactor: GoodsInteractorProtocol!
     var router: GoodsRouterProtocol!
-    var uniqueSizesId: [[String]] = [[]]
-    var vendoreCode: String = ""
-    
-    var relatedProducts: [ProductsModel] = []  {
-        didSet {
-            delegate.updateData()
-        }
-    }
-    
-    var recommendedProducts: [ProductsModel] = []   {
-        didSet {
-            delegate.updateData()
-        }
-    }
+    var vendorCode: String = ""
+    var relatedProducts: [ProductsModel] = []
+    var recommendedProducts: [ProductsModel] = []
     
     var goodCards: [GoodsCard] = [] {
         didSet {
@@ -65,16 +56,20 @@ final class GoodsVCPresenter: GoodsPresenterProtocol {
 
 extension GoodsVCPresenter {
     
-    func configureView(with vendoreCode: String) {
-        self.interactor.getData(with: vendoreCode)
-    }
-    
     final func blocksCount() -> Int {
         var blocksCounter: Int = 0
         blocksCounter = relatedProducts.count > 0 ? blocksCounter + 1 : blocksCounter
         blocksCounter = recommendedProducts.count > 0 ? blocksCounter + 1 : blocksCounter
         blocksCounter = goodCards.count > 0 ? blocksCounter + 1 : blocksCounter
         return blocksCounter
+    }
+    
+    final func sendError(with error: NetworkingError) {
+        delegate.getResponse(with: error)
+    }
+    
+    final func updateData() {
+        delegate.updateData()
     }
     
 }

@@ -10,23 +10,26 @@ import UIKit
 
 protocol VCDelegate: class {
     var presenter: MainVCPresenter! { get set }
+    var interactor: MainInteractor! { get set }
     func prepare()
     func updateData()
     func getResponse(with error: NetworkingError)
 }
 
+// MARK - MainPresenterProtocol
+
 protocol MainPresenterProtocol: class {
-    var vendoreCode: String { get set }
+    var vendorCode: String { get set }
     var blocks: [Block] { get set }
     var delegate: VCDelegate! { get set }
     var router: MainRouterProtocol! { set get }
-    func configureView()
     func blocksCount() -> Int
+    func sendError(with error: NetworkingError)
 }
 
 // MARK: - Declaration
 
-class MainVCPresenter: MainPresenterProtocol {
+final class MainVCPresenter: MainPresenterProtocol {
     
     init(view: VCDelegate) {
         self.delegate = view
@@ -35,9 +38,8 @@ class MainVCPresenter: MainPresenterProtocol {
     // MARK: Properties
     
     weak var delegate: VCDelegate!
-    var interactor: MainInteractorProtocol!
     var router: MainRouterProtocol!
-    var vendoreCode: String = ""
+    var vendorCode: String = ""
     
     var blocks: [Block] = [] {
         didSet {
@@ -51,12 +53,12 @@ class MainVCPresenter: MainPresenterProtocol {
 
 extension MainVCPresenter {
     
-    final func configureView() {
-        self.interactor.getData()
-    }
-    
     final func blocksCount() -> Int {
         return blocks.count
+    }
+    
+    final func sendError(with error: NetworkingError) {
+        delegate.getResponse(with: error)
     }
     
 }

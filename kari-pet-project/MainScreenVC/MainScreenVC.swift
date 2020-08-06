@@ -22,14 +22,15 @@ final class MainScreenVC: UIViewController, VCDelegate {
     
     // MARK: Properties
     
-        internal var presenter: MainVCPresenter!
+        var presenter: MainVCPresenter!
+        var interactor: MainInteractor!
         let configurator: MainConfiguratorProtocol = MainConfigurator()
 
     // MARK: Life cycle
     
         override func viewDidLoad() {
             configurator.configure(with: self)
-            presenter.configureView()
+            interactor.configureView()
         }
     
 }
@@ -51,7 +52,7 @@ extension MainScreenVC {
         guard let secondVC = storyboard.instantiateViewController(
             withIdentifier: GoodsVC.reuseID
             ) as? GoodsVC else { return }
-        secondVC.vendoreCode = presenter.vendoreCode
+        secondVC.vendorCode = presenter.vendorCode
         show(secondVC, sender: self)
     }
     
@@ -61,9 +62,8 @@ extension MainScreenVC {
 
 extension MainScreenVC: CatalogCellDelegate {
     
-    func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendoreCode: String) {
-        presenter.vendoreCode = vendoreCode
-        presenter.router.show()
+    func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendorCode: String) {
+        interactor.prepare(with: vendorCode)
     }
     
 }

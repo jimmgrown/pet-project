@@ -17,19 +17,20 @@ final class GoodsVC: UIViewController, ReusableVC, GoodsVCDelegate {
     
     // MARK: Private properties
     
-    internal var presenter: GoodsVCPresenter!
+    var presenter: GoodsVCPresenter!
+    var interactor: GoodsInteractor!
     let configurator: GoodsConfiguratorProtocol = GoodsConfigurator()
     
     // MARK: Properties
     
-    var vendoreCode: String = ""
+    var vendorCode: String = ""
     
     // MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configurator.configure(with: self)
-        presenter.configureView(with: vendoreCode)
+        interactor.configureView(with: vendorCode)
     }
     
 }
@@ -51,7 +52,7 @@ extension GoodsVC {
         guard let secondVC = storyboard.instantiateViewController(
             withIdentifier: GoodsVC.reuseID
             ) as? GoodsVC else { return }
-        secondVC.vendoreCode = presenter.vendoreCode
+        secondVC.vendorCode = presenter.vendorCode
         show(secondVC, sender: self)
     }
     
@@ -61,9 +62,8 @@ extension GoodsVC {
 
 extension GoodsVC: CatalogCellDelegate {
     
-    func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendoreCode: String) {
-        presenter.vendoreCode = vendoreCode
-        presenter.router.show()
+    func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendorCode: String) {
+        interactor.prepare(with: vendorCode)
     }
     
 }
