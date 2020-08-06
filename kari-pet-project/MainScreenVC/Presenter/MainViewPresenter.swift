@@ -10,11 +10,13 @@ import UIKit
 
 protocol VCDelegate: class {
     var presenter: MainVCPresenter! { get set }
+    func prepare()
     func updateData()
     func getResponse(with error: NetworkingError)
 }
 
 protocol MainPresenterProtocol: class {
+    var vendoreCode: String { get set }
     var blocks: [Block] { get set }
     var delegate: VCDelegate! { get set }
     var router: MainRouterProtocol! { set get }
@@ -35,6 +37,7 @@ class MainVCPresenter: MainPresenterProtocol {
     weak var delegate: VCDelegate!
     var interactor: MainInteractorProtocol!
     var router: MainRouterProtocol!
+    var vendoreCode: String = ""
     
     var blocks: [Block] = [] {
         didSet {

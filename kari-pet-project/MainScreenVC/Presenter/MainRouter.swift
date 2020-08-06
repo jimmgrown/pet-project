@@ -6,9 +6,10 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-#warning("Здесь непонятно как перейти на новый контроллер")
+import UIKit
 
 protocol MainRouterProtocol: class {
+    func show()
 }
 
 class MainRouter: MainRouterProtocol {
@@ -18,4 +19,8 @@ class MainRouter: MainRouterProtocol {
         self.viewController = viewController
     }
 
+    func show() {
+        viewController.prepare()
+    }
+    
 }

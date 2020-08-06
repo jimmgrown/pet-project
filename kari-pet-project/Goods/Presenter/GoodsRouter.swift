@@ -7,15 +7,19 @@
 //
 
 protocol GoodsRouterProtocol: class {
+    func show()
 }
 
-#warning("Здесь непонятно как перейти на новый контроллер")
-
 class GoodsRouter: GoodsRouterProtocol {
+    
     weak var viewController: GoodsVCDelegate!
     
     init(viewController: GoodsVCDelegate) {
         self.viewController = viewController
+    }
+    
+    func show() {
+        viewController.prepare()
     }
     
 }

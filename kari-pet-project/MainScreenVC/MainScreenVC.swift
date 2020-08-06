@@ -20,7 +20,7 @@ final class MainScreenVC: UIViewController, VCDelegate {
         }
     }
     
-    // MARK: Private properties
+    // MARK: Properties
     
         internal var presenter: MainVCPresenter!
         let configurator: MainConfiguratorProtocol = MainConfigurator()
@@ -46,6 +46,15 @@ extension MainScreenVC {
         error.present(on: self)
     }
     
+    func prepare() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let secondVC = storyboard.instantiateViewController(
+            withIdentifier: GoodsVC.reuseID
+            ) as? GoodsVC else { return }
+        secondVC.vendoreCode = presenter.vendoreCode
+        show(secondVC, sender: self)
+    }
+    
 }
 
 // MARK: - CatalogCellDelegate
@@ -53,12 +62,8 @@ extension MainScreenVC {
 extension MainScreenVC: CatalogCellDelegate {
     
     func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendoreCode: String) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let secondVC = storyboard.instantiateViewController(
-            withIdentifier: GoodsVC.reuseID
-        ) as? GoodsVC else { return }
-        secondVC.vendoreCode = vendoreCode
-        show(secondVC, sender: self)
+        presenter.vendoreCode = vendoreCode
+        presenter.router.show()
     }
     
 }

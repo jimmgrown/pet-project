@@ -8,11 +8,13 @@
 
 protocol GoodsVCDelegate: class {
     var presenter: GoodsVCPresenter! { get set }
+    func prepare()
     func updateData()
     func getResponse(with error: NetworkingError)
 }
 
 protocol GoodsPresenterProtocol: class {
+    var vendoreCode: String { get set }
     var goodCards: [GoodsCard] { get set}
     var relatedProducts: [ProductsModel] { get set }
     var recommendedProducts: [ProductsModel] { get set }
@@ -37,6 +39,7 @@ final class GoodsVCPresenter: GoodsPresenterProtocol {
     var interactor: GoodsInteractorProtocol!
     var router: GoodsRouterProtocol!
     var uniqueSizesId: [[String]] = [[]]
+    var vendoreCode: String = ""
     
     var relatedProducts: [ProductsModel] = []  {
         didSet {

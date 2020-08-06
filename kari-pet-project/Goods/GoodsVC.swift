@@ -46,6 +46,15 @@ extension GoodsVC {
         error.present(on: self)
     }
     
+    func prepare() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let secondVC = storyboard.instantiateViewController(
+            withIdentifier: GoodsVC.reuseID
+            ) as? GoodsVC else { return }
+        secondVC.vendoreCode = presenter.vendoreCode
+        show(secondVC, sender: self)
+    }
+    
 }
 
 // MARK: - CatalogCellDelegate
@@ -53,10 +62,8 @@ extension GoodsVC {
 extension GoodsVC: CatalogCellDelegate {
     
     func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendoreCode: String) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let secondVC = storyboard.instantiateViewController(withIdentifier: GoodsVC.reuseID) as? GoodsVC else { return }
-        secondVC.vendoreCode = vendoreCode
-        show(secondVC, sender: self)
+        presenter.vendoreCode = vendoreCode
+        presenter.router.show()
     }
     
 }
