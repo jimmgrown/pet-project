@@ -36,20 +36,6 @@ extension SliderCell {
         //setTimer()
     }
     
-    //    func setTimer() {
-    //        let _ = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
-    //    }
-    
-    //    @objc func autoScroll() {
-    //        if self.x < infiniteSize {
-    //            let indexPath = IndexPath(item: x, section: 0)
-    //            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-    //            self.x = self.x + 1
-    //        } else {
-    //            self.x = 1
-    //            self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
-    //        }
-    //    }
 }
 
 // MARK: - UICollectionViewDataSource
