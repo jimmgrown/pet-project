@@ -1,9 +1,14 @@
 import SDWebImage
 import UIKit
 
+protocol GoodsPresenterProtocol {
+    func getBlocksData(for vendorCode: String)
+    func blocksCount() -> Int
+}
+
 // MARK: - Declaration
 
-final class GoodsVC: UIViewController, ReusableVC, GoodsVCDelegate {
+final class GoodsVC: UIViewController, ReusableVC {
     
     // MARK: Outlets
     
@@ -17,32 +22,31 @@ final class GoodsVC: UIViewController, ReusableVC, GoodsVCDelegate {
     
     // MARK: Private properties
     
-    private var presenter: GoodsVCPresenter!
+    private lazy var presenter = GoodsPresenter(view: self)
     
     // MARK: Properties
     
-    var vendoreCode: String = ""
+    var vendorCode: String = ""
     
     // MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = GoodsVCPresenter()
-        presenter.getData(for: vendoreCode)
-        presenter.delegate = self
+        presenter.getBlocksData(for: vendorCode)
+        presenter.view = self
     }
     
 }
 
 // MARK: - Public API
 
-extension GoodsVC {
+extension GoodsVC: GoodsDisplaying {
     
-    func updateData() {
+    func updateGoodsData() {
         tableView.reloadData()
     }
     
-    func getResponse(with error: NetworkingError) {
+    func showAlert(with error: NetworkingError) {
         error.present(on: self)
     }
     
@@ -55,7 +59,7 @@ extension GoodsVC: CatalogCellDelegate {
     func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendoreCode: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let secondVC = storyboard.instantiateViewController(withIdentifier: GoodsVC.reuseID) as? GoodsVC else { return }
-        secondVC.vendoreCode = vendoreCode
+        secondVC.vendorCode = vendoreCode
         show(secondVC, sender: self)
     }
     

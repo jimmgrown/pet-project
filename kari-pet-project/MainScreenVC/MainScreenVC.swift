@@ -1,11 +1,15 @@
 import UIKit
 import SDWebImage
 
-#warning("Взгляни на файловую структуру. Слой моделей не стоит привязывать к одному контроллеру, ведь они могут переиспользоваться в разных контроллерах. Нужно выносить в более внешнюю папку")
+protocol MainScreenPresenting {
+    func getBlocksData()
+    var blocks: [Block] { get }
+    var view: MainScreenDisplaying { get }
+}
 
 // MARK: - Base
 
-final class MainScreenVC: UIViewController, VCDelegate {
+final class MainScreenVC: UIViewController {
     
     // MARK: Outlets
     
@@ -23,32 +27,26 @@ final class MainScreenVC: UIViewController, VCDelegate {
     }
     
     // MARK: Private properties
-    #warning("Что-то многовато табов")
     
-        private var presenter: MainVCPresenter!
+    private lazy var presenter = MainScreenPresenter(view: self)
 
     // MARK: Life cycle
     
-        override func viewDidLoad() {
-            #warning("Почему просто не перенести инициализацию напрямую в декларацию проперти, избавившись от форс анрэпа?")
-            presenter = MainVCPresenter()
-            presenter.getData()
-            #warning("Все-таки у презентера должен быть не delegate, а view. Протокол делегата здесь семантически не подходит + он у тебя оформлен не как протокол делегата + презентер без вью не имеет смысла, поэтому я бы не делал это internal проперти, а просто передавал бы контроллер в инит презентера")
-            presenter.delegate = self
-        }
+    override func viewDidLoad() {
+        presenter.getBlocksData()
+    }
     
 }
 
 // MARK: - Public API
 
-#warning("Стоит указывать все конформансы в соответствующих экстеншнах, а не в декларации класса")
-extension MainScreenVC {
+extension MainScreenVC: MainScreenDisplaying {
     
-    func updateData() {
+    func updateMainScreenData() {
         tableView.reloadData()
     }
     
-    func getResponse(with error: NetworkingError) {
+    func showAlert(with error: NetworkingError) {
         error.present(on: self)
     }
     
@@ -58,13 +56,12 @@ extension MainScreenVC {
 
 extension MainScreenVC: CatalogCellDelegate {
     
-    #warning("Правильно пишется vendor. Исправь во всем проекте")
-    func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendoreCode: String) {
+    func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendorCode: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let secondVC = storyboard.instantiateViewController(
             withIdentifier: GoodsVC.reuseID
         ) as? GoodsVC else { return }
-        secondVC.vendoreCode = vendoreCode
+        secondVC.vendorCode = vendorCode
         show(secondVC, sender: self)
     }
     
@@ -75,7 +72,7 @@ extension MainScreenVC: CatalogCellDelegate {
 extension MainScreenVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.blocksCount()
+        return presenter.blocks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

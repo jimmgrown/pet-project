@@ -271,6 +271,11 @@
 		8456EE48248F6B18009DB9F5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				84D2BD1624BD813500298C94 /* GoodsCard.swift */,
+				84D2BD1824BD822200298C94 /* Media.swift */,
+				845105DF24BF0A2C0023FB0F /* Size.swift */,
+				84BE46C324C7006D00692B8A /* ProductsBlock.swift */,
+				8455750024C7F5B60042140C /* ProductDataModel.swift */,
 				8456EE4C248F753B009DB9F5 /* ModelJSON.swift */,
 				846FF10424A6123F00E04182 /* BlockType.swift */,
 				846FF0E324A5DE1100E04182 /* BrandModel.swift */,
@@ -327,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				8457A51D248E4FB400E2943F /* Main.storyboard */,
+				8456EE48248F6B18009DB9F5 /* Models */,
 				848B2FD824BC4BB500E6AEEF /* Goods */,
 				84D0893E24B5C47D00997EF4 /* Networking */,
 				846FF0DE24A5C74D00E04182 /* Exstensions */,
@@ -427,7 +433,6 @@
 			children = (
 				84CE118C249B9D0700CA3FA2 /* MainScreenVC.swift */,
 				8440BD9924D9531F00A5E16C /* Presenter */,
-				8456EE48248F6B18009DB9F5 /* Models */,
 				84B97F972498AFF5000AB86B /* TableViewCells */,
 			);
 			path = MainScreenVC;
@@ -493,11 +498,6 @@
 		84DD66BD24BC8A51009665B4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				84D2BD1624BD813500298C94 /* GoodsCard.swift */,
-				84D2BD1824BD822200298C94 /* Media.swift */,
-				845105DF24BF0A2C0023FB0F /* Size.swift */,
-				84BE46C324C7006D00692B8A /* ProductsBlock.swift */,
-				8455750024C7F5B60042140C /* ProductDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

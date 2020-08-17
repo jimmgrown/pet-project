@@ -8,115 +8,97 @@
 
 import UIKit
 
-protocol GoodsVCDelegate: class {
-    func updateData()
-    func getResponse(with error: NetworkingError)
-}
-
-protocol GoodsPresenter {
-    func getData(for vendoreCode: String)
-    func blocksCount() -> Int
+protocol GoodsDisplaying: class {
+    func updateGoodsData()
+    func showAlert(with error: NetworkingError)
 }
 
 // MARK: - Declaration
 
-final class GoodsVCPresenter: GoodsPresenter {
+final class GoodsPresenter: GoodsPresenterProtocol {
+    
+    // MARK: Initialization
+    
+    init(view: GoodsDisplaying) {
+        self.view = view
+    }
     
     // MARK: Private properties
     
-    private let apiClient = APIClient()
+    private let apiClient: APIClient = .init()
     
     // MARK: Properties
     
-    weak var delegate: GoodsVCDelegate!
+    unowned var view: GoodsDisplaying
     var uniqueSizesId: [[String]] = [[]]
-    
-    var relatedProducts: [ProductsModel] = []  {
-        didSet {
-            delegate.updateData()
-        }
-    }
-    
-    var recommendedProducts: [ProductsModel] = []   {
-        didSet {
-            delegate.updateData()
-        }
-    }
-    
-    var goodCards: [GoodsCard] = [] {
-        didSet {
-            delegate.updateData()
-        }
-    }
+    var relatedProducts: [ProductsModel] = []
+    var recommendedProducts: [ProductsModel] = []
+    var goodCards: [GoodsCard] = []
     
 }
 
 // MARK: - Public API
 
-extension GoodsVCPresenter {
+extension GoodsPresenter {
     
-    final func getData(for vendoreCode: String) {
-        apiClient.send(GetGoodsCard(url: API.Main.goodsCardURL(for: vendoreCode))) { response in
-            self.apiClient.handle(response: response) { result, error in
-                if let goodCards = result {
-                    self.goodCards = goodCards
-                    self.uniqueSizesId = goodCards.map { $0.uniqueSizesIDs.map { String($0.value) }}
-                } else if let error = error {
-                    self.delegate.getResponse(with: error)
-                }
+    func getBlocksData(for vendorCode: String) {
+        apiClient.send(GetGoodsCard(url: API.Main.goodsCardURL(for: vendorCode))) { result, error in
+            if let goodCards = result {
+                self.goodCards = goodCards
+                self.uniqueSizesId = goodCards.map { $0.uniqueSizesIDs.map { String($0.value) }}
+            } else if let error = error {
+                self.view.showAlert(with: error)
             }
+            
             
             let productsGroup = DispatchGroup()
             
-            #warning("Зачем ты вернул неверно работающий код групп? Мы же уже разбирались с этим")
-            
-            DispatchQueue.global().async(group: productsGroup) {
-                self.apiClient.send(
-                    GetRecomendedProducts(
-                        locationId: API.baseLocationId,
-                        size: 5,
-                        page: 1,
-                        uniqueSizesIds: self.uniqueSizesId[0]
-                    )
-                ) { response in
-                        self.apiClient.handle(response: response) { result, error in
-                            if let products = result {
-                                self.recommendedProducts = products.data.products
-                            } else if let error = error {
-                                self.delegate.getResponse(with: error)
-                            }
-                        }
-                    //print(try? JSONSerialization.jsonObject(with: data!, options: []))
+            productsGroup.enter()
+            self.apiClient.send(
+                GetRecomendedProducts(
+                    locationId: API.baseLocationId,
+                    size: 5,
+                    page: 1,
+                    uniqueSizesIds: self.uniqueSizesId[0]
+                )
+            ) { result, error in
+                if let products = result {
+                    self.recommendedProducts = products.data.products
+                } else if let error = error {
+                    self.view.showAlert(with: error)
                 }
+                productsGroup.leave()
+                
+                //print(try? JSONSerialization.jsonObject(with: data!, options: []))
             }
             
-            DispatchQueue.global(qos: .userInitiated).async(group: productsGroup) {
-                self.apiClient.send(
-                    GetRelatedProducts(
-                        locationId: API.baseLocationId,
-                        size: 5,
-                        page: 1,
-                        uniqueSizesIds: self.uniqueSizesId[0]
-                    )
-                ) { response in
-                        self.apiClient.handle(response: response) { result, error in
-                            if let products = result {
-                                self.relatedProducts = products.data.products
-                            } else if let error = error {
-                                self.delegate.getResponse(with: error)
-                            }
-                        }
-                    //print(try? JSONSerialization.jsonObject(with: data!, options: []))
+            
+            productsGroup.enter()
+            self.apiClient.send(
+                GetRelatedProducts(
+                    locationId: API.baseLocationId,
+                    size: 5,
+                    page: 1,
+                    uniqueSizesIds: self.uniqueSizesId[0]
+                )
+            ) { result, error in
+                if let products = result {
+                    self.relatedProducts = products.data.products
+                } else if let error = error {
+                    self.view.showAlert(with: error)
                 }
+                productsGroup.leave()
+                
+                //print(try? JSONSerialization.jsonObject(with: data!, options: []))
             }
             
             productsGroup.notify(queue: DispatchQueue.main) {
-                self.delegate.updateData()
+                self.view.updateGoodsData()
             }
         }
     }
     
-    final func blocksCount() -> Int {
+    func blocksCount() -> Int {
         var blocksCounter: Int = 0
         blocksCounter = relatedProducts.count > 0 ? blocksCounter + 1 : blocksCounter
         blocksCounter = recommendedProducts.count > 0 ? blocksCounter + 1 : blocksCounter

@@ -28,7 +28,7 @@ final class APIClient {
         
     }
     
-    final func send<T: APIRequest>(_ request: T, completion: @escaping ResultCallback<T.Response>) {
+    final func send<T: APIRequest>(_ request: T, completion: @escaping NetworkHandler<T.Response>) {
         guard let url = URL(string: request.url) else {
             return
         }
@@ -43,7 +43,9 @@ final class APIClient {
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             if error != nil {
                 DispatchQueue.main.async {
-                    completion(.failure(.lostConnection))
+                    self.handle(response: .failure(.lostConnection)) { result, error in
+                        completion(result, error)
+                    }
                 }
             } else if let data = data {
                 if let result = try? JSONDecoder().decode(APIResponse<T.Response>.self, from: data) {
@@ -51,7 +53,9 @@ final class APIClient {
                     case 580, 400, 500:
                         if let message = result.message {
                             DispatchQueue.main.async {
-                                completion(.failure(.serverError(message: message)))
+                                self.handle(response: .failure(.serverError(message: message))) { result, error in
+                                    completion(result, error)
+                                }
                             }
                         }
                     default:
@@ -59,16 +63,22 @@ final class APIClient {
                     }
                     if let dataContainer = result.data {
                         DispatchQueue.main.async {
-                            completion(.success(dataContainer))
+                            self.handle(response: .success(dataContainer)) { result, error in
+                                completion(result, error)
+                            }
                         }
                     } else {
                         DispatchQueue.main.async {
-                            completion(.failure(.badUnwrapping))
+                            self.handle(response: .failure(.badUnwrapping)) { result, error in
+                                completion(result, error)
+                            }
                         }
                     }
                 } else {
                     DispatchQueue.main.async {
-                        completion(.failure(.badDecode))
+                        self.handle(response: .failure(.badDecode)) { result, error in
+                            completion(result, error)
+                        }
                     }
                 }
             }
