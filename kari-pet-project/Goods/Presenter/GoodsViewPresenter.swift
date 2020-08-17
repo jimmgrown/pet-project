@@ -68,6 +68,8 @@ extension GoodsVCPresenter {
             
             let productsGroup = DispatchGroup()
             
+            #warning("Зачем ты вернул неверно работающий код групп? Мы же уже разбирались с этим")
+            
             DispatchQueue.global().async(group: productsGroup) {
                 self.apiClient.send(
                     GetRecomendedProducts(
