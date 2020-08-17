@@ -10,26 +10,17 @@ import UIKit
 
 protocol MainScreenDisplaying: class {
     func updateMainScreenData()
-    func showAlert(with error: NetworkingError)
 }
 
 // MARK: - Declaration
 
-final class MainScreenPresenter: MainScreenPresenting {
-    
-    // MARK: Initialization
-    
-    init(view: MainScreenDisplaying) {
-        self.view = view
-    }
+final class MainScreenPresenter {
     
     // MARK: Private properties
     
     private let apiClient: APIClient = .init()
-    
-    // MARK: Properties
-    
-    unowned var view: MainScreenDisplaying
+    private let alertPresenter: AlertPresenting = AlertPresenter()
+    private unowned let view: MainScreenDisplaying
     
     private(set) var blocks: [Block] = [] {
         didSet {
@@ -37,18 +28,24 @@ final class MainScreenPresenter: MainScreenPresenting {
         }
     }
     
+    // MARK: Initialization
+    
+    init(view: MainScreenDisplaying) {
+        self.view = view
+    }
+    
 }
 
 // MARK: - Public API
 
-extension MainScreenPresenter {
+extension MainScreenPresenter: MainScreenPresenting {
     
     func getBlocksData() {
         apiClient.send(GetMainScreenData()) { result, error in
             if let result = result {
                 self.blocks = result.filter { $0.type != nil }.sorted(by: <)
             } else if let error = error {
-                self.view.showAlert(with: error)
+                self.alertPresenter.showAlert(with: error, on: self.view as! UIViewController)
             }
         }
     }

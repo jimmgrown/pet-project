@@ -1,9 +1,12 @@
 import SDWebImage
 import UIKit
 
-protocol GoodsPresenterProtocol {
+protocol GoodsPresenting {
+    var recommendedProducts: [ProductsModel] { get }
+    var relatedProducts: [ProductsModel] { get }
+    var goodCards: [GoodsCard] { get }
+    var blocksCount: Int { get }
     func getBlocksData(for vendorCode: String)
-    func blocksCount() -> Int
 }
 
 // MARK: - Declaration
@@ -22,7 +25,7 @@ final class GoodsVC: UIViewController, ReusableVC {
     
     // MARK: Private properties
     
-    private lazy var presenter = GoodsPresenter(view: self)
+    private lazy var presenter: GoodsPresenting = GoodsPresenter(view: self)
     
     // MARK: Properties
     
@@ -33,7 +36,6 @@ final class GoodsVC: UIViewController, ReusableVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.getBlocksData(for: vendorCode)
-        presenter.view = self
     }
     
 }
@@ -44,10 +46,6 @@ extension GoodsVC: GoodsDisplaying {
     
     func updateGoodsData() {
         tableView.reloadData()
-    }
-    
-    func showAlert(with error: NetworkingError) {
-        error.present(on: self)
     }
     
 }
@@ -70,16 +68,16 @@ extension GoodsVC: CatalogCellDelegate {
 extension GoodsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.blocksCount()
+        return presenter.blocksCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 1, 2:
-            var nameProductsBanner: String = ProductsType.alternative
+            var nameProductsBanner: String = ProductsType.alternative.rawValue
             
             if indexPath.row == 2 {
-                nameProductsBanner = ProductsType.related
+                nameProductsBanner = ProductsType.related.rawValue
             }
             
             let products = [presenter.recommendedProducts, presenter.relatedProducts]

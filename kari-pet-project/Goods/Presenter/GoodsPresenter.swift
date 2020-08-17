@@ -10,12 +10,21 @@ import UIKit
 
 protocol GoodsDisplaying: class {
     func updateGoodsData()
-    func showAlert(with error: NetworkingError)
 }
 
 // MARK: - Declaration
 
-final class GoodsPresenter: GoodsPresenterProtocol {
+final class GoodsPresenter {
+    
+    // MARK: Private properties
+    
+    private let apiClient: APIClient = .init()
+    private let alertPresenter: AlertPresenting = AlertPresenter()
+    private unowned let view: GoodsDisplaying
+    private var uniqueSizesId: [[String]] = [[]]
+    private(set) var relatedProducts: [ProductsModel] = []
+    private(set) var recommendedProducts: [ProductsModel] = []
+    private(set) var goodCards: [GoodsCard] = []
     
     // MARK: Initialization
     
@@ -23,23 +32,16 @@ final class GoodsPresenter: GoodsPresenterProtocol {
         self.view = view
     }
     
-    // MARK: Private properties
-    
-    private let apiClient: APIClient = .init()
-    
-    // MARK: Properties
-    
-    unowned var view: GoodsDisplaying
-    var uniqueSizesId: [[String]] = [[]]
-    var relatedProducts: [ProductsModel] = []
-    var recommendedProducts: [ProductsModel] = []
-    var goodCards: [GoodsCard] = []
-    
 }
 
 // MARK: - Public API
 
-extension GoodsPresenter {
+extension GoodsPresenter: GoodsPresenting {
+    
+    var blocksCount: Int {
+        return [relatedProducts.isEmpty, recommendedProducts.isEmpty, goodCards.isEmpty]
+            .reduce(0) { $0 + ($1 ? 0 : 1) }
+    }
     
     func getBlocksData(for vendorCode: String) {
         apiClient.send(GetGoodsCard(url: API.Main.goodsCardURL(for: vendorCode))) { result, error in
@@ -47,7 +49,7 @@ extension GoodsPresenter {
                 self.goodCards = goodCards
                 self.uniqueSizesId = goodCards.map { $0.uniqueSizesIDs.map { String($0.value) }}
             } else if let error = error {
-                self.view.showAlert(with: error)
+                self.alertPresenter.showAlert(with: error, on: self.view as! UIViewController)
             }
             
             
@@ -65,7 +67,7 @@ extension GoodsPresenter {
                 if let products = result {
                     self.recommendedProducts = products.data.products
                 } else if let error = error {
-                    self.view.showAlert(with: error)
+                    self.alertPresenter.showAlert(with: error, on: self.view as! UIViewController)
                 }
                 productsGroup.leave()
                 
@@ -85,7 +87,7 @@ extension GoodsPresenter {
                 if let products = result {
                     self.relatedProducts = products.data.products
                 } else if let error = error {
-                    self.view.showAlert(with: error)
+                    self.alertPresenter.showAlert(with: error, on: self.view as! UIViewController)
                 }
                 productsGroup.leave()
                 
@@ -96,14 +98,6 @@ extension GoodsPresenter {
                 self.view.updateGoodsData()
             }
         }
-    }
-    
-    func blocksCount() -> Int {
-        var blocksCounter: Int = 0
-        blocksCounter = relatedProducts.count > 0 ? blocksCounter + 1 : blocksCounter
-        blocksCounter = recommendedProducts.count > 0 ? blocksCounter + 1 : blocksCounter
-        blocksCounter = goodCards.count > 0 ? blocksCounter + 1 : blocksCounter
-        return blocksCounter
     }
     
 }

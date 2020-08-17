@@ -2,9 +2,8 @@ import UIKit
 import SDWebImage
 
 protocol MainScreenPresenting {
-    func getBlocksData()
     var blocks: [Block] { get }
-    var view: MainScreenDisplaying { get }
+    func getBlocksData()
 }
 
 // MARK: - Base
@@ -28,7 +27,7 @@ final class MainScreenVC: UIViewController {
     
     // MARK: Private properties
     
-    private lazy var presenter = MainScreenPresenter(view: self)
+    private lazy var presenter: MainScreenPresenting = MainScreenPresenter(view: self)
 
     // MARK: Life cycle
     
@@ -44,10 +43,6 @@ extension MainScreenVC: MainScreenDisplaying {
     
     func updateMainScreenData() {
         tableView.reloadData()
-    }
-    
-    func showAlert(with error: NetworkingError) {
-        error.present(on: self)
     }
     
 }
