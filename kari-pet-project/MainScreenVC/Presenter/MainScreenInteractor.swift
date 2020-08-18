@@ -6,19 +6,19 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-protocol MainInteractorProtocol: class {
+protocol MainScreenInteracting: class {
     func getData()
 }
 
 #warning("final")
-class MainInteractor: MainInteractorProtocol {
+class MainScreenInteractor: MainScreenInteracting {
 
-    weak var presenter: MainPresenterProtocol!
+    weak var presenter: MainScreenPresenting!
     #warning("private")
     let apiClient = APIClient()
     
     #warning("Зачем required?")
-    required init(presenter: MainPresenterProtocol) {
+    required init(presenter: MainScreenPresenting) {
         self.presenter = presenter
     }
     
@@ -30,7 +30,7 @@ class MainInteractor: MainInteractorProtocol {
                 if let result = result {
                     self.presenter.blocks = result.filter { $0.type != nil }.sorted(by: <)
                 } else if let error = error {
-                    self.presenter.delegate.getResponse(with: error)
+                    self.presenter.delegate.showAlert(with: error)
                 }
             }
         }

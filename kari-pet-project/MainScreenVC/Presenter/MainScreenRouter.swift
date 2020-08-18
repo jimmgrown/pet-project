@@ -8,23 +8,26 @@
 
 import UIKit
 
-protocol MainRouterProtocol: class {
+protocol MainRouting: class {
     #warning("Про названия я уже написал, но блин, что это такое?))) show?)) серьезно?)))")
     func show()
 }
 
 #warning("final")
-class MainRouter: MainRouterProtocol {
+class MainScreenRouter: MainRouting {
     #warning("Почему твой раутер обращается к контроллеру через протокол, по которому к нему обращается презентер? Обязанности не разделены, получается. И вообще в плане взаимодействия раутера с контроллером оба протокола можно опустить и использовать конкретные типы")
-    weak var viewController: VCDelegate!
+    weak var view: MainScreenDisplaying!
     
-    init(viewController: VCDelegate) {
-        self.viewController = viewController
+    init(view: MainScreenDisplaying) {
+        self.view = view
     }
+    
+}
 
-    #warning("Почему это не в экстеншне?")
+extension MainScreenRouter {
+    
     func show() {
-        viewController.prepare()
+        view.prepare()
     }
     
 }
