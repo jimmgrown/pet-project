@@ -4,14 +4,13 @@ import SDWebImage
 protocol MainScreenPresenting: class {
     var vendorCode: String { get set }
     var blocks: [Block] { get set }
-    var delegate: MainScreenDisplaying { get set }
-    var router: MainScreenRouting! { set get }
+    var view: MainScreenDisplaying { get }
+    var router: MainScreenRouter! { set get }
     var interactor: MainScreenInteracting! { get set }
     func configureView()
 }
 
 // MARK: - Base
-#warning("Нужно поправить местоположение протоколов, их названия, названия методов внутри них и привести префиксы в модуле к общему виду (по тем же принципам, что и в MVP). Еще модели нужно отделить от папки конкретного контроллера")
 
 final class MainScreenVC: UIViewController {
     
@@ -33,19 +32,17 @@ final class MainScreenVC: UIViewController {
     // MARK: Properties
     
     lazy var presenter: MainScreenPresenting = MainScreenPresenter(view: self)
-        #warning("Зачем конфигуратору протокол? Его, кстати, по дефолту в вайпере называют Assembler. И почему он не приватный? Также, есть смысл все ассемблеры делать либо синглтонами, либо кейс-лесс енамами")
-    private let assembler: MainScreenAssembling = MainScreenAssembler()
-
+    
     // MARK: Life cycle
     
     override func viewDidLoad() {
-        assembler.configure(with: self)
+        MainScreenAssembler.configure(with: self)
         presenter.configureView()
     }
     
 }
 
-// MARK: - Public API
+// MARK: - MainScreenDisplaying
 
 extension MainScreenVC: MainScreenDisplaying {
     
@@ -53,28 +50,15 @@ extension MainScreenVC: MainScreenDisplaying {
         tableView.reloadData()
     }
     
-    func showAlert(with error: NetworkingError) {
-        error.present(on: self)
-    }
-    
-    func prepare() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let secondVC = storyboard.instantiateViewController(
-            withIdentifier: GoodsVC.reuseID
-            ) as? GoodsVC else { return }
-        secondVC.vendoreCode = presenter.vendorCode
-        show(secondVC, sender: self)
-    }
-    
 }
+
 
 // MARK: - CatalogCellDelegate
 
 extension MainScreenVC: CatalogCellDelegate {
     
-    func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendoreCode: String) {
-        presenter.vendorCode = vendoreCode
-        presenter.router.showView()
+    func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendorCode: String) {
+        presenter.router.showView(vendorCode: vendorCode)
     }
     
 }

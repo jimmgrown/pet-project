@@ -6,11 +6,8 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-import UIKit
-
-protocol MainScreenDisplaying: class {
+protocol MainScreenDisplaying: Displaying {
     var presenter: MainScreenPresenting { get set }
-    func prepare()
     func updateData()
     func showAlert(with error: NetworkingError)
 }
@@ -21,21 +18,21 @@ final class MainScreenPresenter {
     
     // MARK: Properties
     
-    var delegate: MainScreenDisplaying
+    unowned let view: MainScreenDisplaying
     var interactor: MainScreenInteracting!
-    var router: MainScreenRouting!
+    var router: MainScreenRouter!
     var vendorCode: String = ""
     
     var blocks: [Block] = [] {
         didSet {
-            delegate.updateData()
+            view.updateData()
         }
     }
     
     // MARK: Initialization
     
     init(view: MainScreenDisplaying) {
-        self.delegate = view
+        self.view = view
     }
     
 }
@@ -45,7 +42,7 @@ final class MainScreenPresenter {
 extension MainScreenPresenter: MainScreenPresenting {
 
     func configureView() {
-        self.interactor.getData()
+        self.interactor.getBlocksData()
     }
     
 }

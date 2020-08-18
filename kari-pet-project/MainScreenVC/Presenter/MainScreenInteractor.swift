@@ -7,12 +7,12 @@
 //
 
 protocol MainScreenInteracting: class {
-    func getData()
+    func getBlocksData()
 }
 
 class MainScreenInteractor: MainScreenInteracting {
 
-    weak var presenter: MainScreenPresenting!
+    private weak var presenter: MainScreenPresenting!
     private let apiClient: APIClient = .init()
     
     init(presenter: MainScreenPresenting) {
@@ -23,15 +23,12 @@ class MainScreenInteractor: MainScreenInteracting {
 
 extension MainScreenInteractor {
     
-    func getData() {
-        apiClient.send(GetMainScreenData()) { response in
-            #warning("Это экстрактни в апи клиент, как в MVP")
-            self.apiClient.handle(response: response) { result, error in
-                if let result = result {
-                    self.presenter.blocks = result.filter { $0.type != nil }.sorted(by: <)
-                } else if let error = error {
-                    self.presenter.delegate.showAlert(with: error)
-                }
+    func getBlocksData() {
+        apiClient.send(GetMainScreenData()) { result, error in
+            if let result = result {
+                self.presenter.blocks = result.filter { $0.type != nil }.sorted(by: <)
+            } else if let error = error {
+                self.presenter.view.showAlert(with: error)
             }
         }
     }

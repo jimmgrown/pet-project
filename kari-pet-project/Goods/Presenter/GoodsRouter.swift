@@ -6,20 +6,22 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-protocol GoodsRouterProtocol: class {
-    func show()
-}
+import UIKit
 
-class GoodsRouter: GoodsRouterProtocol {
+final class GoodsRouter {
+    weak var view: UIViewController!
     
-    weak var viewController: GoodsVCDelegate!
-    
-    init(viewController: GoodsVCDelegate) {
-        self.viewController = viewController
+    init(view: UIViewController) {
+        self.view = view
     }
     
-    func show() {
-        viewController.prepare()
+    func showView(vendorCode: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let secondVC = storyboard.instantiateViewController(
+            withIdentifier: GoodsVC.reuseID
+            ) as? GoodsVC else { return }
+        secondVC.vendorCode = vendorCode
+        view.show(secondVC, sender: self)
     }
     
 }

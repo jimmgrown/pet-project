@@ -6,19 +6,16 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-protocol GoodsConfiguratorProtocol: class {
-    func configure(with viewController: GoodsVCDelegate)
-}
-
-class GoodsConfigurator: GoodsConfiguratorProtocol {
+enum GoodsAssembler {
     
-    func configure(with viewController: GoodsVCDelegate) {
-        let presenter = GoodsVCPresenter(view: viewController)
+    static func configure(with viewController: GoodsVC) {
+        let presenter = GoodsPresenter(view: viewController)
         let interactor = GoodsInteractor(presenter: presenter)
-        let router = GoodsRouter(viewController: viewController)
+        let router = GoodsRouter(view: viewController)
         
         viewController.presenter = presenter
         presenter.interactor = interactor
         presenter.router = router
     }
+    
 }

@@ -8,15 +8,10 @@
 
 import UIKit
 
-protocol MainScreenRouting: class {
-    func showView()
-}
-
-final class MainScreenRouter: MainScreenRouting {
-    #warning("Почему твой раутер обращается к контроллеру через протокол, по которому к нему обращается презентер? Обязанности не разделены, получается. И вообще в плане взаимодействия раутера с контроллером оба протокола можно опустить и использовать конкретные типы")
-    weak var view: MainScreenDisplaying!
+final class MainScreenRouter {
+    private weak var view: UIViewController!
     
-    init(view: MainScreenDisplaying) {
+    init(view: UIViewController) {
         self.view = view
     }
     
@@ -24,8 +19,13 @@ final class MainScreenRouter: MainScreenRouting {
 
 extension MainScreenRouter {
     
-    func showView() {
-        view.prepare()
+    func showView(vendorCode: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let secondVC = storyboard.instantiateViewController(
+            withIdentifier: GoodsVC.reuseID
+            ) as? GoodsVC else { return }
+        secondVC.vendorCode = vendorCode
+        view.show(secondVC, sender: view)
     }
     
 }

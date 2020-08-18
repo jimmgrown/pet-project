@@ -6,19 +6,16 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-protocol MainScreenAssembling: class {
-    func configure(with viewController: MainScreenDisplaying)
-}
-
-class MainScreenAssembler: MainScreenAssembling {
+enum MainScreenAssembler {
     
-    func configure(with viewController: MainScreenDisplaying) {
+    static func configure(with viewController: MainScreenVC) {
         let presenter: MainScreenPresenting = MainScreenPresenter(view: viewController)
         let interactor: MainScreenInteracting = MainScreenInteractor(presenter: presenter)
-        let router: MainScreenRouting = MainScreenRouter(view: viewController)
+        let router: MainScreenRouter = MainScreenRouter(view: viewController)
         
         viewController.presenter = presenter
         presenter.interactor = interactor
         presenter.router = router
     }
+    
 }

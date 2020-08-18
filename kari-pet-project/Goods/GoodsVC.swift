@@ -1,9 +1,21 @@
 import SDWebImage
 import UIKit
 
+protocol GoodsPresenting: class {
+    var vendorCode: String { get set }
+    var goodCards: [GoodsCard] { get set}
+    var blocksCount: Int { get }
+    var relatedProducts: [ProductsModel] { get set }
+    var recommendedProducts: [ProductsModel] { get set }
+    var uniqueSizesId: [[String]] { get set }
+    var view: GoodsDisplaying { get }
+    var router: GoodsRouter! { get set }
+    func configureView(with vendorCode: String)
+}
+
 // MARK: - Declaration
 
-final class GoodsVC: UIViewController, ReusableVC, GoodsVCDelegate {
+final class GoodsVC: UIViewController, ReusableVC {
     
     // MARK: Outlets
     
@@ -17,42 +29,28 @@ final class GoodsVC: UIViewController, ReusableVC, GoodsVCDelegate {
     
     // MARK: Private properties
     
-    internal var presenter: GoodsVCPresenter!
-    let configurator: GoodsConfiguratorProtocol = GoodsConfigurator()
+    lazy var presenter: GoodsPresenting = GoodsPresenter(view: self)
     
     // MARK: Properties
     
-    var vendoreCode: String = ""
+    var vendorCode: String = ""
     
     // MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configurator.configure(with: self)
-        presenter.configureView(with: vendoreCode)
+        GoodsAssembler.configure(with: self)
+        presenter.configureView(with: vendorCode)
     }
     
 }
 
-// MARK: - Public API
+// MARK: - GoodsDisplaying
 
-extension GoodsVC {
+extension GoodsVC: GoodsDisplaying {
     
     func updateData() {
         tableView.reloadData()
-    }
-    
-    func getResponse(with error: NetworkingError) {
-        error.present(on: self)
-    }
-    
-    func prepare() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let secondVC = storyboard.instantiateViewController(
-            withIdentifier: GoodsVC.reuseID
-            ) as? GoodsVC else { return }
-        secondVC.vendoreCode = presenter.vendoreCode
-        show(secondVC, sender: self)
     }
     
 }
@@ -61,9 +59,8 @@ extension GoodsVC {
 
 extension GoodsVC: CatalogCellDelegate {
     
-    func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendoreCode: String) {
-        presenter.vendoreCode = vendoreCode
-        presenter.router.show()
+    func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendorCode: String) {
+        presenter.router.showView(vendorCode: vendorCode)
     }
     
 }
@@ -73,7 +70,7 @@ extension GoodsVC: CatalogCellDelegate {
 extension GoodsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.blocksCount()
+        return presenter.blocksCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
