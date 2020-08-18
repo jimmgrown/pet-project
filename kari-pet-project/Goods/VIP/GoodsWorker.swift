@@ -8,18 +8,18 @@
 
 import Foundation
 
-protocol GoodsWorkerProtocol: class {
-    func getData(with vendoreCode: String)
+protocol GoodsWorking: class {
+    func getBlocksData(with vendoreCode: String)
 }
 
 // MARK: - Declaration
 
-final class GoodsWorker: GoodsWorkerProtocol {
+final class GoodsWorker: GoodsWorking {
     
-    weak var interactor: GoodsInteractorProtocol!
-    let apiClient = APIClient()
+    private weak var interactor: GoodsInteracting!
+    private let apiClient: APIClient = .init()
     
-    required init(interactor: GoodsInteractorProtocol) {
+    init(interactor: GoodsInteracting) {
         self.interactor = interactor
     }
     
@@ -27,11 +27,9 @@ final class GoodsWorker: GoodsWorkerProtocol {
 
 extension GoodsWorker {
     
-    final func getData(with vendoreCode: String) {
-        apiClient.send(GetGoodsCard(url: API.Main.goodsCardURL(for: vendoreCode))) { response in
-            self.apiClient.handle(response: response) { result, error in
-                self.interactor.handle(result: result, error: error)
-            }
+    func getBlocksData(with vendoreCode: String) {
+        apiClient.send(GetGoodsCard(url: API.Main.goodsCardURL(for: vendoreCode))) { result, error in
+            self.interactor.handle(result: result, error: error)
             
             let productsGroup = DispatchGroup()
             
@@ -43,14 +41,12 @@ extension GoodsWorker {
                     page: 1,
                     uniqueSizesIds: self.interactor.uniqueSizesId[0]
                 )
-            ) { response in
-                self.apiClient.handle(response: response) { result, error in
-                    self.interactor.handleRecommended(result: result, error: error)
-                    productsGroup.leave()
-                }
+            ) { result, error in
+                self.interactor.handleRecommended(result: result, error: error)
+                productsGroup.leave()
+                
                 //print(try? JSONSerialization.jsonObject(with: data!, options: []))
             }
-            
             
             productsGroup.enter()
             self.apiClient.send(
@@ -60,14 +56,12 @@ extension GoodsWorker {
                     page: 1,
                     uniqueSizesIds: self.interactor.uniqueSizesId[0]
                 )
-            ) { response in
-                self.apiClient.handle(response: response) { result, error in
-                    self.interactor.handleRelated(result: result, error: error)
-                    productsGroup.leave()
-                }
+            ) { result, error in
+                self.interactor.handleRelated(result: result, error: error)
+                productsGroup.leave()
+                
                 //print(try? JSONSerialization.jsonObject(with: data!, options: []))
             }
-            
             
             productsGroup.notify(queue: DispatchQueue.main) {
                 self.interactor.notify()

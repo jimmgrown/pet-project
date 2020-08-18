@@ -4,9 +4,14 @@ import SDWebImage
 typealias CellsProviders = CategoriesCellDelegate & SliderCellDelegate &
     InformationCellDelegate & FindsCellDelegate & BrandsCellDelegate
 
+protocol MainScreenPresenting: class {
+    var blocks: [Block] { get set }
+    var view: MainScreenDisplaying! { get set }
+}
+
 // MARK: - Base
 
-final class MainScreenVC: UIViewController, VCDelegate, CellsProviders  {
+final class MainScreenVC: UIViewController {
     
     // MARK: Outlets
     
@@ -25,14 +30,13 @@ final class MainScreenVC: UIViewController, VCDelegate, CellsProviders  {
     
     // MARK: Properties
     
-        var presenter: MainVCPresenter!
-        var interactor: MainInteractor!
-        let configurator: MainConfiguratorProtocol = MainConfigurator()
+        lazy var router = MainScreenRouter(view: self)
+        lazy var interactor: MainScreenInteracting = MainScreenInteractor(view: self)
 
     // MARK: Life cycle
     
         override func viewDidLoad() {
-            configurator.configure(with: self)
+            MainScreenAssembler.configure(with: self)
             interactor.configureView()
         }
     
@@ -43,7 +47,7 @@ final class MainScreenVC: UIViewController, VCDelegate, CellsProviders  {
 extension MainScreenVC: CatalogCellDelegate {
     
     func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendorCode: String) {
-        interactor.prepare(with: vendorCode)
+        router.showView(vendorCode: vendorCode)
     }
     
 }
@@ -53,35 +57,28 @@ extension MainScreenVC: CatalogCellDelegate {
 extension MainScreenVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.blocksCount()
+        return interactor.presenter.blocks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return prepareData(for: indexPath, block: presenter.blocks[indexPath.row])
+        return prepareData(for: indexPath, block: interactor.presenter.blocks[indexPath.row])
     }
     
 }
 
-// MARK: - Public API
+// MARK: - MainScreenDisplaying
 
-extension MainScreenVC {
+extension MainScreenVC: MainScreenDisplaying {
     
     func updateData() {
         tableView.reloadData()
     }
     
-    func getResponse(with error: NetworkingError) {
-        error.present(on: self)
-    }
-    
-    func prepare() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let secondVC = storyboard.instantiateViewController(
-            withIdentifier: GoodsVC.reuseID
-            ) as? GoodsVC else { return }
-        secondVC.vendorCode = presenter.vendorCode
-        show(secondVC, sender: self)
-    }
+}
+
+// MARK: - CellsProviders
+
+extension MainScreenVC: CellsProviders {
     
     func prepareData(for indexPath: IndexPath, block: Block) -> UITableViewCell {
         switch block.type! {

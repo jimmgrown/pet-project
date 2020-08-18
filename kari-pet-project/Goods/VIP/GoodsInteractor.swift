@@ -6,30 +6,37 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-import Foundation
-
 // MARK: - GoodsInteractorProtocol
 
-protocol GoodsInteractorProtocol: class {
+protocol GoodsInteracting: class {
+    var worker: GoodsWorking! { get set }
+    var presenter: GoodsPresenting! { get set }
     var uniqueSizesId: [[String]] { get set }
+    
     func handle(result: GetGoodsCard.Response?, error: NetworkingError?)
     func handleRecommended(result: GetRecomendedProducts.Response?, error: NetworkingError?)
     func handleRelated(result: GetRelatedProducts.Response?, error: NetworkingError?)
     func configureView(with vendoreCode: String)
     func notify()
-    func prepare(with vendorCode: String)
 }
 
 // MARK: - Declaration
 
-final class GoodsInteractor: GoodsInteractorProtocol {
+final class GoodsInteractor: GoodsInteracting {
     
-    weak var presenter: GoodsPresenterProtocol!
-    var worker: GoodsWorkerProtocol!
+    // MARK: Private properties
+    
+    private weak var view: GoodsDisplaying!
+    
+    // MARK: Properties
+    
+    var presenter: GoodsPresenting!
+    var worker: GoodsWorking!
+    
     var uniqueSizesId: [[String]] = [[]]
     
-    required init(presenter: GoodsPresenterProtocol) {
-        self.presenter = presenter
+    init(view: GoodsDisplaying) {
+        self.view = view
     }
     
 }
@@ -38,42 +45,38 @@ final class GoodsInteractor: GoodsInteractorProtocol {
 
 extension GoodsInteractor {
     
-    final func configureView(with vendoreCode: String) {
-        worker.getData(with: vendoreCode)
+    func configureView(with vendoreCode: String) {
+        worker.getBlocksData(with: vendoreCode)
     }
     
-    final func handle(result: GetGoodsCard.Response?, error: NetworkingError?) {
+    func handle(result: GetGoodsCard.Response?, error: NetworkingError?) {
         if let goodCards = result {
             presenter.goodCards = goodCards
             uniqueSizesId = goodCards.map { $0.uniqueSizesIDs.map { String($0.value) }}
         } else if let error = error {
-            self.presenter.sendError(with: error)
+            self.presenter.view.showAlert(with: error)
         }
     }
     
-    final func handleRecommended(result: GetRecomendedProducts.Response?, error: NetworkingError?) {
+    func handleRecommended(result: GetRecomendedProducts.Response?, error: NetworkingError?) {
         if let products = result {
             self.presenter.recommendedProducts = products.data.products
         } else if let error = error {
-            self.presenter.sendError(with: error)
+            self.presenter.view.showAlert(with: error)
         }
     }
     
-    final func handleRelated(result: GetRelatedProducts.Response?, error: NetworkingError?) {
+    func handleRelated(result: GetRelatedProducts.Response?, error: NetworkingError?) {
         if let products = result {
             self.presenter.relatedProducts = products.data.products
         } else if let error = error {
-            self.presenter.sendError(with: error)
+            self.presenter.view.showAlert(with: error)
         }
     }
     
     final func notify() {
-        self.presenter.updateData()
+        self.presenter.view.updateData()
     }
     
-    final func prepare(with vendorCode: String) {
-        presenter.vendorCode = vendorCode
-        presenter.router.show()
-    }
     
 }
