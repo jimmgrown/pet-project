@@ -8,8 +8,9 @@
 
 import UIKit
 
-protocol MainScreenDisplaying: class {
+protocol MainScreenDisplaying: Displaying {
     func updateMainScreenData()
+    func showAlert(with error: NetworkingError)
 }
 
 // MARK: - Declaration
@@ -19,7 +20,6 @@ final class MainScreenPresenter {
     // MARK: Private properties
     
     private let apiClient: APIClient = .init()
-    private let alertPresenter: AlertPresenting = AlertPresenter()
     private unowned let view: MainScreenDisplaying
     
     private(set) var blocks: [Block] = [] {
@@ -45,7 +45,7 @@ extension MainScreenPresenter: MainScreenPresenting {
             if let result = result {
                 self.blocks = result.filter { $0.type != nil }.sorted(by: <)
             } else if let error = error {
-                self.alertPresenter.showAlert(with: error, on: self.view as! UIViewController)
+                self.view.showAlert(with: error)
             }
         }
     }

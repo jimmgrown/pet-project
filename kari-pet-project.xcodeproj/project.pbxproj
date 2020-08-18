@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		84150A2724EAAD29000F5E00 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84150A2624EAAD29000F5E00 /* AlertPresenter.swift */; };
+		84150A2724EAAD29000F5E00 /* Displayng.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84150A2624EAAD29000F5E00 /* Displayng.swift */; };
 		843B533A24AAF5ED007C4CBB /* ColorsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B533824AAF5ED007C4CBB /* ColorsCell.swift */; };
 		843B533B24AAF5ED007C4CBB /* ColorsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843B533924AAF5ED007C4CBB /* ColorsCell.xib */; };
 		843F373724B434D1000ED099 /* UITableView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F373624B434D1000ED099 /* UITableView+CellRegistration.swift */; };
@@ -116,7 +116,7 @@
 /* Begin PBXFileReference section */
 		1236C8C2CDB51A66DDD8D7D1 /* Pods-kari-pet-project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kari-pet-project.release.xcconfig"; path = "Target Support Files/Pods-kari-pet-project/Pods-kari-pet-project.release.xcconfig"; sourceTree = "<group>"; };
 		354DE11A5CABB6548C5CCE2B /* Pods_kari_pet_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kari_pet_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		84150A2624EAAD29000F5E00 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
+		84150A2624EAAD29000F5E00 /* Displayng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Displayng.swift; sourceTree = "<group>"; };
 		843B533824AAF5ED007C4CBB /* ColorsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCell.swift; sourceTree = "<group>"; };
 		843B533924AAF5ED007C4CBB /* ColorsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorsCell.xib; sourceTree = "<group>"; };
 		843F373624B434D1000ED099 /* UITableView+CellRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+CellRegistration.swift"; sourceTree = "<group>"; };
@@ -373,7 +373,7 @@
 				843F373624B434D1000ED099 /* UITableView+CellRegistration.swift */,
 				84FF3A0724C074FF00A2F11E /* ReusableVC.swift */,
 				84BE46C524C7133200692B8A /* URLRequest+cURL.swift */,
-				84150A2624EAAD29000F5E00 /* AlertPresenter.swift */,
+				84150A2624EAAD29000F5E00 /* Displayng.swift */,
 			);
 			path = Exstensions;
 			sourceTree = "<group>";
@@ -757,7 +757,7 @@
 				8455750124C7F5B60042140C /* ProductDataModel.swift in Sources */,
 				8463C89024A0684200417B51 /* InformationCell.swift in Sources */,
 				845105D924BEFE6F0023FB0F /* OtherColorCell.swift in Sources */,
-				84150A2724EAAD29000F5E00 /* AlertPresenter.swift in Sources */,
+				84150A2724EAAD29000F5E00 /* Displayng.swift in Sources */,
 				84D2BD1924BD822200298C94 /* Media.swift in Sources */,
 				846FF0F224A5E08400E04182 /* CollectionField.swift in Sources */,
 				848B2FD724BC375F00E6AEEF /* HttpMethod.swift in Sources */,

@@ -8,7 +8,7 @@ protocol MainScreenPresenting {
 
 // MARK: - Base
 
-final class MainScreenVC: UIViewController {
+final class MainScreenVC: UIViewController, Displaying {
     
     // MARK: Outlets
     
