@@ -79,10 +79,10 @@ extension GoodsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 1, 2:
-            var nameProductsBanner: String = ProductsType.alternative
+            var nameProductsBanner: String = ProductsType.alternative.rawValue
             
             if indexPath.row == 2 {
-                nameProductsBanner = ProductsType.related
+                nameProductsBanner = ProductsType.related.rawValue
             }
             
             let products = [presenter.recommendedProducts, presenter.relatedProducts]

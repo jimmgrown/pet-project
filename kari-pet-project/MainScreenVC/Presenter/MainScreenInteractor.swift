@@ -10,19 +10,19 @@ protocol MainScreenInteracting: class {
     func getData()
 }
 
-#warning("final")
 class MainScreenInteractor: MainScreenInteracting {
 
     weak var presenter: MainScreenPresenting!
-    #warning("private")
-    let apiClient = APIClient()
+    private let apiClient: APIClient = .init()
     
-    #warning("Зачем required?")
-    required init(presenter: MainScreenPresenting) {
+    init(presenter: MainScreenPresenting) {
         self.presenter = presenter
     }
     
-    #warning("Почему это не в экстеншне?")
+}
+
+extension MainScreenInteractor {
+    
     func getData() {
         apiClient.send(GetMainScreenData()) { response in
             #warning("Это экстрактни в апи клиент, как в MVP")

@@ -1,11 +1,19 @@
 import UIKit
 import SDWebImage
 
+protocol MainScreenPresenting: class {
+    var vendorCode: String { get set }
+    var blocks: [Block] { get set }
+    var delegate: MainScreenDisplaying { get set }
+    var router: MainScreenRouting! { set get }
+    var interactor: MainScreenInteracting! { get set }
+    func configureView()
+}
+
 // MARK: - Base
 #warning("Нужно поправить местоположение протоколов, их названия, названия методов внутри них и привести префиксы в модуле к общему виду (по тем же принципам, что и в MVP). Еще модели нужно отделить от папки конкретного контроллера")
 
-                                            #warning("Конформанс не на месте")
-final class MainScreenVC: UIViewController, VCDelegate {
+final class MainScreenVC: UIViewController {
     
     // MARK: Outlets
     
@@ -23,32 +31,29 @@ final class MainScreenVC: UIViewController, VCDelegate {
     }
     
     // MARK: Properties
-    #warning("Табы")
     
-        #warning("internal не стоит писать")
-        #warning("Почему здесь конкретный тип указан?")
-        internal var presenter: MainVCPresenter!
+    lazy var presenter: MainScreenPresenting = MainScreenPresenter(view: self)
         #warning("Зачем конфигуратору протокол? Его, кстати, по дефолту в вайпере называют Assembler. И почему он не приватный? Также, есть смысл все ассемблеры делать либо синглтонами, либо кейс-лесс енамами")
-        let configurator: MainConfiguratorProtocol = MainConfigurator()
+    private let assembler: MainScreenAssembling = MainScreenAssembler()
 
     // MARK: Life cycle
     
-        override func viewDidLoad() {
-            configurator.configure(with: self)
-            presenter.configureView()
-        }
+    override func viewDidLoad() {
+        assembler.configure(with: self)
+        presenter.configureView()
+    }
     
 }
 
 // MARK: - Public API
 
-extension MainScreenVC {
+extension MainScreenVC: MainScreenDisplaying {
     
     func updateData() {
         tableView.reloadData()
     }
     
-    func getResponse(with error: NetworkingError) {
+    func showAlert(with error: NetworkingError) {
         error.present(on: self)
     }
     
@@ -57,7 +62,7 @@ extension MainScreenVC {
         guard let secondVC = storyboard.instantiateViewController(
             withIdentifier: GoodsVC.reuseID
             ) as? GoodsVC else { return }
-        secondVC.vendoreCode = presenter.vendoreCode
+        secondVC.vendoreCode = presenter.vendorCode
         show(secondVC, sender: self)
     }
     
@@ -68,8 +73,8 @@ extension MainScreenVC {
 extension MainScreenVC: CatalogCellDelegate {
     
     func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendoreCode: String) {
-        presenter.vendoreCode = vendoreCode
-        presenter.router.show()
+        presenter.vendorCode = vendoreCode
+        presenter.router.showView()
     }
     
 }
@@ -79,7 +84,7 @@ extension MainScreenVC: CatalogCellDelegate {
 extension MainScreenVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.blocksCount()
+        return presenter.blocks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MainScreenDisplaying: class {
-    var presenter: MainScreenPresenter! { get set }
+    var presenter: MainScreenPresenting { get set }
     func prepare()
     func updateData()
     func showAlert(with error: NetworkingError)
@@ -21,9 +21,9 @@ final class MainScreenPresenter {
     
     // MARK: Properties
     
-    weak var delegate: MainScreenDisplaying!
-    var interactor: MainInteractorProtocol!
-    var router: MainRouterProtocol!
+    var delegate: MainScreenDisplaying
+    var interactor: MainScreenInteracting!
+    var router: MainScreenRouting!
     var vendorCode: String = ""
     
     var blocks: [Block] = [] {

@@ -8,13 +8,11 @@
 
 import UIKit
 
-protocol MainRouting: class {
-    #warning("Про названия я уже написал, но блин, что это такое?))) show?)) серьезно?)))")
-    func show()
+protocol MainScreenRouting: class {
+    func showView()
 }
 
-#warning("final")
-class MainScreenRouter: MainRouting {
+final class MainScreenRouter: MainScreenRouting {
     #warning("Почему твой раутер обращается к контроллеру через протокол, по которому к нему обращается презентер? Обязанности не разделены, получается. И вообще в плане взаимодействия раутера с контроллером оба протокола можно опустить и использовать конкретные типы")
     weak var view: MainScreenDisplaying!
     
@@ -26,7 +24,7 @@ class MainScreenRouter: MainRouting {
 
 extension MainScreenRouter {
     
-    func show() {
+    func showView() {
         view.prepare()
     }
     
