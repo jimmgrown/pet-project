@@ -2,7 +2,9 @@ import UIKit
 import SDWebImage
 
 // MARK: - Base
+#warning("Нужно поправить местоположение протоколов, их названия, названия методов внутри них и привести префиксы в модуле к общему виду (по тем же принципам, что и в MVP). Еще модели нужно отделить от папки конкретного контроллера")
 
+                                            #warning("Конформанс не на месте")
 final class MainScreenVC: UIViewController, VCDelegate {
     
     // MARK: Outlets
@@ -21,8 +23,12 @@ final class MainScreenVC: UIViewController, VCDelegate {
     }
     
     // MARK: Properties
+    #warning("Табы")
     
+        #warning("internal не стоит писать")
+        #warning("Почему здесь конкретный тип указан?")
         internal var presenter: MainVCPresenter!
+        #warning("Зачем конфигуратору протокол? Его, кстати, по дефолту в вайпере называют Assembler. И почему он не приватный? Также, есть смысл все ассемблеры делать либо синглтонами, либо кейс-лесс енамами")
         let configurator: MainConfiguratorProtocol = MainConfigurator()
 
     // MARK: Life cycle

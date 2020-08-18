@@ -17,17 +17,21 @@ protocol VCDelegate: class {
 
 protocol MainPresenterProtocol: class {
     var vendoreCode: String { get set }
+    #warning("Если у тебя есть это")
     var blocks: [Block] { get set }
     var delegate: VCDelegate! { get set }
     var router: MainRouterProtocol! { set get }
     func configureView()
+    #warning("То зачем здесь это?")
     func blocksCount() -> Int
 }
 
 // MARK: - Declaration
 
+#warning("final")
 class MainVCPresenter: MainPresenterProtocol {
     
+    #warning("Иниты принято после пропертей декларировать")
     init(view: VCDelegate) {
         self.delegate = view
     }
@@ -37,6 +41,7 @@ class MainVCPresenter: MainPresenterProtocol {
     weak var delegate: VCDelegate!
     var interactor: MainInteractorProtocol!
     var router: MainRouterProtocol!
+    #warning("vendor")
     var vendoreCode: String = ""
     
     var blocks: [Block] = [] {
@@ -49,8 +54,10 @@ class MainVCPresenter: MainPresenterProtocol {
 
 // MARK: - Public API
 
+#warning("Конформанс под протокол должен быть тут")
 extension MainVCPresenter {
-    
+
+    #warning("final не нужен")
     final func configureView() {
         self.interactor.getData()
     }
