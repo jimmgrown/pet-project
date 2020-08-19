@@ -9,13 +9,16 @@
 enum GoodsAssembler {
     
     static func configure(with viewController: GoodsVC) {
-        let presenter = GoodsPresenter(view: viewController)
-        let interactor = GoodsInteractor(presenter: presenter)
-        let router = GoodsRouter(view: viewController)
+        let presenter = GoodsPresenter()
+        let interactor = GoodsInteractor()
+        let router = GoodsRouter()
         
         viewController.presenter = presenter
+        interactor.presenter = presenter
+        router.view = viewController
         presenter.interactor = interactor
         presenter.router = router
+        presenter.view = viewController
     }
     
 }

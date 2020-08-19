@@ -16,12 +16,11 @@ final class MainScreenPresenter {
     
     // MARK: Properties
     
-    unowned var view: MainScreenDisplaying!
+    var view: MainScreenDisplaying!
     var interactor: MainScreenInteracting!
     var router: MainScreenRouter!
-    var vendorCode: String = ""
     
-    var blocks: [Block] = [] {
+    private(set) var blocks: [Block] = [] {
         didSet {
             view.updateTableViewData()
         }
@@ -43,6 +42,10 @@ extension MainScreenPresenter: MainScreenPresenting {
     
     func showAlert(with error: NetworkingError) {
         view.showAlert(with: error)
+    }
+    
+    func getBlocksData(blocks: [Block]) {
+        self.blocks = blocks
     }
     
 }

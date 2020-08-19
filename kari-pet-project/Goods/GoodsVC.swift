@@ -2,15 +2,17 @@ import SDWebImage
 import UIKit
 
 protocol GoodsPresenting: class {
-    var vendorCode: String { get set }
-    var goodCards: [GoodsCard] { get set}
+    var goodCards: [GoodsCard] { get }
     var blocksCount: Int { get }
-    var relatedProducts: [ProductsModel] { get set }
-    var recommendedProducts: [ProductsModel] { get set }
-    var uniqueSizesId: [[String]] { get set }
-    var view: GoodsDisplaying { get }
-    var router: GoodsRouter! { get set }
+    var relatedProducts: [ProductsModel] { get }
+    var recommendedProducts: [ProductsModel] { get }
+    var uniqueSizesId: [[String]] { get }
     func configureView(with vendorCode: String)
+    func goToGoodsVC(with vendorCode: String)
+    func showAlert(with error: NetworkingError)
+    func updateTableViewData()
+    func getGoodsCardData(goodCards: GetGoodsCard.Response, uniqueSizesId: [[String]])
+    func getProductsBlocksData(productsBlocks: (recommended: [ProductsModel], related: [ProductsModel]))
 }
 
 // MARK: - Declaration
@@ -27,13 +29,10 @@ final class GoodsVC: UIViewController, ReusableVC {
         }
     }
     
-    // MARK: Private properties
-    
-    lazy var presenter: GoodsPresenting = GoodsPresenter(view: self)
-    
     // MARK: Properties
     
     var vendorCode: String = ""
+    var presenter: GoodsPresenting!
     
     // MARK: Life cycle
     
@@ -49,7 +48,7 @@ final class GoodsVC: UIViewController, ReusableVC {
 
 extension GoodsVC: GoodsDisplaying {
     
-    func updateData() {
+    func updateTableViewData() {
         tableView.reloadData()
     }
     
@@ -60,7 +59,7 @@ extension GoodsVC: GoodsDisplaying {
 extension GoodsVC: CatalogCellDelegate {
     
     func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendorCode: String) {
-        presenter.router.showView(vendorCode: vendorCode)
+        presenter.goToGoodsVC(with: vendorCode)
     }
     
 }

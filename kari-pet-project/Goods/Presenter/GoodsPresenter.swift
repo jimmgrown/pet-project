@@ -7,35 +7,29 @@
 //
 
 protocol GoodsDisplaying: ErrorDisplaying {
-    var presenter: GoodsPresenting { get set }
-    func updateData()
-    func showAlert(with error: NetworkingError)
+    func updateTableViewData()
 }
 
 // MARK: - Declaration
 
-final class GoodsPresenter: GoodsPresenting {
-    
-    init(view: GoodsDisplaying) {
-        self.view = view
-    }
+final class GoodsPresenter {
     
     // MARK: Properties
     
-    unowned let view: GoodsDisplaying
+    var view: GoodsDisplaying!
     var interactor: GoodsInteracting!
     var router: GoodsRouter!
-    var uniqueSizesId: [[String]] = [[]]
-    var vendorCode: String = ""
-    var relatedProducts: [ProductsModel] = []
-    var recommendedProducts: [ProductsModel] = []
-    var goodCards: [GoodsCard] = []
+    
+    private(set) var uniqueSizesId: [[String]] = [[]]
+    private(set) var relatedProducts: [ProductsModel] = []
+    private(set) var recommendedProducts: [ProductsModel] = []
+    private(set) var goodCards: [GoodsCard] = []
     
 }
 
 // MARK: - Public API
 
-extension GoodsPresenter {
+extension GoodsPresenter: GoodsPresenting {
     
     var blocksCount: Int {
         get {
@@ -44,8 +38,30 @@ extension GoodsPresenter {
         }
     }
     
+    func goToGoodsVC(with vendorCode: String) {
+        router.goToGoodsVC(vendorCode: vendorCode)
+    }
+    
     func configureView(with vendorCode: String) {
         self.interactor.getBlocksData(with: vendorCode)
+    }
+    
+    func showAlert(with error: NetworkingError) {
+        view.showAlert(with: error)
+    }
+    
+    func updateTableViewData() {
+        view.updateTableViewData()
+    }
+    
+    func getGoodsCardData(goodCards: GetGoodsCard.Response, uniqueSizesId: [[String]]) {
+        self.goodCards = goodCards
+        self.uniqueSizesId = uniqueSizesId
+    }
+    
+    func getProductsBlocksData(productsBlocks: (recommended: [ProductsModel], related: [ProductsModel])) {
+        self.recommendedProducts = productsBlocks.recommended
+        self.relatedProducts = productsBlocks.related
     }
     
 }

@@ -9,13 +9,12 @@
 import UIKit
 
 final class GoodsRouter {
-    weak var view: UIViewController!
+    var view: UIViewController!
+}
+
+extension GoodsRouter {
     
-    init(view: UIViewController) {
-        self.view = view
-    }
-    
-    func showView(vendorCode: String) {
+    func goToGoodsVC(vendorCode: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let secondVC = storyboard.instantiateViewController(
             withIdentifier: GoodsVC.reuseID

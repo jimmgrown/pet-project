@@ -2,11 +2,11 @@ import UIKit
 import SDWebImage
 
 protocol MainScreenPresenting: class {
-    var vendorCode: String { get set }
-    var blocks: [Block] { get set }
+    var blocks: [Block] { get }
     func configureView()
     func goToGoodsVC(with vendorCode: String)
     func showAlert(with error: NetworkingError)
+    func getBlocksData(blocks: [Block])
 }
 
 // MARK: - Base
@@ -30,7 +30,7 @@ final class MainScreenVC: UIViewController {
     
     // MARK: Properties
     
-    var presenter: MainScreenPresenting = MainScreenPresenter()
+    var presenter: MainScreenPresenting!
     
     // MARK: Life cycle
     

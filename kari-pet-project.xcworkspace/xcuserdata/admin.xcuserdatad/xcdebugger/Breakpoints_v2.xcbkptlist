@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kari-pet-project/MainScreenVC/MainScreenVC.swift"
-            timestampString = "619515289.361495"
+            timestampString = "619528756.5414521"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -74,12 +74,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "kari-pet-project/Goods/GoodsVC.swift"
-            timestampString = "619439278.100873"
+            timestampString = "619528756.541545"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kari-pet-project/MainScreenVC/Presenter/MainScreenInteractor.swift"
+            timestampString = "619528756.54162"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "getBlocksData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;kari_pet_project.Block&gt;&gt;, Swift.Optional&lt;kari_pet_project.NetworkingError&gt;) -&gt; () in kari_pet_project.MainScreenInteractor.getBlocksData() -&gt; Swift.Array&lt;kari_pet_project.Block&gt;"
+                  moduleName = "kari-pet-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/kari_pet_project/kari-pet-project/MainScreenVC/Presenter/MainScreenInteractor.swift"
+                  timestampString = "619526210.55821"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "825">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;kari_pet_project.Block&gt;&gt;, Swift.Optional&lt;kari_pet_project.NetworkingError&gt;) -&gt; () in kari_pet_project.MainScreenInteractor.getBlocksData() -&gt; Swift.Array&lt;kari_pet_project.Block&gt;"
+                  moduleName = "kari-pet-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/kari_pet_project/kari-pet-project/MainScreenVC/Presenter/MainScreenInteractor.swift"
+                  timestampString = "619526210.56383"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "856">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kari-pet-project/MainScreenVC/Presenter/MainScreenPresenter.swift"
+            timestampString = "619528756.541693"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "configureView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kari-pet-project/MainScreenVC/Presenter/MainScreenPresenter.swift"
+            timestampString = "619528756.541765"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "blocks"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kari-pet-project/MainScreenVC/Presenter/MainScreenInteractor.swift"
+            timestampString = "619528756.541836"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "getBlocksData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -13,7 +13,7 @@ protocol MainScreenInteracting: class {
 
 final class MainScreenInteractor {
 
-    unowned var presenter: MainScreenPresenting!
+    var presenter: MainScreenPresenting!
     private let apiClient: APIClient = .init()
     
 }
@@ -23,7 +23,8 @@ extension MainScreenInteractor: MainScreenInteracting {
     func getBlocksData() {
         apiClient.send(GetMainScreenData()) { result, error in
             if let result = result {
-                self.presenter.blocks = result.filter { $0.type != nil }.sorted(by: <)
+                let blocks = result.filter { $0.type != nil }.sorted(by: <)
+                self.presenter.getBlocksData(blocks: blocks)
             } else if let error = error {
                 self.presenter.showAlert(with: error)
             }

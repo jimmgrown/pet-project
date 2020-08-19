@@ -9,25 +9,22 @@
 import Foundation
 
 protocol GoodsInteracting: class {
-    func getBlocksData(with vendoreCode: String)
+    func getBlocksData(with vendorCode: String)
 }
 
 final class GoodsInteractor: GoodsInteracting {
     
-    weak var presenter: GoodsPresenting!
-    let apiClient: APIClient = .init()
-    
-    init(presenter: GoodsPresenting) {
-        self.presenter = presenter
-    }
+    var presenter: GoodsPresenting!
+    private let apiClient: APIClient = .init()
+    private var productsBlocks: (recommended: [ProductsModel], related: [ProductsModel]) = ([],[])
     
     func getBlocksData(with vendorCode: String) {
         apiClient.send(GetGoodsCard(url: API.Main.goodsCardURL(for: vendorCode))) { result, error in
             if let goodCards = result {
-                self.presenter.goodCards = goodCards
-                self.presenter.uniqueSizesId = goodCards.map { $0.uniqueSizesIDs.map { String($0.value) }}
+                let uniqueSizesId = goodCards.map { $0.uniqueSizesIDs.map { String($0.value) }}
+                self.presenter.getGoodsCardData(goodCards: goodCards, uniqueSizesId: uniqueSizesId)
             } else if let error = error {
-                self.presenter.view.showAlert(with: error)
+                self.presenter.showAlert(with: error)
             }
             
             let productsGroup = DispatchGroup()
@@ -42,9 +39,9 @@ final class GoodsInteractor: GoodsInteracting {
                 )
             ) { result, error in
                 if let products = result {
-                    self.presenter.recommendedProducts = products.data.products
+                    self.productsBlocks.recommended = products.data.products
                 } else if let error = error {
-                    self.presenter.view.showAlert(with: error)
+                    self.presenter.showAlert(with: error)
                 }
                 productsGroup.leave()
                 //print(try? JSONSerialization.jsonObject(with: data!, options: []))
@@ -60,16 +57,17 @@ final class GoodsInteractor: GoodsInteracting {
                 )
             ) { result, error in
                 if let products = result {
-                    self.presenter.relatedProducts = products.data.products
+                    self.productsBlocks.related = products.data.products
                 } else if let error = error {
-                    self.presenter.view.showAlert(with: error)
+                    self.presenter.showAlert(with: error)
                 }
                 productsGroup.leave()
                 //print(try? JSONSerialization.jsonObject(with: data!, options: []))
             }
             
             productsGroup.notify(queue: DispatchQueue.main) {
-                self.presenter.view.updateData()
+                self.presenter.getProductsBlocksData(productsBlocks: self.productsBlocks)
+                self.presenter.updateTableViewData()
             }
             
         }

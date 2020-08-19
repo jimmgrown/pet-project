@@ -9,7 +9,7 @@
 import UIKit
 
 final class MainScreenRouter {
-    unowned var view: UIViewController!
+    var view: UIViewController!
 }
 
 extension MainScreenRouter {
