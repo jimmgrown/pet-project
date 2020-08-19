@@ -7,8 +7,11 @@
 //
 
 protocol MainScreenDisplaying: Displaying {
+    #warning("Зачем тут это")
     var presenter: MainScreenPresenting { get set }
+    #warning("Я же уже писал и в MVP, и тут, что имена надо менее общие выбирать. Больше конкретики")
     func updateData()
+    #warning("Это нужно отрефакторить так же, как в MVP")
     func showAlert(with error: NetworkingError)
 }
 
@@ -31,6 +34,7 @@ final class MainScreenPresenter {
     
     // MARK: Initialization
     
+    #warning("В вайпере не принято инджектить сущности через инит. Тем более, у тебя ко view в любом случае доступ не ограничен, так что все подобные иниты нужно убрать")
     init(view: MainScreenDisplaying) {
         self.view = view
     }

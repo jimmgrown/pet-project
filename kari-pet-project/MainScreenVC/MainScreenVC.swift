@@ -5,7 +5,9 @@ protocol MainScreenPresenting: class {
     var vendorCode: String { get set }
     var blocks: [Block] { get set }
     var view: MainScreenDisplaying { get }
+    #warning("Зачем это здесь?")
     var router: MainScreenRouter! { set get }
+    #warning("Зачем это здесь?")
     var interactor: MainScreenInteracting! { get set }
     func configureView()
 }
@@ -31,6 +33,7 @@ final class MainScreenVC: UIViewController {
     
     // MARK: Properties
     
+    #warning("У тебя есть ассемблер, зачем тут иницализация презентера?")
     lazy var presenter: MainScreenPresenting = MainScreenPresenter(view: self)
     
     // MARK: Life cycle

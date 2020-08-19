@@ -19,6 +19,7 @@ final class MainScreenRouter {
 
 extension MainScreenRouter {
     
+    #warning("Ты поменял название с show на showView. Лучше не стало))) Выбери говорящее название")
     func showView(vendorCode: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let secondVC = storyboard.instantiateViewController(

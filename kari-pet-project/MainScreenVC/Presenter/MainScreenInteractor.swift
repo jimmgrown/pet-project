@@ -10,8 +10,11 @@ protocol MainScreenInteracting: class {
     func getBlocksData()
 }
 
+#warning("final")
+#warning("Конформанс не на месте")
 class MainScreenInteractor: MainScreenInteracting {
 
+    #warning("Я уже говорил, weak вместе с ! не имеет никакого смысла. Используй либо unowned, либо ?. Во всем проекте проследи за этим")
     private weak var presenter: MainScreenPresenting!
     private let apiClient: APIClient = .init()
     
