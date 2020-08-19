@@ -6,7 +6,7 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-protocol GoodsDisplaying: Displaying {
+protocol GoodsDisplaying: ErrorDisplaying {
     var presenter: GoodsPresenting { get set }
     func updateData()
     func showAlert(with error: NetworkingError)

@@ -4,13 +4,9 @@ import SDWebImage
 protocol MainScreenPresenting: class {
     var vendorCode: String { get set }
     var blocks: [Block] { get set }
-    #warning("Зачем это здесь?")
-    var view: MainScreenDisplaying { get }
-    #warning("Зачем это здесь?")
-    var router: MainScreenRouter! { set get }
-    #warning("Зачем это здесь?")
-    var interactor: MainScreenInteracting! { get set }
     func configureView()
+    func goToGoodsVC(with vendorCode: String)
+    func showAlert(with error: NetworkingError)
 }
 
 // MARK: - Base
@@ -34,8 +30,7 @@ final class MainScreenVC: UIViewController {
     
     // MARK: Properties
     
-    #warning("У тебя есть ассемблер, зачем тут иницализация презентера?")
-    lazy var presenter: MainScreenPresenting = MainScreenPresenter(view: self)
+    var presenter: MainScreenPresenting = MainScreenPresenter()
     
     // MARK: Life cycle
     
@@ -50,7 +45,7 @@ final class MainScreenVC: UIViewController {
 
 extension MainScreenVC: MainScreenDisplaying {
     
-    func updateData() {
+    func updateTableViewData() {
         tableView.reloadData()
     }
     
@@ -62,7 +57,7 @@ extension MainScreenVC: MainScreenDisplaying {
 extension MainScreenVC: CatalogCellDelegate {
     
     func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendorCode: String) {
-        presenter.router.showView(vendorCode: vendorCode)
+        presenter.goToGoodsVC(with: vendorCode)
     }
     
 }

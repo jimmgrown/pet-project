@@ -9,13 +9,16 @@
 enum MainScreenAssembler {
     
     static func configure(with viewController: MainScreenVC) {
-        let presenter: MainScreenPresenting = MainScreenPresenter(view: viewController)
-        let interactor: MainScreenInteracting = MainScreenInteractor(presenter: presenter)
-        let router: MainScreenRouter = MainScreenRouter(view: viewController)
+        let presenter = MainScreenPresenter()
+        let interactor = MainScreenInteractor()
+        let router = MainScreenRouter()
         
         viewController.presenter = presenter
+        interactor.presenter = presenter
+        router.view = viewController
         presenter.interactor = interactor
         presenter.router = router
+        presenter.view = viewController
     }
     
 }

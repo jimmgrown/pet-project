@@ -6,13 +6,8 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-protocol MainScreenDisplaying: Displaying {
-    #warning("Зачем тут это")
-    var presenter: MainScreenPresenting { get set }
-    #warning("Я же уже писал и в MVP, и тут, что имена надо менее общие выбирать. Больше конкретики")
-    func updateData()
-    #warning("Это нужно отрефакторить так же, как в MVP")
-    func showAlert(with error: NetworkingError)
+protocol MainScreenDisplaying: ErrorDisplaying {
+    func updateTableViewData()
 }
 
 // MARK: - Declaration
@@ -21,22 +16,15 @@ final class MainScreenPresenter {
     
     // MARK: Properties
     
-    unowned let view: MainScreenDisplaying
+    unowned var view: MainScreenDisplaying!
     var interactor: MainScreenInteracting!
     var router: MainScreenRouter!
     var vendorCode: String = ""
     
     var blocks: [Block] = [] {
         didSet {
-            view.updateData()
+            view.updateTableViewData()
         }
-    }
-    
-    // MARK: Initialization
-    
-    #warning("В вайпере не принято инджектить сущности через инит. Тем более, у тебя ко view в любом случае доступ не ограничен, так что все подобные иниты нужно убрать")
-    init(view: MainScreenDisplaying) {
-        self.view = view
     }
     
 }
@@ -44,9 +32,17 @@ final class MainScreenPresenter {
 // MARK: - Public API
 
 extension MainScreenPresenter: MainScreenPresenting {
+    
+    func goToGoodsVC(with vendorCode: String) {
+        router.goToGoodsVC(vendorCode: vendorCode)
+    }
 
     func configureView() {
         self.interactor.getBlocksData()
+    }
+    
+    func showAlert(with error: NetworkingError) {
+        view.showAlert(with: error)
     }
     
 }

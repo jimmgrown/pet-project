@@ -9,18 +9,12 @@
 import UIKit
 
 final class MainScreenRouter {
-    private weak var view: UIViewController!
-    
-    init(view: UIViewController) {
-        self.view = view
-    }
-    
+    unowned var view: UIViewController!
 }
 
 extension MainScreenRouter {
     
-    #warning("Ты поменял название с show на showView. Лучше не стало))) Выбери говорящее название")
-    func showView(vendorCode: String) {
+    func goToGoodsVC(vendorCode: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let secondVC = storyboard.instantiateViewController(
             withIdentifier: GoodsVC.reuseID
