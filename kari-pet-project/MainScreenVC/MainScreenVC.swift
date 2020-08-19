@@ -4,6 +4,7 @@ import SDWebImage
 protocol MainScreenPresenting: class {
     var vendorCode: String { get set }
     var blocks: [Block] { get set }
+    #warning("Зачем это здесь?")
     var view: MainScreenDisplaying { get }
     #warning("Зачем это здесь?")
     var router: MainScreenRouter! { set get }
