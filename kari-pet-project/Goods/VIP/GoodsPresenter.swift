@@ -6,16 +6,10 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-struct GoodsCardScreenData {
-    var goodsCard: GetGoodsCard.Response
-    var recommendedProducts: [ProductsModel]
-    var relatedProducts: [ProductsModel]
-}
-
 protocol GoodsDisplaying: ErrorDisplaying {
     func updateTableViewData()
     func getBlocksCount(blocksCount: Int)
-    func getBlocksData(blocks: GoodsCardScreenData)
+    func getBlocksData(cards: [GoodsCard], recommended: [ProductsModel], related: [ProductsModel])
 }
 
 // MARK: - Declaration
@@ -26,42 +20,45 @@ final class GoodsPresenter {
     
     var view: GoodsDisplaying!
     
-    private(set) var blocks: GoodsCardScreenData? {
-        didSet {
-            view.getBlocksCount(blocksCount: blocksCount)
-            if let blocks = blocks {
-                view.getBlocksData(blocks: blocks)
-            }
-            view.updateTableViewData()
-        }
-    }
+    // MARK: Private Properties
     
-    // MARK: Initialization
+    private(set) var goodsCard: [GoodsCard] = []
+    private(set) var recommendedProducts: [ProductsModel] = []
+    private(set) var relatedProducts: [ProductsModel] = []
     
 }
 
-// MARK: - Public API
+// MARK: - GoodsPresenting
 
 extension GoodsPresenter: GoodsPresenting {
     
     
-    func getBlocksData(blocks: GoodsCardScreenData) {
-        self.blocks = blocks
+    func getBlocksData(blocks: [GoodsCard]) {
+        goodsCard = blocks
     }
     
+    func getRecommendedData(data: [ProductsModel]) {
+        recommendedProducts = data
+    }
+    
+    func getRelatedData(data: [ProductsModel]) {
+        relatedProducts = data
+    }
     
     func showAlert(with error: NetworkingError) {
         view.showAlert(with: error)
     }
     
+    func sendBlocksData() {
+        view.getBlocksCount(blocksCount: blocksCount)
+        view.getBlocksData(cards: goodsCard, recommended: recommendedProducts, related: relatedProducts)
+        view.updateTableViewData()
+    }
+    
     var blocksCount: Int {
         get {
-            if let blocks = blocks {
-                return [blocks.relatedProducts.isEmpty, blocks.recommendedProducts.isEmpty, blocks.goodsCard.isEmpty]
-                    .reduce(0) { $0 + ($1 ? 0 : 1) }
-            } else {
-                return 0
-            }
+            return [relatedProducts.isEmpty, recommendedProducts.isEmpty, goodsCard.isEmpty]
+                .reduce(0) { $0 + ($1 ? 0 : 1) }
         }
     }
     

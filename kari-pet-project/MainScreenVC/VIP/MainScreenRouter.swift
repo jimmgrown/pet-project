@@ -9,7 +9,7 @@
 import UIKit
 
 final class MainScreenRouter {
-    var view: UIViewController!
+    weak var view: UIViewController?
 }
 
 extension MainScreenRouter {
@@ -20,7 +20,7 @@ extension MainScreenRouter {
             withIdentifier: GoodsVC.reuseID
             ) as? GoodsVC else { return }
         secondVC.vendorCode = vendorCode
-        view.show(secondVC, sender: view)
+        view?.show(secondVC, sender: view)
     }
     
 }

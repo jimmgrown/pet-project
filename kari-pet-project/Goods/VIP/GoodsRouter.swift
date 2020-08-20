@@ -9,7 +9,7 @@
 import UIKit
 
 final class GoodsRouter {
-    var view: UIViewController!
+    weak var view: UIViewController?
 }
 
 extension GoodsRouter {
@@ -20,7 +20,7 @@ extension GoodsRouter {
             withIdentifier: GoodsVC.reuseID
             ) as? GoodsVC else { return }
         secondVC.vendorCode = vendorCode
-        view.show(secondVC, sender: view)
+        view?.show(secondVC, sender: view)
     }
     
 }

@@ -14,18 +14,20 @@ protocol GoodsWorking: class {
 
 // MARK: - Declaration
 
-final class GoodsWorker: GoodsWorking {
+final class GoodsWorker {
     
-    var interactor: GoodsInteracting!
+    weak var interactor: GoodsInteracting?
     private let apiClient: APIClient = .init()
     
 }
 
-extension GoodsWorker {
+// MARK: -
+
+extension GoodsWorker: GoodsWorking {
     
     func getBlocksData(with vendoreCode: String) {
         apiClient.send(GetGoodsCard(url: API.Main.goodsCardURL(for: vendoreCode))) { result, error in
-            self.interactor.handle(result: result, error: error)
+            self.interactor?.handle(result: result, error: error)
             
             let productsGroup = DispatchGroup()
             
@@ -35,10 +37,10 @@ extension GoodsWorker {
                     locationId: API.baseLocationId,
                     size: 5,
                     page: 1,
-                    uniqueSizesIds: self.interactor.uniqueSizesId[0]
+                    uniqueSizesIds: self.interactor?.uniqueSizesId[0] ?? ["0"]
                 )
             ) { result, error in
-                self.interactor.handleRecommended(result: result, error: error)
+                self.interactor?.handleRecommended(result: result, error: error)
                 productsGroup.leave()
                 
                 //print(try? JSONSerialization.jsonObject(with: data!, options: []))
@@ -50,17 +52,17 @@ extension GoodsWorker {
                     locationId: API.baseLocationId,
                     size: 5,
                     page: 1,
-                    uniqueSizesIds: self.interactor.uniqueSizesId[0]
+                    uniqueSizesIds: self.interactor?.uniqueSizesId[0] ?? ["0"]
                 )
             ) { result, error in
-                self.interactor.handleRelated(result: result, error: error)
+                self.interactor?.handleRelated(result: result, error: error)
                 productsGroup.leave()
                 
                 //print(try? JSONSerialization.jsonObject(with: data!, options: []))
             }
             
             productsGroup.notify(queue: DispatchQueue.main) {
-                self.interactor.notify()
+                self.interactor?.notify()
             }
         }
     }

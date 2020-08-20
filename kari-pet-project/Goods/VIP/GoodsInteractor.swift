@@ -19,21 +19,22 @@ protocol GoodsInteracting: class {
 
 // MARK: - Declaration
 
-final class GoodsInteractor: GoodsInteracting {
+final class GoodsInteractor {
     
     // MARK: Properties
     
     var presenter: GoodsPresenting!
     var worker: GoodsWorking!
     
+    // MARK: PRivate properties
+    
     private(set) var uniqueSizesId: [[String]] = [[]]
-    private(set) var goodsCardScreenData: GoodsCardScreenData?
     
 }
 
 // MARK: - Public API
 
-extension GoodsInteractor {
+extension GoodsInteractor: GoodsInteracting {
     
     func configureView(with vendoreCode: String) {
         worker.getBlocksData(with: vendoreCode)
@@ -41,7 +42,7 @@ extension GoodsInteractor {
     
     func handle(result: GetGoodsCard.Response?, error: NetworkingError?) {
         if let goodsCards = result {
-            goodsCardScreenData?.goodsCard = goodsCards
+            presenter.getBlocksData(blocks: goodsCards)
             uniqueSizesId = goodsCards.map { $0.uniqueSizesIDs.map { String($0.value) }}
         } else if let error = error {
             self.presenter.showAlert(with: error)
@@ -50,7 +51,7 @@ extension GoodsInteractor {
     
     func handleRecommended(result: GetRecomendedProducts.Response?, error: NetworkingError?) {
         if let products = result {
-            goodsCardScreenData?.recommendedProducts = products.data.products
+            presenter.getRecommendedData(data: products.data.products)
         } else if let error = error {
             self.presenter.showAlert(with: error)
         }
@@ -58,16 +59,14 @@ extension GoodsInteractor {
     
     func handleRelated(result: GetRelatedProducts.Response?, error: NetworkingError?) {
         if let products = result {
-            goodsCardScreenData?.relatedProducts = products.data.products
+            presenter.getRelatedData(data: products.data.products)
         } else if let error = error {
             self.presenter.showAlert(with: error)
         }
     }
     
     func notify() {
-        if let blocks = goodsCardScreenData {
-            presenter.getBlocksData(blocks: blocks)
-        }
+        presenter.sendBlocksData()
     }
     
 }

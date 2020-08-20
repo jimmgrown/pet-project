@@ -2,8 +2,11 @@ import SDWebImage
 import UIKit
 
 protocol GoodsPresenting: class {
-    func getBlocksData(blocks: GoodsCardScreenData)
+    func getBlocksData(blocks: [GoodsCard])
+    func getRecommendedData(data: [ProductsModel])
+    func getRelatedData(data: [ProductsModel])
     func showAlert(with error: NetworkingError)
+    func sendBlocksData()
 }
 
 // MARK: - Declaration
@@ -28,8 +31,13 @@ final class GoodsVC: UIViewController, ReusableVC {
     // MARK: Properties
     
     var vendorCode: String = ""
+    
+    // MARK: Private properties
+    
     private(set) var blocksCount: Int = 0
-    private(set) var blocks: GoodsCardScreenData?
+    private(set) var goodsCard: [GoodsCard] = []
+    private(set) var recommendedProducts: [ProductsModel] = []
+    private(set) var relatedProducts: [ProductsModel] = []
     
     // MARK: Life cycle
     
@@ -48,8 +56,10 @@ extension GoodsVC: GoodsDisplaying {
         self.blocksCount = blocksCount
     }
     
-    func getBlocksData(blocks: GoodsCardScreenData) {
-        self.blocks = blocks
+    func getBlocksData(cards: [GoodsCard], recommended: [ProductsModel], related: [ProductsModel]) {
+        self.goodsCard = cards
+        self.recommendedProducts = recommended
+        self.relatedProducts = related
     }
     
     
@@ -86,8 +96,7 @@ extension GoodsVC: UITableViewDataSource {
                 nameProductsBanner = ProductsType.related.rawValue
             }
             let cell: CatalogCell = tableView.dequeueReusableCell(for: indexPath)
-            guard let blocks = self.blocks else { return cell }
-            let products = [blocks.recommendedProducts, blocks.relatedProducts]
+            let products = [recommendedProducts, relatedProducts]
             let bgColor: UIColor = .white
             let fontColor: UIColor = .black
             let productsBlock: [ProductsModel] = products[indexPath.row - 1]
@@ -120,8 +129,7 @@ extension GoodsVC: UITableViewDataSource {
             
         default:
             let cell: GoodsCardsCell = tableView.dequeueReusableCell(for: indexPath)
-            guard let block = blocks?.goodsCard else { return cell }
-            let card = block[indexPath.row]
+            let card = goodsCard[indexPath.row]
             
             cell.setup(
                 title: card.title,

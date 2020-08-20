@@ -12,7 +12,7 @@ protocol MainScreenWorking: class {
 
 final class MainScreenWorker {
     
-    var interactor: MainScreenInteracting!
+    weak var interactor: MainScreenInteracting?
     private let apiClient: APIClient = .init()
     
 }
@@ -21,7 +21,7 @@ extension MainScreenWorker: MainScreenWorking {
     
     func getBlocksData() {
         apiClient.send(GetMainScreenData()) { result, error in
-            self.interactor.handle(result: result, error: error)
+            self.interactor?.handle(result: result, error: error)
         }
     }
     
