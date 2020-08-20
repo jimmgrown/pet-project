@@ -6,45 +6,63 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-protocol GoodsDisplaying: Displaying {
-    var interactor: GoodsInteracting { get set }
-    var router: GoodsRouter { get set }
-    func updateData()
-    func showAlert(with error: NetworkingError)
+struct GoodsCardScreenData {
+    var goodsCard: GetGoodsCard.Response
+    var recommendedProducts: [ProductsModel]
+    var relatedProducts: [ProductsModel]
+}
+
+protocol GoodsDisplaying: ErrorDisplaying {
+    func updateTableViewData()
+    func getBlocksCount(blocksCount: Int)
+    func getBlocksData(blocks: GoodsCardScreenData)
 }
 
 // MARK: - Declaration
 
-final class GoodsPresenter: GoodsPresenting {
+final class GoodsPresenter {
     
     // MARK: Properties
     
-    weak var view: GoodsDisplaying!
-    var relatedProducts: [ProductsModel] = []
-    var recommendedProducts: [ProductsModel] = []
-    var goodCards: [GoodsCard] = []
+    var view: GoodsDisplaying!
+    
+    private(set) var blocks: GoodsCardScreenData? {
+        didSet {
+            view.getBlocksCount(blocksCount: blocksCount)
+            if let blocks = blocks {
+                view.getBlocksData(blocks: blocks)
+            }
+            view.updateTableViewData()
+        }
+    }
     
     // MARK: Initialization
-    
-    init(view: GoodsDisplaying) {
-        self.view = view
-    }
     
 }
 
 // MARK: - Public API
 
-extension GoodsPresenter {
+extension GoodsPresenter: GoodsPresenting {
+    
+    
+    func getBlocksData(blocks: GoodsCardScreenData) {
+        self.blocks = blocks
+    }
+    
+    
+    func showAlert(with error: NetworkingError) {
+        view.showAlert(with: error)
+    }
     
     var blocksCount: Int {
         get {
-            return [relatedProducts.isEmpty, recommendedProducts.isEmpty, goodCards.isEmpty]
-                .reduce(0) { $0 + ($1 ? 0 : 1) }
+            if let blocks = blocks {
+                return [blocks.relatedProducts.isEmpty, blocks.recommendedProducts.isEmpty, blocks.goodsCard.isEmpty]
+                    .reduce(0) { $0 + ($1 ? 0 : 1) }
+            } else {
+                return 0
+            }
         }
-    }
-    
-    func updateData() {
-        view.updateData()
     }
     
 }

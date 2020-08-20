@@ -10,20 +10,14 @@ protocol MainScreenWorking: class {
     func getBlocksData()
 }
 
-final class MainScreenWorker: MainScreenWorking {
+final class MainScreenWorker {
     
-    private weak var interactor: MainScreenInteracting!
+    var interactor: MainScreenInteracting!
     private let apiClient: APIClient = .init()
-    
-    init(interactor: MainScreenInteracting) {
-        self.interactor = interactor
-    }
     
 }
 
-// MARK: - Public API
-
-extension MainScreenWorker {
+extension MainScreenWorker: MainScreenWorking {
     
     func getBlocksData() {
         apiClient.send(GetMainScreenData()) { result, error in

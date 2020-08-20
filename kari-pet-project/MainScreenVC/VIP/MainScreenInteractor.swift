@@ -7,38 +7,29 @@
 //
 
 protocol MainScreenInteracting: class {
-    var worker: MainScreenWorking! { get set }
-    var presenter: MainScreenPresenting! { get set }
     func handle(result: GetMainScreenData.Response?, error: NetworkingError?)
     func configureView()
 }
 
-final class MainScreenInteractor: MainScreenInteracting {
-
-    // MARK: Private properties
-    
-    private weak var view: MainScreenDisplaying!
+final class MainScreenInteractor {
     
     // MARK: Properties
     
     var presenter: MainScreenPresenting!
     var worker: MainScreenWorking!
-
-    init(view: MainScreenDisplaying) {
-        self.view = view
-    }
     
 }
 
-// MARK: - Public API
+// MARK: - MainScreenInteracting
 
-extension MainScreenInteractor {
+extension MainScreenInteractor: MainScreenInteracting {
     
     func handle(result: GetMainScreenData.Response?, error: NetworkingError?) {
         if let result = result {
-            self.presenter.blocks = result.filter { $0.type != nil }.sorted(by: <)
+            let blocks = result.filter { $0.type != nil }.sorted(by: <)
+            self.presenter.getBlocksData(blocks: blocks)
         } else if let error = error {
-            self.presenter.view.showAlert(with: error)
+            self.presenter.showAlert(with: error)
         }
     }
     

@@ -16,12 +16,8 @@ protocol GoodsWorking: class {
 
 final class GoodsWorker: GoodsWorking {
     
-    private weak var interactor: GoodsInteracting!
+    var interactor: GoodsInteracting!
     private let apiClient: APIClient = .init()
-    
-    init(interactor: GoodsInteracting) {
-        self.interactor = interactor
-    }
     
 }
 

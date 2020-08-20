@@ -5,8 +5,10 @@ typealias CellsProviders = CategoriesCellDelegate & SliderCellDelegate &
     InformationCellDelegate & FindsCellDelegate & BrandsCellDelegate
 
 protocol MainScreenPresenting: class {
-    var blocks: [Block] { get set }
-    var view: MainScreenDisplaying! { get set }
+    func sendBlocksCount()
+    func getBlocksData(blocks: [Block])
+    func sendBlocksData(blocks: [Block])
+    func showAlert(with error: NetworkingError)
 }
 
 // MARK: - Base
@@ -29,16 +31,36 @@ final class MainScreenVC: UIViewController {
     }
     
     // MARK: Properties
+    private(set) var blocksCount: Int = 0
+    private(set) var blocks: [Block] = []
     
-        lazy var router = MainScreenRouter(view: self)
-        lazy var interactor: MainScreenInteracting = MainScreenInteractor(view: self)
+    var router: MainScreenRouter!
+    var interactor: MainScreenInteracting!
 
     // MARK: Life cycle
     
-        override func viewDidLoad() {
-            MainScreenAssembler.configure(with: self)
-            interactor.configureView()
-        }
+    override func viewDidLoad() {
+        MainScreenAssembler.configure(with: self)
+        interactor.configureView()
+    }
+    
+}
+
+// MARK: - MainScreenDisplaying
+
+extension MainScreenVC: MainScreenDisplaying {
+    
+    func getBlocksCount(blocksCount: Int) {
+        self.blocksCount = blocksCount
+    }
+    
+    func updateTableViewData() {
+        tableView.reloadData()
+    }
+    
+    func getBlocksData(blocks: [Block]) {
+        self.blocks = blocks
+    }
     
 }
 
@@ -47,7 +69,7 @@ final class MainScreenVC: UIViewController {
 extension MainScreenVC: CatalogCellDelegate {
     
     func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendorCode: String) {
-        router.showView(vendorCode: vendorCode)
+        router.goToGoodsVC(vendorCode: vendorCode)
     }
     
 }
@@ -57,21 +79,11 @@ extension MainScreenVC: CatalogCellDelegate {
 extension MainScreenVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return interactor.presenter.blocks.count
+        return blocksCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return prepareData(for: indexPath, block: interactor.presenter.blocks[indexPath.row])
-    }
-    
-}
-
-// MARK: - MainScreenDisplaying
-
-extension MainScreenVC: MainScreenDisplaying {
-    
-    func updateData() {
-        tableView.reloadData()
+        return prepareData(for: indexPath, block: blocks[indexPath.row])
     }
     
 }

@@ -8,14 +8,13 @@
 
 import UIKit
 
-final class MainScreenRouter{
-    weak var view: UIViewController!
-    
-    init(view: UIViewController) {
-        self.view = view
-    }
+final class MainScreenRouter {
+    var view: UIViewController!
+}
 
-    func showView(vendorCode: String) {
+extension MainScreenRouter {
+    
+    func goToGoodsVC(vendorCode: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let secondVC = storyboard.instantiateViewController(
             withIdentifier: GoodsVC.reuseID

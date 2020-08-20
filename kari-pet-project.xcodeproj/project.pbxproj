@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8433062C24EC004B006271CB /* Displaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433062B24EC004B006271CB /* Displaying.swift */; };
+		8433062C24EC004B006271CB /* ErrorDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433062B24EC004B006271CB /* ErrorDisplaying.swift */; };
 		843B533A24AAF5ED007C4CBB /* ColorsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B533824AAF5ED007C4CBB /* ColorsCell.swift */; };
 		843B533B24AAF5ED007C4CBB /* ColorsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843B533924AAF5ED007C4CBB /* ColorsCell.xib */; };
 		843F373724B434D1000ED099 /* UITableView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F373624B434D1000ED099 /* UITableView+CellRegistration.swift */; };
@@ -133,7 +133,7 @@
 /* Begin PBXFileReference section */
 		1236C8C2CDB51A66DDD8D7D1 /* Pods-kari-pet-project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kari-pet-project.release.xcconfig"; path = "Target Support Files/Pods-kari-pet-project/Pods-kari-pet-project.release.xcconfig"; sourceTree = "<group>"; };
 		354DE11A5CABB6548C5CCE2B /* Pods_kari_pet_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kari_pet_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8433062B24EC004B006271CB /* Displaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Displaying.swift; sourceTree = "<group>"; };
+		8433062B24EC004B006271CB /* ErrorDisplaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDisplaying.swift; sourceTree = "<group>"; };
 		843B533824AAF5ED007C4CBB /* ColorsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCell.swift; sourceTree = "<group>"; };
 		843B533924AAF5ED007C4CBB /* ColorsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorsCell.xib; sourceTree = "<group>"; };
 		843F373624B434D1000ED099 /* UITableView+CellRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+CellRegistration.swift"; sourceTree = "<group>"; };
@@ -485,7 +485,7 @@
 				843F373624B434D1000ED099 /* UITableView+CellRegistration.swift */,
 				84FF3A0724C074FF00A2F11E /* ReusableVC.swift */,
 				84BE46C524C7133200692B8A /* URLRequest+cURL.swift */,
-				8433062B24EC004B006271CB /* Displaying.swift */,
+				8433062B24EC004B006271CB /* ErrorDisplaying.swift */,
 			);
 			path = Exstensions;
 			sourceTree = "<group>";
@@ -861,7 +861,7 @@
 				8440BD9B24D9534700A5E16C /* MainScreenPresenter.swift in Sources */,
 				846FF0FB24A5E0E100E04182 /* Rate.swift in Sources */,
 				84BE46BE24C6E8CF00692B8A /* GetRecomendedProducts.swift in Sources */,
-				8433062C24EC004B006271CB /* Displaying.swift in Sources */,
+				8433062C24EC004B006271CB /* ErrorDisplaying.swift in Sources */,
 				846FF0E824A5E00500E04182 /* FontColor.swift in Sources */,
 				846FF0E624A5DE3C00E04182 /* Background.swift in Sources */,
 				8463C89C24A07A6500417B51 /* ThumbnailCell.swift in Sources */,

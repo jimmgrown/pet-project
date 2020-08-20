@@ -9,11 +9,18 @@
 enum MainScreenAssembler {
     
     static func configure(with view: MainScreenVC) {
-        let presenter: MainScreenPresenting = MainScreenPresenter(view: view)
-        let worker: MainScreenWorking = MainScreenWorker(interactor: view.interactor)
+        let presenter = MainScreenPresenter()
+        let worker = MainScreenWorker()
+        let interactor = MainScreenInteractor()
+        let router = MainScreenRouter()
         
-        view.interactor.worker = worker
-        view.interactor.presenter = presenter
+        view.interactor = interactor
+        worker.interactor = interactor
+        presenter.view = view
+        interactor.worker = worker
+        interactor.presenter = presenter
+        router.view = view
+        view.router = router
         
     }
 }

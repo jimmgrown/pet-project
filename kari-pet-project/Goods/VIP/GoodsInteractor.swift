@@ -9,10 +9,7 @@
 // MARK: - GoodsInteractorProtocol
 
 protocol GoodsInteracting: class {
-    var worker: GoodsWorking! { get set }
-    var presenter: GoodsPresenting! { get set }
-    var uniqueSizesId: [[String]] { get set }
-    
+    var uniqueSizesId: [[String]] { get }
     func handle(result: GetGoodsCard.Response?, error: NetworkingError?)
     func handleRecommended(result: GetRecomendedProducts.Response?, error: NetworkingError?)
     func handleRelated(result: GetRelatedProducts.Response?, error: NetworkingError?)
@@ -24,20 +21,13 @@ protocol GoodsInteracting: class {
 
 final class GoodsInteractor: GoodsInteracting {
     
-    // MARK: Private properties
-    
-    private weak var view: GoodsDisplaying!
-    
     // MARK: Properties
     
     var presenter: GoodsPresenting!
     var worker: GoodsWorking!
     
-    var uniqueSizesId: [[String]] = [[]]
-    
-    init(view: GoodsDisplaying) {
-        self.view = view
-    }
+    private(set) var uniqueSizesId: [[String]] = [[]]
+    private(set) var goodsCardScreenData: GoodsCardScreenData?
     
 }
 
@@ -50,33 +40,34 @@ extension GoodsInteractor {
     }
     
     func handle(result: GetGoodsCard.Response?, error: NetworkingError?) {
-        if let goodCards = result {
-            presenter.goodCards = goodCards
-            uniqueSizesId = goodCards.map { $0.uniqueSizesIDs.map { String($0.value) }}
+        if let goodsCards = result {
+            goodsCardScreenData?.goodsCard = goodsCards
+            uniqueSizesId = goodsCards.map { $0.uniqueSizesIDs.map { String($0.value) }}
         } else if let error = error {
-            self.presenter.view.showAlert(with: error)
+            self.presenter.showAlert(with: error)
         }
     }
     
     func handleRecommended(result: GetRecomendedProducts.Response?, error: NetworkingError?) {
         if let products = result {
-            self.presenter.recommendedProducts = products.data.products
+            goodsCardScreenData?.recommendedProducts = products.data.products
         } else if let error = error {
-            self.presenter.view.showAlert(with: error)
+            self.presenter.showAlert(with: error)
         }
     }
     
     func handleRelated(result: GetRelatedProducts.Response?, error: NetworkingError?) {
         if let products = result {
-            self.presenter.relatedProducts = products.data.products
+            goodsCardScreenData?.relatedProducts = products.data.products
         } else if let error = error {
-            self.presenter.view.showAlert(with: error)
+            self.presenter.showAlert(with: error)
         }
     }
     
-    final func notify() {
-        self.presenter.view.updateData()
+    func notify() {
+        if let blocks = goodsCardScreenData {
+            presenter.getBlocksData(blocks: blocks)
+        }
     }
-    
     
 }

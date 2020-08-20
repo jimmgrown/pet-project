@@ -8,9 +8,11 @@
 
 import UIKit
 
-protocol Displaying: class {}
+protocol ErrorDisplaying: class {
+    func showAlert(with error: NetworkingError)
+}
 
-extension Displaying where Self: UIViewController {
+extension ErrorDisplaying where Self: UIViewController {
     
     func showAlert(with error: NetworkingError) {
         error.present(on: self)

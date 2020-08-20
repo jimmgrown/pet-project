@@ -8,31 +8,48 @@
 
 import UIKit
 
-protocol MainScreenDisplaying: Displaying {
-    var interactor: MainScreenInteracting { get set }
-    var router: MainScreenRouter { get set }
-    func updateData()
-    func showAlert(with error: NetworkingError)
+protocol MainScreenDisplaying: ErrorDisplaying {
+    func updateTableViewData()
+    func getBlocksCount(blocksCount: Int)
+    func getBlocksData(blocks: [Block])
 }
 
 // MARK: - Declaration
 
-final class MainScreenPresenter: MainScreenPresenting {
+final class MainScreenPresenter {
     
     // MARK: Properties
     
-    weak var view: MainScreenDisplaying!
+    var view: MainScreenDisplaying!
     
-    var blocks: [Block] = [] {
+    private(set) var blocks: [Block] = [] {
         didSet {
-            view.updateData()
+            sendBlocksData(blocks: blocks)
+            sendBlocksCount()
+            view.updateTableViewData()
         }
     }
     
-    // MARK: - Initialization
+}
+
+// MARK: - MainScreenPresenting
+
+extension MainScreenPresenter: MainScreenPresenting {
     
-    init(view: MainScreenDisplaying) {
-        self.view = view
+    func getBlocksData(blocks: [Block]) {
+        self.blocks = blocks
+    }
+    
+    func showAlert(with error: NetworkingError) {
+        view.showAlert(with: error)
+    }
+    
+    func sendBlocksData(blocks: [Block]) {
+        view.getBlocksData(blocks: blocks)
+    }
+    
+    func sendBlocksCount() {
+        view.getBlocksCount(blocksCount: blocks.count)
     }
     
 }
