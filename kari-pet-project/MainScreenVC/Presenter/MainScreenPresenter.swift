@@ -16,13 +16,13 @@ final class MainScreenPresenter {
     
     // MARK: Properties
     
-    var view: MainScreenDisplaying!
+    weak var view: MainScreenDisplaying?
     var interactor: MainScreenInteracting!
     var router: MainScreenRouter!
     
     private(set) var blocks: [Block] = [] {
         didSet {
-            view.updateTableViewData()
+            view?.updateTableViewData()
         }
     }
     
@@ -41,7 +41,7 @@ extension MainScreenPresenter: MainScreenPresenting {
     }
     
     func showAlert(with error: NetworkingError) {
-        view.showAlert(with: error)
+        view?.showAlert(with: error)
     }
     
     func getBlocksData(blocks: [Block]) {
