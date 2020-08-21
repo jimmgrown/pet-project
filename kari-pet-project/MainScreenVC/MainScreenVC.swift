@@ -1,13 +1,18 @@
 import UIKit
 import SDWebImage
 
+#warning("В клин свифте используются неймспейсы с экшнами, реквестами, респонсами и вью моделями. Ты потерял где-то эту часть. Также, ты потерял протоколы DataStore, DataPassing и Routing")
+
+#warning("Почему у тебя композиция протоколов Delegate назвается Providers? + не забывай, что typealias все еще обозначает какой-то определенный тип, поэтому называть этот тип множественным числом - как-то сомнительно")
 typealias CellsProviders = CategoriesCellDelegate & SliderCellDelegate &
     InformationCellDelegate & FindsCellDelegate & BrandsCellDelegate
 
+#warning("Что здесь забыл этот протокол?")
 protocol MainScreenPresenting: class {
     func sendBlocksCount()
     func getBlocksData(blocks: [Block])
     func sendBlocksData(blocks: [Block])
+    #warning("Это нужно экстрактнуть")
     func showAlert(with error: NetworkingError)
 }
 

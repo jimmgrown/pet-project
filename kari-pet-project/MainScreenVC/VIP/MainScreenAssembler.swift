@@ -6,6 +6,8 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
+#warning("А вот в клин свифте это должно называться конфигуратором, а не ассемблером")
+
 enum MainScreenAssembler {
     
     static func configure(with view: MainScreenVC) {

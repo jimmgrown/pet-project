@@ -10,6 +10,7 @@ import UIKit
 
 protocol MainScreenDisplaying: ErrorDisplaying {
     func updateTableViewData()
+    #warning("Тут тоже почему get-то? (см. ворнинг в интеракторе)")
     func getBlocksCount(blocksCount: Int)
     func getBlocksData(blocks: [Block])
 }
