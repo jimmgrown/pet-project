@@ -8,18 +8,29 @@
 
 import UIKit
 
-final class GoodsRouter {
-    weak var view: UIViewController?
+protocol GoodsRouting {
+    func goToGoodsVC()
 }
 
-extension GoodsRouter {
+protocol GoodsDataPassing {
+    var dataStore: Goods.DataStore? { get set }
+}
+
+final class GoodsRouter {
+    weak var view: UIViewController?
+    var dataStore: Goods.DataStore?
+}
+
+extension GoodsRouter: Goods.DataPassing, Goods.Routing {
     
-    func goToGoodsVC(vendorCode: String) {
+    func goToGoodsVC() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let secondVC = storyboard.instantiateViewController(
             withIdentifier: GoodsVC.reuseID
             ) as? GoodsVC else { return }
-        secondVC.vendorCode = vendorCode
+        if let vendorCode = dataStore?.vendorCode {
+            secondVC.vendorCode = vendorCode
+        }
         view?.show(secondVC, sender: view)
     }
     

@@ -6,23 +6,19 @@
 //  Copyright © 2020 Admin. All rights reserved.
 //
 
-#warning("А вот в клин свифте это должно называться конфигуратором, а не ассемблером")
-
-enum MainScreenAssembler {
+enum MainScreenConfigurator {
     
     static func configure(with view: MainScreenVC) {
         let presenter = MainScreenPresenter()
-        let worker = MainScreenWorker()
         let interactor = MainScreenInteractor()
         let router = MainScreenRouter()
         
         view.interactor = interactor
-        worker.interactor = interactor
         presenter.view = view
-        interactor.worker = worker
         interactor.presenter = presenter
         router.view = view
         view.router = router
+        router.dataStore = interactor
         
     }
 }

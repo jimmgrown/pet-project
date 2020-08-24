@@ -1,19 +1,8 @@
 import UIKit
 import SDWebImage
 
-#warning("В клин свифте используются неймспейсы с экшнами, реквестами, респонсами и вью моделями. Ты потерял где-то эту часть. Также, ты потерял протоколы DataStore, DataPassing и Routing")
-
-#warning("Почему у тебя композиция протоколов Delegate назвается Providers? + не забывай, что typealias все еще обозначает какой-то определенный тип, поэтому называть этот тип множественным числом - как-то сомнительно")
-typealias CellsProviders = CategoriesCellDelegate & SliderCellDelegate &
-    InformationCellDelegate & FindsCellDelegate & BrandsCellDelegate
-
-#warning("Что здесь забыл этот протокол?")
-protocol MainScreenPresenting: class {
-    func sendBlocksCount()
-    func getBlocksData(blocks: [Block])
-    func sendBlocksData(blocks: [Block])
-    #warning("Это нужно экстрактнуть")
-    func showAlert(with error: NetworkingError)
+protocol MainScreenInteracting: MainScreenDataStore {
+    func configureView(_ request: MainScreen.GetBlocksDataAction.Request)
 }
 
 // MARK: - Base
@@ -36,35 +25,30 @@ final class MainScreenVC: UIViewController {
     }
     
     // MARK: Properties
-    private(set) var blocksCount: Int = 0
-    private(set) var blocks: [Block] = []
+    private(set) var viewModel = MainScreen.GetBlocksDataAction.ViewModel(blocks: [])
     
-    var router: MainScreenRouter!
-    var interactor: MainScreenInteracting!
+    var router: MainScreen.Routing!
+    var interactor: MainScreen.Interacting!
 
     // MARK: Life cycle
     
     override func viewDidLoad() {
-        MainScreenAssembler.configure(with: self)
-        interactor.configureView()
+        MainScreenConfigurator.configure(with: self)
+        interactor.configureView(MainScreen.GetBlocksDataAction.Request())
     }
     
 }
 
 // MARK: - MainScreenDisplaying
 
-extension MainScreenVC: MainScreenDisplaying {
-    
-    func getBlocksCount(blocksCount: Int) {
-        self.blocksCount = blocksCount
-    }
+extension MainScreenVC: MainScreen.Displaying {
     
     func updateTableViewData() {
         tableView.reloadData()
     }
     
-    func getBlocksData(blocks: [Block]) {
-        self.blocks = blocks
+    func updateUI(viewModel: MainScreen.GetBlocksDataAction.ViewModel) {
+        self.viewModel = viewModel
     }
     
 }
@@ -74,7 +58,8 @@ extension MainScreenVC: MainScreenDisplaying {
 extension MainScreenVC: CatalogCellDelegate {
     
     func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendorCode: String) {
-        router.goToGoodsVC(vendorCode: vendorCode)
+        interactor.setDataStore(with: vendorCode)
+        router.goToGoodsVC()
     }
     
 }
@@ -84,18 +69,18 @@ extension MainScreenVC: CatalogCellDelegate {
 extension MainScreenVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return blocksCount
+        return viewModel.blocks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return prepareData(for: indexPath, block: blocks[indexPath.row])
+        return prepareData(for: indexPath, block: viewModel.blocks[indexPath.row])
     }
     
 }
 
 // MARK: - CellsProviders
 
-extension MainScreenVC: CellsProviders {
+extension MainScreenVC: MainScreen.CellsDelegate {
     
     func prepareData(for indexPath: IndexPath, block: Block) -> UITableViewCell {
         switch block.type! {

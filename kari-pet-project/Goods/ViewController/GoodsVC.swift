@@ -1,12 +1,11 @@
 import SDWebImage
 import UIKit
 
-protocol GoodsPresenting: class {
-    func getBlocksData(blocks: [GoodsCard])
-    func getRecommendedData(data: [ProductsModel])
-    func getRelatedData(data: [ProductsModel])
-    func showAlert(with error: NetworkingError)
-    func sendBlocksData()
+// MARK: - GoodsInteracting
+
+protocol GoodsInteracting: GoodsDataStore {
+    var uniqueSizesId: [[String]] { get }
+    func configureView(_ request: Goods.GetBlocksDataAction.Request.Card)
 }
 
 // MARK: - Declaration
@@ -25,7 +24,7 @@ final class GoodsVC: UIViewController, ReusableVC {
     
     // MARK: Private properties
     
-    var router: GoodsRouter!
+    var router: Goods.Routing!
     var interactor: GoodsInteracting!
     
     // MARK: Properties
@@ -34,16 +33,18 @@ final class GoodsVC: UIViewController, ReusableVC {
     
     // MARK: Private properties
     
-    private(set) var blocksCount: Int = 0
-    private(set) var goodsCard: [GoodsCard] = []
-    private(set) var recommendedProducts: [ProductsModel] = []
-    private(set) var relatedProducts: [ProductsModel] = []
+    private(set) var viewModel = Goods.GetBlocksDataAction.ViewModel(
+        card: [],
+        recommended: [],
+        related: [],
+        blocksCount: 0
+    )
     
     // MARK: Life cycle
     
     override func viewDidLoad() {
-        GoodsAssembler.configure(with: self)
-        interactor.configureView(with: vendorCode)
+        GoodsConfigurator.configure(with: self)
+        interactor.configureView(Goods.GetBlocksDataAction.Request.Card(url: API.Main.goodsCardURL(for: vendorCode)))
     }
     
 }
@@ -52,16 +53,9 @@ final class GoodsVC: UIViewController, ReusableVC {
 
 extension GoodsVC: GoodsDisplaying {
     
-    func getBlocksCount(blocksCount: Int) {
-        self.blocksCount = blocksCount
+    func updateUI(viewModel: Goods.GetBlocksDataAction.ViewModel) {
+        self.viewModel = viewModel
     }
-    
-    func getBlocksData(cards: [GoodsCard], recommended: [ProductsModel], related: [ProductsModel]) {
-        self.goodsCard = cards
-        self.recommendedProducts = recommended
-        self.relatedProducts = related
-    }
-    
     
     func updateTableViewData() {
         tableView.reloadData()
@@ -74,7 +68,8 @@ extension GoodsVC: GoodsDisplaying {
 extension GoodsVC: CatalogCellDelegate {
     
     func catalogCell(_ catalogCell: CatalogCell, didReceiveTapOnProductWith vendorCode: String) {
-        router.goToGoodsVC(vendorCode: vendorCode)
+        interactor.setDataStore(with: vendorCode)
+        router.goToGoodsVC()
     }
     
 }
@@ -84,7 +79,7 @@ extension GoodsVC: CatalogCellDelegate {
 extension GoodsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return blocksCount
+        return viewModel.blocksCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,7 +91,7 @@ extension GoodsVC: UITableViewDataSource {
                 nameProductsBanner = ProductsType.related.rawValue
             }
             let cell: CatalogCell = tableView.dequeueReusableCell(for: indexPath)
-            let products = [recommendedProducts, relatedProducts]
+            let products = [viewModel.recommended, viewModel.related]
             let bgColor: UIColor = .white
             let fontColor: UIColor = .black
             let productsBlock: [ProductsModel] = products[indexPath.row - 1]
@@ -129,7 +124,7 @@ extension GoodsVC: UITableViewDataSource {
             
         default:
             let cell: GoodsCardsCell = tableView.dequeueReusableCell(for: indexPath)
-            let card = goodsCard[indexPath.row]
+            let card = viewModel.card[indexPath.row]
             
             cell.setup(
                 title: card.title,
